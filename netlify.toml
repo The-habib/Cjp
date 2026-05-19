@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && cp -r dist/client/* dist/ || true"
+  command = "npm run build"
   publish = "dist"
 
 [[redirects]]
