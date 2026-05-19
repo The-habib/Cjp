@@ -29,17 +29,23 @@ function buildVercel() {
   // Copy the entire server output into the function directory
   fs.cpSync(path.join(process.cwd(), 'dist', 'server'), funcDir, { recursive: true });
 
-  // Overwrite function's index file (which is currently just a wrapper) to use the server.js
-  // The server.js exports default { fetch }
-  fs.writeFileSync(path.join(funcDir, 'index.js'), `export { default } from "./server.js";`);
+  // Create the entrypoint
+  fs.writeFileSync(path.join(funcDir, 'index.js'), `import app from "./server.js";
 
-  // Create .vc-config.json for Edge
+export default function(request, response) {
+  // Try calling Web fetch, wait Vercel Nodejs functions natively support Web Request signature 
+  // via export default function(req) { return Response }
+  return app.fetch(request, process?.env || {}, {});
+}`);
+
+  // Create .vc-config.json for Nodejs
   fs.writeFileSync(path.join(funcDir, '.vc-config.json'), JSON.stringify({
-    runtime: 'edge',
-    entrypoint: 'index.js'
+    runtime: "nodejs20.x",
+    handler: "index.js",
+    launcherType: "Nodejs"
   }, null, 2));
 
-  console.log('✅ Generated .vercel/output APIv3 structure');
+  console.log('✅ Generated .vercel/output APIv3 structure using Node.js');
 }
 
 buildVercel();
