@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 2. Reusable global helpers
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null; }
+
+    // 3. Validation Blueprint for Registration
+    function isValidRegistration(data) {
+      return data.keys().hasAll(['name', 'email', 'chronicallyOnline', 'lazy', 'identifyAsCockroach', 'createdAt']) &&
+             data.keys().size() >= 6 && data.keys().size() <= 8 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.email is string && data.email.size() > 0 && data.email.size() <= 100 &&
+             data.chronicallyOnline in ['Yes', 'No', 'Maybe'] &&
+             data.lazy in ['Yes', 'No', 'Strategically'] &&
+             data.identifyAsCockroach in ['Yes', 'No'] &&
+             data.createdAt == request.time &&
+             ( !('phone' in data) || (data.phone is string && data.phone.size() <= 20) ) &&
+             ( !('twitterHandle' in data) || (data.twitterHandle is string && data.twitterHandle.size() <= 50) );
+    }
+
+    // 4. Registration rules
+    match /registrations/{registrationId} {
+      allow read: if isSignedIn() && request.auth.uid == registrationId;
+      allow create: if isSignedIn() &&
+                       request.auth.uid == registrationId &&
+                       isValidId(registrationId) &&
+                       isValidRegistration(incoming());
+      // Updates are not allowed for registrations in this spec.
+      // Deletes are not allowed.
+    }
+  }
+}

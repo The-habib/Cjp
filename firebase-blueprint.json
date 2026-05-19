@@ -1,0 +1,26 @@
+{
+  "entities": {
+    "Registration": {
+      "title": "Registration",
+      "description": "A user registration for the Cockroach Janta Party.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "email": { "type": "string", "description": "Email address" },
+        "chronicallyOnline": { "type": "string", "enum": ["Yes", "No", "Maybe"] },
+        "lazy": { "type": "string", "enum": ["Yes", "No", "Strategically"] },
+        "identifyAsCockroach": { "type": "string", "enum": ["Yes", "No"] },
+        "twitterHandle": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "chronicallyOnline", "lazy", "identifyAsCockroach", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/registrations/{registrationId}": {
+      "schema": { "$ref": "#/entities/Registration" },
+      "description": "Party membership registrations"
+    }
+  }
+}

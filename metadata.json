@@ -1,0 +1,6 @@
+{
+  "name": "Cockroach Janta Party",
+  "description": "The official landing page of the Cockroach Janta Party (CJP)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
