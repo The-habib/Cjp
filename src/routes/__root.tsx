@@ -1,10 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-} from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter } from "@tanstack/react-router";
 import { HeadContent, Scripts } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 
@@ -14,22 +9,41 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Cockroach Janta Party | CJP</title>
-        <meta name="description" content="Welcome to the official website of the Cockroach Janta Party (CJP). Working towards a resilient future." />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218061/favicon_i2bss7.ico"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218061/favicon-32x32_zfvobt.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218061/favicon-16x16_nedlde.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218061/apple-touch-icon_xsppdn.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218062/android-chrome-192x192_gxtgg6.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="512x512"
+          href="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218062/android-chrome-512x512_bactvf.png"
+        />
         <link rel="canonical" href="https://cockroachjantaparty.eu.cc/" />
-        
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Cockroach Janta Party" />
-        <meta property="og:description" content="Official Website of the Cockroach Janta Party (CJP)." />
-        <meta property="og:url" content="https://cockroachjantaparty.eu.cc/" />
-        <meta property="og:type" content="website" />
-        
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Cockroach Janta Party" />
-        <meta name="twitter:description" content="Official Website of the Cockroach Janta Party (CJP)." />
-        
         <link rel="stylesheet" href={appCss} />
         <HeadContent />
       </head>

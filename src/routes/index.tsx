@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 
@@ -7,24 +7,41 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Cockroach Janta Party — Voice of the Lazy & Unemployed" },
-      { name: "description", content: "A political party for the people the system forgot to count. Five demands. Zero sponsors. One large, stubborn swarm. They tried to step on us. We came back." },
-      { name: "keywords", content: "Cockroach Janta Party, CJP, Indian political party, satirical political party India, Voice of the Lazy and Unemployed, Abhijeet Dipke, Indian politics, anti-establishment India, youth political party India, cockroach party" },
+      {
+        name: "description",
+        content:
+          "A political party for the people the system forgot to count. Five demands. Zero sponsors. One large, stubborn swarm. They tried to step on us. We came back.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Cockroach Janta Party, CJP, Indian political party, satirical political party India, Voice of the Lazy and Unemployed, Abhijeet Dipke, Indian politics, anti-establishment India, youth political party India, cockroach party",
+      },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       { name: "author", content: "Cockroach Janta Party" },
       { name: "theme-color", content: "#0d1a12" },
       { property: "og:title", content: "Cockroach Janta Party (CJP)" },
-      { property: "og:description", content: "Voice of the Lazy & Unemployed. Five demands. Zero sponsors. They tried to step on us — we came back." },
+      {
+        property: "og:description",
+        content:
+          "Voice of the Lazy & Unemployed. Five demands. Zero sponsors. They tried to step on us — we came back.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Cockroach Janta Party" },
       { property: "og:url", content: "https://cockroachjantaparty.eu.cc/" },
       { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Cockroach Janta Party (CJP) — Voice of the Lazy & Unemployed" },
-      { name: "twitter:description", content: "Five demands. Zero sponsors. One large, stubborn swarm. They tried to step on us — we came back." },
+      {
+        name: "twitter:title",
+        content: "Cockroach Janta Party (CJP) — Voice of the Lazy & Unemployed",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Five demands. Zero sponsors. One large, stubborn swarm. They tried to step on us — we came back.",
+      },
     ],
-    links: [
-      { rel: "canonical", href: "https://cockroachjantaparty.eu.cc/" },
-    ],
+    links: [{ rel: "canonical", href: "https://cockroachjantaparty.eu.cc/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -99,26 +116,63 @@ export const Route = createFileRoute("/")({
 /* ============ MASCOT — hand-drawn cockroach ============ */
 function Roach({ size = 280 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 320 320" width={size} height={size} xmlns="http://www.w3.org/2000/svg" aria-label="CJP cockroach mascot" className="cjp-roach">
+    <svg
+      viewBox="0 0 320 320"
+      width={size}
+      height={size}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="CJP cockroach mascot"
+      className="cjp-roach"
+    >
       <g>
         {/* antennae */}
         <g className="cjp-antenna a-l" style={{ transformOrigin: "135px 95px" }}>
-          <path d="M135 95 Q95 55 55 30" stroke="#0a0a0a" strokeWidth="5" fill="none" strokeLinecap="round" />
+          <path
+            d="M135 95 Q95 55 55 30"
+            stroke="#0a0a0a"
+            strokeWidth="5"
+            fill="none"
+            strokeLinecap="round"
+          />
           <circle cx="55" cy="30" r="6" fill="#c8ff00" stroke="#0a0a0a" strokeWidth="3" />
         </g>
         <g className="cjp-antenna a-r" style={{ transformOrigin: "185px 95px" }}>
-          <path d="M185 95 Q225 55 265 30" stroke="#0a0a0a" strokeWidth="5" fill="none" strokeLinecap="round" />
+          <path
+            d="M185 95 Q225 55 265 30"
+            stroke="#0a0a0a"
+            strokeWidth="5"
+            fill="none"
+            strokeLinecap="round"
+          />
           <circle cx="265" cy="30" r="6" fill="#c8ff00" stroke="#0a0a0a" strokeWidth="3" />
         </g>
         {/* legs */}
         {[0, 1, 2].map((i) => (
-          <g key={`L${i}`} className={`cjp-leg L${i}`} style={{ transformOrigin: `120px ${165 + i * 28}px` }}>
-            <path d={`M120 ${165 + i * 28} L${50 - i * 8} ${150 + i * 36}`} stroke="#0a0a0a" strokeWidth="6" strokeLinecap="round" />
+          <g
+            key={`L${i}`}
+            className={`cjp-leg L${i}`}
+            style={{ transformOrigin: `120px ${165 + i * 28}px` }}
+          >
+            <path
+              d={`M120 ${165 + i * 28} L${50 - i * 8} ${150 + i * 36}`}
+              stroke="#0a0a0a"
+              strokeWidth="6"
+              strokeLinecap="round"
+            />
           </g>
         ))}
         {[0, 1, 2].map((i) => (
-          <g key={`R${i}`} className={`cjp-leg R${i}`} style={{ transformOrigin: `200px ${165 + i * 28}px` }}>
-            <path d={`M200 ${165 + i * 28} L${270 + i * 8} ${150 + i * 36}`} stroke="#0a0a0a" strokeWidth="6" strokeLinecap="round" />
+          <g
+            key={`R${i}`}
+            className={`cjp-leg R${i}`}
+            style={{ transformOrigin: `200px ${165 + i * 28}px` }}
+          >
+            <path
+              d={`M200 ${165 + i * 28} L${270 + i * 8} ${150 + i * 36}`}
+              stroke="#0a0a0a"
+              strokeWidth="6"
+              strokeLinecap="round"
+            />
           </g>
         ))}
         {/* head */}
@@ -126,8 +180,21 @@ function Roach({ size = 280 }: { size?: number }) {
         {/* body */}
         <path d="M85 175 Q160 110 235 175 Q260 240 160 280 Q60 240 85 175 Z" fill="#0a0a0a" />
         {/* shell highlight */}
-        <path d="M120 165 Q160 200 200 165" stroke="#c8ff00" strokeWidth="4" fill="none" strokeLinecap="round" />
-        <path d="M115 200 Q160 235 205 200" stroke="#c8ff00" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.7" />
+        <path
+          d="M120 165 Q160 200 200 165"
+          stroke="#c8ff00"
+          strokeWidth="4"
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path
+          d="M115 200 Q160 235 205 200"
+          stroke="#c8ff00"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+          opacity="0.7"
+        />
         {/* center seam */}
         <path d="M160 130 L160 270" stroke="#1a1a1a" strokeWidth="2" />
         {/* eyes */}
@@ -145,47 +212,88 @@ function Roach({ size = 280 }: { size?: number }) {
 
 /* ============ DATA ============ */
 const manifesto = [
-  { t: "No Rajya Sabha for retired CJIs", b: "If CJP comes to power, no Chief Justice gets a Rajya Sabha seat as a post-retirement reward. Period." },
-  { t: "Vote tampering = UAPA", b: "If a legitimate vote is deleted — anywhere — the CEC gets arrested under UAPA. Taking voting rights from citizens is terrorism." },
-  { t: "50% reservation for women", b: "Women get 50%, not 33%, without inflating Parliament. 50% of all Cabinet positions reserved for women." },
-  { t: "Cancel Ambani & Adani media licences", b: "All media houses owned by them lose licences. Independent media gets oxygen. Godi anchors' bank accounts get a deep audit." },
-  { t: "20-year ban on defectors", b: "Any MLA or MP who jumps party is barred from contesting or holding public office for 20 years." },
+  {
+    t: "No Rajya Sabha for retired CJIs",
+    b: "If CJP comes to power, no Chief Justice gets a Rajya Sabha seat as a post-retirement reward. Period.",
+  },
+  {
+    t: "Vote tampering = UAPA",
+    b: "If a legitimate vote is deleted — anywhere — the CEC gets arrested under UAPA. Taking voting rights from citizens is terrorism.",
+  },
+  {
+    t: "50% reservation for women",
+    b: "Women get 50%, not 33%, without inflating Parliament. 50% of all Cabinet positions reserved for women.",
+  },
+  {
+    t: "Cancel Ambani & Adani media licences",
+    b: "All media houses owned by them lose licences. Independent media gets oxygen. Godi anchors' bank accounts get a deep audit.",
+  },
+  {
+    t: "20-year ban on defectors",
+    b: "Any MLA or MP who jumps party is barred from contesting or holding public office for 20 years.",
+  },
 ];
 
 const eligibility = [
   { id: "01", t: "Unemployed", b: "By force, by choice, or by principle. We don't ask which." },
   { id: "02", t: "Lazy", b: "Physically only. The brain may continue to spiral at 3am." },
   { id: "03", t: "Chronically online", b: "Minimum 11 hours / day. Bathroom scrolling counts." },
-  { id: "04", t: "Can rant professionally", b: "Sharp, honest, and pointed at something that actually matters." },
+  {
+    id: "04",
+    t: "Can rant professionally",
+    b: "Sharp, honest, and pointed at something that actually matters.",
+  },
 ];
 
 const tickerWords = [
-  "हम ज़िंदा हैं", "WE SURVIVE", "तेज़ धूप में भी", "STEP ON US, WE COME BACK",
-  "जनता का जवाब", "5 DEMANDS · 0 SPONSORS", "बेरोज़गारों की पार्टी",
-  "VOICE OF THE LAZY & UNEMPLOYED", "🪳 ZINDABAD 🪳",
+  "हम ज़िंदा हैं",
+  "WE SURVIVE",
+  "तेज़ धूप में भी",
+  "STEP ON US, WE COME BACK",
+  "जनता का जवाब",
+  "5 DEMANDS · 0 SPONSORS",
+  "बेरोज़गारों की पार्टी",
+  "VOICE OF THE LAZY & UNEMPLOYED",
+  "🪳 ZINDABAD 🪳",
 ];
 
-import { RegistrationForm } from '../components/RegistrationForm';
+import { RegistrationForm } from "../components/RegistrationForm";
 
-const WA_URL = "https://wa.me/?text=" + encodeURIComponent("Join the Cockroach Janta Party — Voice of the Lazy & Unemployed. https://cockroachjantaparty.eu.cc/");
+const WA_URL =
+  "https://wa.me/?text=" +
+  encodeURIComponent(
+    "Join the Cockroach Janta Party — Voice of the Lazy & Unemployed. https://cockroachjantaparty.eu.cc/",
+  );
 
 /* ============ HOOKS & ANIMATION ============ */
 function useCursor() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const el = ref.current; if (!el) return;
-    let raf = 0, x = -100, y = -100, tx = -100, ty = -100;
-    const move = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY; };
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0,
+      x = -100,
+      y = -100,
+      tx = -100,
+      ty = -100;
+    const move = (e: MouseEvent) => {
+      tx = e.clientX;
+      ty = e.clientY;
+    };
     const loop = () => {
       if (Math.abs(tx - x) > 0.1 || Math.abs(ty - y) > 0.1) {
-        x += (tx - x) * 0.18; y += (ty - y) * 0.18;
+        x += (tx - x) * 0.18;
+        y += (ty - y) * 0.18;
         el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
       }
       raf = requestAnimationFrame(loop);
     };
     window.addEventListener("mousemove", move);
     raf = requestAnimationFrame(loop);
-    return () => { window.removeEventListener("mousemove", move); cancelAnimationFrame(raf); };
+    return () => {
+      window.removeEventListener("mousemove", move);
+      cancelAnimationFrame(raf);
+    };
   }, []);
   return ref;
 }
@@ -196,7 +304,7 @@ function Reveal({
   delay = 0,
   y = 40,
   style,
-  as = "div"
+  as = "div",
 }: {
   children: React.ReactNode;
   className?: string;
@@ -233,30 +341,42 @@ function Index() {
       <div className="cjp-cursor" ref={cursorRef} aria-hidden />
 
       {/* TOP TICKER */}
-      <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }} className="cjp-ticker cjp-ticker-top" aria-hidden>
+      <motion.div
+        initial={{ height: 0 }}
+        animate={{ height: "auto" }}
+        transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+        className="cjp-ticker cjp-ticker-top"
+        aria-hidden
+      >
         <div className="cjp-ticker-track">
           {Array.from({ length: 4 }).flatMap((_, k) =>
             tickerWords.map((w, i) => (
               <span key={`${k}-${i}`} className="cjp-ticker-item">
                 {w} <em>🪳</em>
               </span>
-            ))
+            )),
           )}
         </div>
       </motion.div>
 
       {/* NAV */}
-      <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1], delay: 0.2 }} className="cjp-nav">
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1], delay: 0.2 }}
+        className="cjp-nav"
+      >
         <div className="cjp-nav-bg" aria-hidden>
-          <img 
-            src="https://static.toiimg.com/thumb/msid-131177259,width-1280,height-720,imgsize-48962,resizemode-6,overlay-toi_sw,pt-32,y_pad-600,x_pad-1200/photo.jpg" 
-            alt="" 
+          <img
+            src="https://static.toiimg.com/thumb/msid-131177259,width-1280,height-720,imgsize-48962,resizemode-6,overlay-toi_sw,pt-32,y_pad-600,x_pad-1200/photo.jpg"
+            alt=""
           />
         </div>
         <a href="#top" className="cjp-brand">
           <span className="cjp-brand-roach">🪳</span>
           <span className="cjp-brand-text">
-            <b>CJP</b><i>est. now</i>
+            <b>CJP</b>
+            <i>est. now</i>
           </span>
         </a>
         <div className="cjp-nav-pill">
@@ -279,33 +399,34 @@ function Index() {
               <span className="cjp-dot" /> Volume 1 · Edition 1 · Filed under General Disgruntlement
             </div>
             <h1 className="cjp-h1">
-              <motion.span 
-                initial={{ opacity: 0, x: -30 }} 
-                animate={{ opacity: 1, x: 0 }} 
-                transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }} 
+              <motion.span
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
                 className="cjp-word l1"
               >
                 COCK<span className="cjp-accent">·</span>ROACH
               </motion.span>
-              <motion.span 
-                initial={{ opacity: 0, x: 30 }} 
-                animate={{ opacity: 1, x: 0 }} 
-                transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }} 
+              <motion.span
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
                 className="cjp-word l2"
               >
                 <i>janta</i> party
               </motion.span>
-              <motion.span 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }} 
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
                 className="cjp-word l3"
               >
                 <span className="cjp-strike">वो</span> हम।
               </motion.span>
             </h1>
             <p className="cjp-sub">
-              <b>A political party for the people the system forgot to count.</b><br/>
+              <b>A political party for the people the system forgot to count.</b>
+              <br />
               <span>Five demands. Zero sponsors. One large, stubborn swarm.</span>
             </p>
             <div className="cjp-hero-ctas">
@@ -315,21 +436,28 @@ function Index() {
               <a href="#manifesto" className="cjp-btn cjp-btn-ghost">
                 <span className="cjp-btn-num">05</span> Demands
               </a>
+              <Link
+                to="/the-vault"
+                className="cjp-btn"
+                style={{ borderColor: "var(--red)", color: "var(--red)" }}
+              >
+                <span>[ REDACTED SECRETS ]</span>
+              </Link>
             </div>
           </Reveal>
 
           {/* right: mascot stage */}
           <Reveal className="cjp-hero-stage" y={50} delay={0.2}>
             <div className="cjp-stage-bg" aria-hidden>
-              <motion.div 
-                animate={{ rotate: 360 }} 
-                transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-                className="cjp-blob b1" 
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                className="cjp-blob b1"
               />
-              <motion.div 
-                animate={{ rotate: -360 }} 
-                transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
-                className="cjp-blob b2" 
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+                className="cjp-blob b2"
               />
               <div className="cjp-cross-grid" />
             </div>
@@ -337,33 +465,79 @@ function Index() {
               <Roach size={340} />
               <div className="cjp-roach-shadow" />
             </div>
-            <motion.div initial={{ scale: 0, rotate: -30 }} animate={{ scale: 1, rotate: 15 }} transition={{ type: 'spring', delay: 0.4 }} className="cjp-stamp cjp-stamp-1">
-              <span>NOT<br/>SQUASHABLE</span>
+            <motion.div
+              initial={{ scale: 0, rotate: -30 }}
+              animate={{ scale: 1, rotate: 15 }}
+              transition={{ type: "spring", delay: 0.4 }}
+              className="cjp-stamp cjp-stamp-1"
+            >
+              <span>
+                NOT
+                <br />
+                SQUASHABLE
+              </span>
             </motion.div>
-            <motion.div initial={{ scale: 0, rotate: 30 }} animate={{ scale: 1, rotate: -12 }} transition={{ type: 'spring', delay: 0.5 }} className="cjp-stamp cjp-stamp-2">
-              <span>EST.<br/>NOW</span>
+            <motion.div
+              initial={{ scale: 0, rotate: 30 }}
+              animate={{ scale: 1, rotate: -12 }}
+              transition={{ type: "spring", delay: 0.5 }}
+              className="cjp-stamp cjp-stamp-2"
+            >
+              <span>
+                EST.
+                <br />
+                NOW
+              </span>
             </motion.div>
-            <motion.div initial={{ scale: 0, rotate: 30 }} animate={{ scale: 1, rotate: -10 }} transition={{ type: 'spring', delay: 0.6 }} className="cjp-stamp cjp-stamp-3">
-              <span>0<br/>FUNDING</span>
+            <motion.div
+              initial={{ scale: 0, rotate: 30 }}
+              animate={{ scale: 1, rotate: -10 }}
+              transition={{ type: "spring", delay: 0.6 }}
+              className="cjp-stamp cjp-stamp-3"
+            >
+              <span>
+                0<br />
+                FUNDING
+              </span>
             </motion.div>
           </Reveal>
         </div>
 
         {/* metrics ribbon */}
         <Reveal y={30} delay={0.4} className="cjp-ribbon">
-          <div><b>05</b><span>Demands</span></div>
-          <div><b>00</b><span>Corporate Donors</span></div>
-          <div><b>∞</b><span>Patience</span></div>
-          <div><b>01</b><span>Founder, no PA</span></div>
+          <div>
+            <b>05</b>
+            <span>Demands</span>
+          </div>
+          <div>
+            <b>00</b>
+            <span>Corporate Donors</span>
+          </div>
+          <div>
+            <b>∞</b>
+            <span>Patience</span>
+          </div>
+          <div>
+            <b>01</b>
+            <span>Founder, no PA</span>
+          </div>
         </Reveal>
       </header>
 
       {/* BIG MARQUEE */}
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "0px" }} transition={{ duration: 0.8, ease: "easeOut" }} className="cjp-bigmarquee" aria-hidden>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "0px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="cjp-bigmarquee"
+        aria-hidden
+      >
         <div className="cjp-bigmarquee-track">
           {Array.from({ length: 3 }).map((_, k) => (
             <span key={k}>
-              They tried to step on us. <em>★</em> We came back. <em>★</em> We came back angrier. <em>★</em> हम ज़िंदा हैं <em>★</em>
+              They tried to step on us. <em>★</em> We came back. <em>★</em> We came back angrier.{" "}
+              <em>★</em> हम ज़िंदा हैं <em>★</em>
             </span>
           ))}
         </div>
@@ -374,10 +548,16 @@ function Index() {
         <div className="cjp-container">
           <Reveal className="cjp-h2-row">
             <span className="cjp-eyebrow">Chapter 01 — The Why</span>
-            <h2 className="cjp-h2">We are not<br/>here to <em>fix</em><br/>the chair.</h2>
+            <h2 className="cjp-h2">
+              We are not
+              <br />
+              here to <em>fix</em>
+              <br />
+              the chair.
+            </h2>
             <p className="cjp-lede">
-              We are here to ask — loudly, repeatedly, in writing — where the money went.
-              Then ask again next week. And the week after.
+              We are here to ask — loudly, repeatedly, in writing — where the money went. Then ask
+              again next week. And the week after.
             </p>
           </Reveal>
 
@@ -385,17 +565,26 @@ function Index() {
             <Reveal as="article" delay={0.1} className="cjp-tile cjp-tile-1">
               <span className="cjp-tile-num">01</span>
               <h3>The Mission</h3>
-              <p>Build a party for the people who keep getting called lazy, chronically online, and — most recently — cockroaches. That's it. The rest is satire.</p>
+              <p>
+                Build a party for the people who keep getting called lazy, chronically online, and —
+                most recently — cockroaches. That's it. The rest is satire.
+              </p>
             </Reveal>
             <Reveal as="article" delay={0.2} className="cjp-tile cjp-tile-2 cjp-tile-lime">
               <span className="cjp-tile-num">02</span>
               <h3>The Method</h3>
-              <p>Ask, in writing. File RTIs. Print receipts. Refuse to forget. The internet has memory. So do we.</p>
+              <p>
+                Ask, in writing. File RTIs. Print receipts. Refuse to forget. The internet has
+                memory. So do we.
+              </p>
             </Reveal>
             <Reveal as="article" delay={0.3} className="cjp-tile cjp-tile-3 cjp-tile-red">
               <span className="cjp-tile-num">03</span>
               <h3>The Symbol</h3>
-              <p>They called us cockroaches. We made it the logo. You cannot squash a movement that already lives behind the fridge.</p>
+              <p>
+                They called us cockroaches. We made it the logo. You cannot squash a movement that
+                already lives behind the fridge.
+              </p>
             </Reveal>
             <Reveal as="article" delay={0.4} className="cjp-tile cjp-tile-4">
               <span className="cjp-tile-num">04</span>
@@ -412,7 +601,8 @@ function Index() {
           <Reveal className="cjp-h2-row">
             <span className="cjp-eyebrow cjp-eyebrow-light">Chapter 02 — The Demands</span>
             <h2 className="cjp-h2 cjp-h2-light">
-              Five demands.<br/>
+              Five demands.
+              <br />
               <em>No</em> negotiation.
             </h2>
           </Reveal>
@@ -436,8 +626,14 @@ function Index() {
         <div className="cjp-container">
           <Reveal className="cjp-h2-row">
             <span className="cjp-eyebrow">Chapter 03 — Eligibility</span>
-            <h2 className="cjp-h2">Are you<br/><em>cockroach</em> enough?</h2>
-            <p className="cjp-lede">We do not check religion, caste, or gender. We do check these four (4) things.</p>
+            <h2 className="cjp-h2">
+              Are you
+              <br />
+              <em>cockroach</em> enough?
+            </h2>
+            <p className="cjp-lede">
+              We do not check religion, caste, or gender. We do check these four (4) things.
+            </p>
           </Reveal>
           <div className="cjp-elig">
             {eligibility.map((e, i) => (
@@ -453,7 +649,8 @@ function Index() {
           </div>
           <Reveal delay={0.4}>
             <p className="cjp-fineprint">
-              Membership is free, lifelong, and revocable only by you. No fees. No selfies with the leader. No "missed call to register."
+              Membership is free, lifelong, and revocable only by you. No fees. No selfies with the
+              leader. No "missed call to register."
             </p>
           </Reveal>
         </div>
@@ -465,7 +662,9 @@ function Index() {
           <Reveal className="cjp-join-left">
             <span className="cjp-eyebrow cjp-eyebrow-dark">Chapter 04 — Enlist</span>
             <h2 className="cjp-h2 cjp-h2-dark">
-              Sign the<br/>roach roll.
+              Sign the
+              <br />
+              roach roll.
             </h2>
             <p className="cjp-lede cjp-lede-dark">
               Two clicks. One form. Lifelong membership. Bring your rage, your memes, your receipts.
@@ -474,7 +673,12 @@ function Index() {
               <a href="#join" className="cjp-btn cjp-btn-lime-alt">
                 Open the form <em>→</em>
               </a>
-              <a href={WA_URL} target="_blank" rel="noreferrer" className="cjp-btn cjp-btn-lime-ghost">
+              <a
+                href={WA_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="cjp-btn cjp-btn-lime-ghost"
+              >
                 <span>📱</span> Share on WhatsApp
               </a>
             </div>
@@ -494,15 +698,29 @@ function Index() {
         <div className="cjp-container">
           <Reveal className="cjp-h2-row">
             <span className="cjp-eyebrow cjp-eyebrow-light">Chapter 05 — Contact</span>
-            <h2 className="cjp-h2 cjp-h2-light">Yell at us<br/>(politely).</h2>
+            <h2 className="cjp-h2 cjp-h2-light">
+              Yell at us
+              <br />
+              (politely).
+            </h2>
           </Reveal>
           <div className="cjp-contact-grid">
-            <Reveal as="a" delay={0.1} href="mailto:contact@cockroachjantaparty.org" className="cjp-contact">
+            <Reveal
+              as="a"
+              delay={0.1}
+              href="mailto:contact@cockroachjantaparty.org"
+              className="cjp-contact"
+            >
               <small>Email</small>
               <span>contact@cockroachjantaparty.org</span>
               <em>↗</em>
             </Reveal>
-            <Reveal as="a" delay={0.2} href="mailto:contact@cockroachjantaparty.org" className="cjp-contact">
+            <Reveal
+              as="a"
+              delay={0.2}
+              href="mailto:contact@cockroachjantaparty.org"
+              className="cjp-contact"
+            >
               <small>Press</small>
               <span>contact@cockroachjantaparty.org</span>
               <em>↗</em>
@@ -530,33 +748,63 @@ function Index() {
           <Reveal delay={0.1}>
             <div className="cjp-brand cjp-brand-foot">
               <span className="cjp-brand-roach">🪳</span>
-              <span className="cjp-brand-text"><b>CJP</b><i>since now</i></span>
+              <span className="cjp-brand-text">
+                <b>CJP</b>
+                <i>since now</i>
+              </span>
             </div>
             <p>Sponsored by no one. Funded by nothing. HQ: wherever the wifi works.</p>
           </Reveal>
           <Reveal delay={0.2}>
             <small>Sitemap</small>
             <ul>
-              <li><a href="#vision">Vision</a></li>
-              <li><a href="#manifesto">Manifesto</a></li>
-              <li><a href="#eligibility">Eligibility</a></li>
-              <li><a href="#join">Join</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li>
+                <a href="#vision">Vision</a>
+              </li>
+              <li>
+                <a href="#manifesto">Manifesto</a>
+              </li>
+              <li>
+                <a href="#eligibility">Eligibility</a>
+              </li>
+              <li>
+                <a href="#join">Join</a>
+              </li>
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
             </ul>
           </Reveal>
           <Reveal delay={0.3}>
             <small>Channels</small>
             <ul>
-              <li><a href={WA_URL} target="_blank" rel="noreferrer">WhatsApp ↗</a></li>
-              <li><a href="#" target="_blank" rel="noreferrer">Twitter / X ↗</a></li>
-              <li><a href="#" target="_blank" rel="noreferrer">Instagram ↗</a></li>
-              <li><a href="#" target="_blank" rel="noreferrer">YouTube ↗</a></li>
+              <li>
+                <a href={WA_URL} target="_blank" rel="noreferrer">
+                  WhatsApp ↗
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noreferrer">
+                  Twitter / X ↗
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noreferrer">
+                  Instagram ↗
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank" rel="noreferrer">
+                  YouTube ↗
+                </a>
+              </li>
             </ul>
           </Reveal>
           <Reveal delay={0.4}>
             <small>Legal-ish</small>
             <p className="cjp-disclaimer">
-              Satire, dissent, and chitin. Filed under General Disgruntlement. Now accepting rants, retweets, and resentment.
+              Satire, dissent, and chitin. Filed under General Disgruntlement. Now accepting rants,
+              retweets, and resentment.
             </p>
           </Reveal>
         </div>

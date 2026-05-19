@@ -5,14 +5,9 @@ import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [
-    tailwindcss(),
-    TanStackRouterVite(),
-    react(),
-    tsconfigPaths(),
-  ],
+  plugins: [tailwindcss(), TanStackRouterVite(), react(), tsconfigPaths()],
   server: {
     host: "::",
     port: 8080,
-  }
+  },
 });

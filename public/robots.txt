@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Allow: /the-vault
 
 Sitemap: https://cockroachjantaparty.eu.cc/sitemap.xml
