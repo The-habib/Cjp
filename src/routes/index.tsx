@@ -16,14 +16,14 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Voice of the Lazy & Unemployed. Five demands. Zero sponsors. They tried to step on us — we came back." },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Cockroach Janta Party" },
-      { property: "og:url", content: "https://cockroach-janta-party.lovable.app/" },
+      { property: "og:url", content: "http://cockroachjantaparty.eu.cc/" },
       { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Cockroach Janta Party (CJP) — Voice of the Lazy & Unemployed" },
       { name: "twitter:description", content: "Five demands. Zero sponsors. One large, stubborn swarm. They tried to step on us — we came back." },
     ],
     links: [
-      { rel: "canonical", href: "https://cockroach-janta-party.lovable.app/" },
+      { rel: "canonical", href: "http://cockroachjantaparty.eu.cc/" },
     ],
     scripts: [
       {
@@ -33,10 +33,10 @@ export const Route = createFileRoute("/")({
           "@graph": [
             {
               "@type": "Organization",
-              "@id": "https://cockroach-janta-party.lovable.app/#org",
+              "@id": "http://cockroachjantaparty.eu.cc/#org",
               name: "Cockroach Janta Party",
               alternateName: ["CJP", "Cockroach Janta Party (CJP)"],
-              url: "https://cockroach-janta-party.lovable.app/",
+              url: "http://cockroachjantaparty.eu.cc/",
               email: "contact@cockroachjantaparty.org",
               slogan: "Voice of the Lazy & Unemployed",
               description:
@@ -46,11 +46,11 @@ export const Route = createFileRoute("/")({
             },
             {
               "@type": "WebSite",
-              "@id": "https://cockroach-janta-party.lovable.app/#website",
-              url: "https://cockroach-janta-party.lovable.app/",
+              "@id": "http://cockroachjantaparty.eu.cc/#website",
+              url: "http://cockroachjantaparty.eu.cc/",
               name: "Cockroach Janta Party",
               inLanguage: "en-IN",
-              publisher: { "@id": "https://cockroach-janta-party.lovable.app/#org" },
+              publisher: { "@id": "http://cockroachjantaparty.eu.cc/#org" },
             },
             {
               "@type": "FAQPage",
@@ -100,13 +100,7 @@ export const Route = createFileRoute("/")({
 function Roach({ size = 280 }: { size?: number }) {
   return (
     <svg viewBox="0 0 320 320" width={size} height={size} xmlns="http://www.w3.org/2000/svg" aria-label="CJP cockroach mascot" className="cjp-roach">
-      <defs>
-        <filter id="rough">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" />
-          <feDisplacementMap in="SourceGraphic" scale="1.2" />
-        </filter>
-      </defs>
-      <g filter="url(#rough)">
+      <g>
         {/* antennae */}
         <g className="cjp-antenna a-l" style={{ transformOrigin: "135px 95px" }}>
           <path d="M135 95 Q95 55 55 30" stroke="#0a0a0a" strokeWidth="5" fill="none" strokeLinecap="round" />
@@ -173,7 +167,7 @@ const tickerWords = [
 
 import { RegistrationForm } from '../components/RegistrationForm';
 
-const WA_URL = "https://wa.me/?text=" + encodeURIComponent("Join the Cockroach Janta Party — Voice of the Lazy & Unemployed. cockroach-janta-party.lovable.app");
+const WA_URL = "https://wa.me/?text=" + encodeURIComponent("Join the Cockroach Janta Party — Voice of the Lazy & Unemployed. http://cockroachjantaparty.eu.cc/");
 
 /* ============ HOOKS & ANIMATION ============ */
 function useCursor() {
@@ -183,8 +177,10 @@ function useCursor() {
     let raf = 0, x = -100, y = -100, tx = -100, ty = -100;
     const move = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY; };
     const loop = () => {
-      x += (tx - x) * 0.18; y += (ty - y) * 0.18;
-      el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      if (Math.abs(tx - x) > 0.1 || Math.abs(ty - y) > 0.1) {
+        x += (tx - x) * 0.18; y += (ty - y) * 0.18;
+        el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+      }
       raf = requestAnimationFrame(loop);
     };
     window.addEventListener("mousemove", move);
@@ -598,7 +594,7 @@ const cjpCss = `
 
 /* GRAIN */
 .cjp-grain {
-  position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.5; mix-blend-mode: multiply;
+  position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.15;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");
 }
 
@@ -617,7 +613,7 @@ const cjpCss = `
   animation: cjp-marquee 38s linear infinite; font-family: 'Space Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em;
 }
 .cjp-ticker-item em { color: var(--lime); font-style: normal; margin-left: 0.4rem; }
-@keyframes cjp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes cjp-marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
 
 /* NAV */
 .cjp-nav {
@@ -731,7 +727,7 @@ const cjpCss = `
   .cjp-hero-stage { max-width: 380px; margin-top: 1rem; width: 100%; }
   .cjp-stage-bg { box-shadow: 8px 8px 0 var(--ink); border-width: 3px; border-radius: 24px; }
 }
-.cjp-blob { position: absolute; border-radius: 50%; filter: blur(40px); opacity: 0.8; mix-blend-mode: multiply; }
+.cjp-blob { position: absolute; border-radius: 50%; filter: blur(30px); opacity: 0.6; transform: translateZ(0); will-change: transform; }
 .cjp-blob.b1 { width: 60%; height: 60%; background: var(--red); top: -10%; right: -10%; animation: cjp-float 9s ease-in-out infinite; }
 .cjp-blob.b2 { width: 50%; height: 50%; background: #00d4ff; bottom: -15%; left: -10%; animation: cjp-float 11s ease-in-out infinite reverse; }
 .cjp-cross-grid {
