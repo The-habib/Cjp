@@ -17,12 +17,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <title>Cockroach Janta Party | CJP</title>
         <meta name="description" content="Welcome to the official website of the Cockroach Janta Party (CJP). Working towards a resilient future." />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
-        <link rel="canonical" href="http://cockroachjantaparty.eu.cc/" />
+        <link rel="canonical" href="https://cockroachjantaparty.eu.cc/" />
         
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Cockroach Janta Party" />
         <meta property="og:description" content="Official Website of the Cockroach Janta Party (CJP)." />
-        <meta property="og:url" content="http://cockroachjantaparty.eu.cc/" />
+        <meta property="og:url" content="https://cockroachjantaparty.eu.cc/" />
         <meta property="og:type" content="website" />
         
         {/* Twitter Card Meta Tags */}
@@ -108,10 +108,8 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
-    <RootShell>
-      <QueryClientProvider client={queryClient}>
-        <Outlet />
-      </QueryClientProvider>
-    </RootShell>
+    <QueryClientProvider client={queryClient}>
+      <Outlet />
+    </QueryClientProvider>
   );
 }

@@ -16,14 +16,14 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Voice of the Lazy & Unemployed. Five demands. Zero sponsors. They tried to step on us — we came back." },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Cockroach Janta Party" },
-      { property: "og:url", content: "http://cockroachjantaparty.eu.cc/" },
+      { property: "og:url", content: "https://cockroachjantaparty.eu.cc/" },
       { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Cockroach Janta Party (CJP) — Voice of the Lazy & Unemployed" },
       { name: "twitter:description", content: "Five demands. Zero sponsors. One large, stubborn swarm. They tried to step on us — we came back." },
     ],
     links: [
-      { rel: "canonical", href: "http://cockroachjantaparty.eu.cc/" },
+      { rel: "canonical", href: "https://cockroachjantaparty.eu.cc/" },
     ],
     scripts: [
       {
@@ -33,10 +33,10 @@ export const Route = createFileRoute("/")({
           "@graph": [
             {
               "@type": "Organization",
-              "@id": "http://cockroachjantaparty.eu.cc/#org",
+              "@id": "https://cockroachjantaparty.eu.cc/#org",
               name: "Cockroach Janta Party",
               alternateName: ["CJP", "Cockroach Janta Party (CJP)"],
-              url: "http://cockroachjantaparty.eu.cc/",
+              url: "https://cockroachjantaparty.eu.cc/",
               email: "contact@cockroachjantaparty.org",
               slogan: "Voice of the Lazy & Unemployed",
               description:
@@ -46,11 +46,11 @@ export const Route = createFileRoute("/")({
             },
             {
               "@type": "WebSite",
-              "@id": "http://cockroachjantaparty.eu.cc/#website",
-              url: "http://cockroachjantaparty.eu.cc/",
+              "@id": "https://cockroachjantaparty.eu.cc/#website",
+              url: "https://cockroachjantaparty.eu.cc/",
               name: "Cockroach Janta Party",
               inLanguage: "en-IN",
-              publisher: { "@id": "http://cockroachjantaparty.eu.cc/#org" },
+              publisher: { "@id": "https://cockroachjantaparty.eu.cc/#org" },
             },
             {
               "@type": "FAQPage",
@@ -167,7 +167,7 @@ const tickerWords = [
 
 import { RegistrationForm } from '../components/RegistrationForm';
 
-const WA_URL = "https://wa.me/?text=" + encodeURIComponent("Join the Cockroach Janta Party — Voice of the Lazy & Unemployed. http://cockroachjantaparty.eu.cc/");
+const WA_URL = "https://wa.me/?text=" + encodeURIComponent("Join the Cockroach Janta Party — Voice of the Lazy & Unemployed. https://cockroachjantaparty.eu.cc/");
 
 /* ============ HOOKS & ANIMATION ============ */
 function useCursor() {
