@@ -122,7 +122,8 @@ export function RegistrationForm() {
           You're in, {user?.displayName || "Roach"}!
         </h3>
         <p style={{ marginBottom: "2rem" }}>
-          Your receipt is secured on the blockchain. Just kidding, it's in a database.
+          The bond is sealed. Your receipt is secured on the blockchain. Just kidding, it's in a
+          database.
         </p>
         <button onClick={handleLogout} className="cjp-btn cjp-btn-ghost">
           Logout
@@ -135,7 +136,7 @@ export function RegistrationForm() {
     return (
       <div className="cjp-join-qs" style={{ textAlign: "center", padding: "1rem 0" }}>
         <p style={{ marginBottom: "1rem", color: "var(--ink)" }}>
-          To sign the roster, authenticate yourself.
+          To forge the bond, authenticate yourself.
         </p>
         <button onClick={handleLogin} className="cjp-btn cjp-btn-dark cjp-btn-block">
           Sign in with Google <em>→</em>

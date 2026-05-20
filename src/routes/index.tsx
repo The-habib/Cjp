@@ -1,47 +1,47 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Cockroach Janta Party — Voice of the Lazy & Unemployed" },
+      { title: "Cockroach Janta Party | We Are Bound — Voice of the Lazy & Unemployed" },
       {
         name: "description",
         content:
-          "A political party for the people the system forgot to count. Five demands. Zero sponsors. One large, stubborn swarm. They tried to step on us. We came back.",
+          "A political party for the people the system forgot to count. We share a strong bond. Five demands. Zero sponsors. We are bound to the truth. Founder: Abhijeet Dipke. Dev: TG Habib, a comrade.",
       },
       {
         name: "keywords",
         content:
-          "Cockroach Janta Party, CJP, Indian political party, satirical political party India, Voice of the Lazy and Unemployed, Abhijeet Dipke, Indian politics, anti-establishment India, youth political party India, cockroach party",
+          "Cockroach Janta Party, CJP, Indian political party, satirical political party India, Voice of the Lazy and Unemployed, TG Habib, bond, bound to CJP, cockroachjantaparty.bond",
       },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       { name: "author", content: "Cockroach Janta Party" },
       { name: "theme-color", content: "#0d1a12" },
-      { property: "og:title", content: "Cockroach Janta Party (CJP)" },
+      { property: "og:title", content: "Cockroach Janta Party (CJP) | Bound Together" },
       {
         property: "og:description",
         content:
-          "Voice of the Lazy & Unemployed. Five demands. Zero sponsors. They tried to step on us — we came back.",
+          "Voice of the Lazy & Unemployed. We share a strong bond. Five demands. Zero sponsors. They tried to step on us — we came back.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Cockroach Janta Party" },
-      { property: "og:url", content: "https://cockroachjantaparty.eu.cc/" },
+      { property: "og:url", content: "https://cockroachjantaparty.bond/" },
       { property: "og:locale", content: "en_IN" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Cockroach Janta Party (CJP) — Voice of the Lazy & Unemployed",
+        content: "Cockroach Janta Party (CJP) | Bound Together",
       },
       {
         name: "twitter:description",
         content:
-          "Five demands. Zero sponsors. One large, stubborn swarm. They tried to step on us — we came back.",
+          "Voice of the Lazy & Unemployed. We share a strong bond. Five demands. Zero sponsors.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://cockroachjantaparty.eu.cc/" }],
+    links: [{ rel: "canonical", href: "https://cockroachjantaparty.bond/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -50,24 +50,24 @@ export const Route = createFileRoute("/")({
           "@graph": [
             {
               "@type": "Organization",
-              "@id": "https://cockroachjantaparty.eu.cc/#org",
+              "@id": "https://cockroachjantaparty.bond/#org",
               name: "Cockroach Janta Party",
               alternateName: ["CJP", "Cockroach Janta Party (CJP)"],
-              url: "https://cockroachjantaparty.eu.cc/",
+              url: "https://cockroachjantaparty.bond/",
               email: "contact@cockroachjantaparty.org",
               slogan: "Voice of the Lazy & Unemployed",
               description:
-                "Cockroach Janta Party (CJP) is a satirical Indian political movement for the people the system forgot to count. Five demands. Zero sponsors.",
+                "Cockroach Janta Party (CJP) is a movement for the lazy, the unemployed, and the chronically online. Bound to the truth, governed by Abhijeet Dipke.",
               founder: { "@type": "Person", name: "Abhijeet Dipke" },
               areaServed: "IN",
             },
             {
               "@type": "WebSite",
-              "@id": "https://cockroachjantaparty.eu.cc/#website",
-              url: "https://cockroachjantaparty.eu.cc/",
+              "@id": "https://cockroachjantaparty.bond/#website",
+              url: "https://cockroachjantaparty.bond/",
               name: "Cockroach Janta Party",
               inLanguage: "en-IN",
-              publisher: { "@id": "https://cockroachjantaparty.eu.cc/#org" },
+              publisher: { "@id": "https://cockroachjantaparty.bond/#org" },
             },
             {
               "@type": "FAQPage",
@@ -77,7 +77,7 @@ export const Route = createFileRoute("/")({
                   name: "What is the Cockroach Janta Party?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "Cockroach Janta Party (CJP) is a satirical Indian political party — a movement for the lazy, the unemployed and the chronically online. Five demands, zero corporate sponsors.",
+                    text: "Cockroach Janta Party (CJP) is a movement for the lazy, the unemployed and the chronically online. We share a strong bond. Five demands, zero corporate sponsors.",
                   },
                 },
                 {
@@ -85,7 +85,7 @@ export const Route = createFileRoute("/")({
                   name: "Who founded the Cockroach Janta Party?",
                   acceptedAnswer: {
                     "@type": "Answer",
-                    text: "The Cockroach Janta Party was founded by Abhijeet Dipke, who serves as Founder & Convenor.",
+                    text: "The Cockroach Janta Party is owned and founded by Abhijeet Dipke, who serves as Founder & Convenor. We are all bound to it. Developed by comrade TG Habib.",
                   },
                 },
                 {
@@ -262,7 +262,7 @@ import { RegistrationForm } from "../components/RegistrationForm";
 const WA_URL =
   "https://wa.me/?text=" +
   encodeURIComponent(
-    "Join the Cockroach Janta Party — Voice of the Lazy & Unemployed. https://cockroachjantaparty.eu.cc/",
+    "Join the Cockroach Janta Party — Voice of the Lazy & Unemployed. https://cockroachjantaparty.bond/",
   );
 
 /* ============ HOOKS & ANIMATION ============ */
@@ -328,6 +328,64 @@ function Reveal({
   );
 }
 
+/* ============ LIVE ELECTION BOARD ============ */
+function LiveCounter() {
+  const [count, setCount] = useState(8820493);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newJoins = Math.floor(Math.random() * 45) + 12;
+      setCount((c) => c + newJoins);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatted = count.toLocaleString();
+
+  return (
+    <div className="cr-election-board">
+      <div className="cr-eb-header">
+        <div className="cr-eb-live-badge">
+          <span className="cr-eb-dot" />
+          LIVE
+        </div>
+        <div className="cr-eb-title">YOUTH STORMING IN</div>
+      </div>
+      
+      <div className="cr-eb-grid">
+        <div className="cr-eb-main-count">
+          <span className="cr-eb-label">TOTAL JOINED SO FAR</span>
+          <div className="cr-live-number">
+            {formatted.split('').map((char, i) => {
+              const isNum = !isNaN(parseInt(char));
+              return (
+                <div key={i} className={`cr-digit-wrap ${isNum ? 'num' : 'comma'}`}>
+                  <AnimatePresence mode="popLayout" initial={false}>
+                    <motion.span
+                      key={`${i}-${char}`}
+                      initial={{ y: "100%", filter: "blur(8px)", opacity: 0 }}
+                      animate={{ y: "0%", filter: "blur(0px)", opacity: 1 }}
+                      exit={{ y: "-100%", filter: "blur(8px)", opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                      className="cr-digit"
+                    >
+                      {char}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      
+      <div className="cr-eb-footer">
+        Real-time count of young people who are tired of the old system and want real change.
+      </div>
+    </div>
+  );
+}
+
 /* ============ PAGE ============ */
 function Index() {
   const cursorRef = useCursor();
@@ -380,14 +438,15 @@ function Index() {
           </span>
         </a>
         <div className="cjp-nav-pill">
+          <Link to="/cockroach">Transmissions</Link>
           <a href="#manifesto">Manifesto</a>
-          <a href="#join">Join</a>
+          <a href="#join">The Bond</a>
           <a href="#contact">Contact</a>
         </div>
-        <a href="#join" className="cjp-nav-cta">
-          <span>Join the Swarm</span>
+        <Link to="/cockroach" className="cjp-nav-cta">
+          <span>Cockroach Media</span>
           <em>→</em>
-        </a>
+        </Link>
       </motion.nav>
 
       {/* HERO */}
@@ -425,25 +484,30 @@ function Index() {
               </motion.span>
             </h1>
             <p className="cjp-sub">
-              <b>A political party for the people the system forgot to count.</b>
+              <b>
+                A political party for the people the system forgot to count. We are bound to the
+                truth.
+              </b>
               <br />
-              <span>Five demands. Zero sponsors. One large, stubborn swarm.</span>
+              <span>
+                We share a strong bond. Five demands. Zero sponsors. One large, stubborn swarm.
+              </span>
             </p>
             <div className="cjp-hero-ctas">
               <a href="#join" className="cjp-btn cjp-btn-primary">
-                Join the swarm <em>→</em>
-              </a>
-              <a href="#manifesto" className="cjp-btn cjp-btn-ghost">
-                <span className="cjp-btn-num">05</span> Demands
+                The Bond <em>→</em>
               </a>
               <Link
-                to="/the-vault"
-                className="cjp-btn"
-                style={{ borderColor: "var(--red)", color: "var(--red)" }}
+                to="/cockroach"
+                className="cjp-btn cjp-glitch-btn"
               >
-                <span>[ REDACTED SECRETS ]</span>
+                <span>Cockroach Media</span>
               </Link>
             </div>
+            
+            <Reveal delay={0.4}>
+              <LiveCounter />
+            </Reveal>
           </Reveal>
 
           {/* right: mascot stage */}
@@ -656,18 +720,18 @@ function Index() {
         </div>
       </section>
 
-      {/* JOIN / CTA */}
+      {/* THE BOND / CTA */}
       <section id="join" className="cjp-section cjp-section-lime">
         <div className="cjp-container cjp-join">
           <Reveal className="cjp-join-left">
             <span className="cjp-eyebrow cjp-eyebrow-dark">Chapter 04 — Enlist</span>
             <h2 className="cjp-h2 cjp-h2-dark">
-              Sign the
+              Forge the
               <br />
-              roach roll.
+              bond.
             </h2>
             <p className="cjp-lede cjp-lede-dark">
-              Two clicks. One form. Lifelong membership. Bring your rage, your memes, your receipts.
+              Two clicks. One form. A lifelong bond. Bring your rage, your memes, your receipts.
             </p>
             <div className="cjp-hero-ctas">
               <a href="#join" className="cjp-btn cjp-btn-lime-alt">
@@ -735,6 +799,11 @@ function Index() {
               <span>Abhijeet Dipke</span>
               <em>🪳</em>
             </Reveal>
+            <Reveal delay={0.5} className="cjp-contact">
+              <small>Developer / Comrade</small>
+              <span>TG Habib</span>
+              <em>🪳</em>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -742,7 +811,11 @@ function Index() {
       {/* FOOTER */}
       <footer className="cjp-footer">
         <Reveal y={100} delay={0.2}>
-          <div className="cjp-footer-mega">COCKROACH · JANTA · PARTY ·</div>
+          <div className="cjp-footer-marquee">
+            <div className="cjp-footer-mega">
+              COCKROACH · JANTA · PARTY · COCKROACH · JANTA · PARTY · COCKROACH · JANTA · PARTY · COCKROACH · JANTA · PARTY · 
+            </div>
+          </div>
         </Reveal>
         <div className="cjp-container cjp-footer-grid">
           <Reveal delay={0.1}>
@@ -838,7 +911,8 @@ const cjpCss = `
 }
 .cjp * { box-sizing: border-box; }
 .cjp a { color: inherit; text-decoration: none; }
-.cjp-container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; position: relative; }
+.cjp-container { max-width: 1440px; margin: 0 auto; padding: 0 4rem; position: relative; }
+@media (max-width: 820px) { .cjp-container { padding: 0 1.5rem; } }
 
 /* GRAIN */
 .cjp-grain {
@@ -867,7 +941,7 @@ const cjpCss = `
 .cjp-nav {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: 1rem 1.5rem; background: var(--paper);
+  padding: 1.25rem 4rem; background: var(--paper);
   border-bottom: 4px solid var(--ink); box-shadow: 0 8px 0 rgba(10,10,10,0.1);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: hidden;
@@ -903,12 +977,12 @@ const cjpCss = `
   .cjp-brand-text i { font-size: 0.6rem; display: none; }
   .cjp-nav-cta { padding: 0.6rem 1rem; font-size: 0.75rem; border-width: 2px; box-shadow: 3px 3px 0 var(--ink); gap: 0.4rem; }
   .cjp-nav-cta span { display: none; }
-  .cjp-nav-cta::before { content: 'Join Swarm'; }
+  .cjp-nav-cta::before { content: 'Media'; }
 }
 
 /* HERO */
-.cjp-hero { position: relative; padding: 4rem 1.5rem 3rem; z-index: 2; overflow: hidden; }
-.cjp-hero-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 1fr; gap: 3.5rem; align-items: center; }
+.cjp-hero { position: relative; padding: 6rem 4rem 4rem; z-index: 2; overflow: hidden; }
+.cjp-hero-grid { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 6rem; align-items: center; }
 @media (max-width: 900px) { .cjp-hero-grid { grid-template-columns: 1fr; gap: 3rem; } }
 @media (max-width: 600px) { .cjp-hero { padding: 2rem 1.25rem 2rem; } }
 .cjp-hero-tag {
@@ -921,11 +995,137 @@ const cjpCss = `
 .cjp-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--lime); animation: cjp-pulse 1.4s ease-in-out infinite; }
 @keyframes cjp-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
 
+/* LIVE ELECTION BOARD */
+.cr-election-board {
+  margin-top: 3.5rem;
+  background: var(--ink);
+  border-radius: 8px;
+  border: 4px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--lime);
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  text-align: left;
+}
+@media (max-width: 600px) {
+  .cr-election-board { box-shadow: 6px 6px 0 var(--lime); border-width: 3px; }
+}
+.cr-eb-header {
+  background: var(--red);
+  color: var(--paper);
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.cr-eb-live-badge {
+  background: var(--paper);
+  color: var(--red);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.cr-eb-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: cjp-pulse 1s infinite;
+}
+.cr-eb-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.cr-eb-grid {
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+@media (min-width: 600px) {
+  .cr-eb-grid {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+.cr-eb-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.cr-live-number {
+  display: flex;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  color: var(--lime);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.cr-digit-wrap {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 1.1em;
+}
+.cr-digit-wrap.num { width: 0.65em; }
+.cr-digit-wrap.comma { width: 0.35em; color: #555; }
+.cr-digit { position: absolute; }
+
+.cr-eb-footer {
+  padding: 1.25rem 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #888;
+  border-top: 1px solid #1a1a1a;
+  margin-top: 1.5rem;
+  line-height: 1.4;
+}
+
 .cjp-h1 {
   margin: 1.25rem 0 1.5rem;
   font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(3rem, 11vw, 8.5rem); line-height: 0.82; letter-spacing: -0.05em;
+  font-size: clamp(2.5rem, 9vw, 9rem); line-height: 0.82; letter-spacing: -0.05em;
   text-transform: uppercase; position: relative;
+}
+@media (max-width: 600px) {
+  .cjp-h1 {
+    line-height: 1;
+    word-break: break-word;
+  }
+}
+@media (min-width: 1200px) {
+  .cjp-h1 { font-size: 11.5rem; letter-spacing: -0.055em; line-height: 0.82; }
+  .cjp-hero { padding: 8rem 4rem 6rem; }
+  .cjp-hero-grid { grid-template-columns: 1.25fr 1fr; gap: 6rem; align-items: center; max-width: 1600px;}
+  .cr-election-board { transform: rotate(-2deg); margin-top: 5rem; }
+  .cr-election-board:hover { transform: rotate(0deg) scale(1.02); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .cjp-bento { gap: 2.5rem; }
+  .cjp-tile { padding: 4rem; min-height: 380px; border-width: 5px; box-shadow: 12px 12px 0 var(--ink); border-radius: 40px; }
+  .cjp-tile:hover { transform: translate(-10px, -10px); box-shadow: 22px 22px 0 var(--ink); }
+  .cjp-h2 { font-size: clamp(5rem, 7vw, 8rem); letter-spacing: -0.04em; }
+  .cjp-demand-num { font-size: 8rem; }
+  .cjp-demand-body h3 { font-size: 3.2rem; }
+  .cjp-demand { padding: 4rem 1rem; gap: 4rem; }
+  .cjp-elig-card { padding: 3rem; border-radius: 40px; border-width: 4px; box-shadow: 10px 10px 0 var(--ink); }
+  .cjp-join-card { padding: 5rem; border-width: 5px; box-shadow: 20px 20px 0 var(--ink); border-radius: 48px; }
+  .cr-eb-grid { padding: 2.5rem; }
+  .cr-live-number { font-size: 5.5rem; }
 }
 .cjp-word { display: block; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.1)); }
 .cjp-word.l1 { color: var(--ink); transform: translateX(-10px); }
@@ -936,7 +1136,7 @@ const cjpCss = `
 .cjp-strike { position: relative; opacity: 0.7; color: var(--ink); -webkit-text-stroke: 0; }
 .cjp-strike::after { content: ''; position: absolute; left: -10%; right: -10%; top: 50%; height: 8px; background: var(--red); transform: rotate(-8deg); }
 
-.cjp-sub { font-size: clamp(1.1rem, 1.5vw, 1.3rem); max-width: 540px; line-height: 1.6; color: var(--grey); border-left: 4px solid var(--lime); padding-left: 1.25rem; }
+.cjp-sub { font-size: clamp(1.2rem, 1.8vw, 1.5rem); max-width: 680px; line-height: 1.6; color: var(--grey); border-left: 4px solid var(--lime); padding-left: 1.5rem; margin-bottom: 2.5rem; }
 .cjp-sub b { color: var(--ink); font-weight: 900; font-size: 1.1em;}
 .cjp-sub span { color: var(--ink); opacity: 0.8; font-family: 'Space Mono', monospace; font-size: 0.85em; text-transform: uppercase; display: inline-block; margin-top: 0.5rem; font-weight: bold;}
 
@@ -954,15 +1154,39 @@ const cjpCss = `
 .cjp-btn-primary { background: var(--lime); color: var(--ink); box-shadow: 6px 6px 0 var(--ink); }
 .cjp-btn-primary:active { transform: translate(2px,2px); box-shadow: 4px 4px 0 var(--ink); }
 .cjp-btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--ink); background: var(--red); color: var(--paper); }
+.cjp-glitch-btn {
+  background: #111; color: var(--lime) !important; border-color: var(--lime);
+  position: relative; overflow: hidden;
+  box-shadow: 6px 6px 0 var(--lime);
+}
+.cjp-glitch-btn span {
+  position: relative;
+  z-index: 2;
+}
+.cjp-glitch-btn::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(200, 255, 0, 0.4), transparent);
+  transform: skewX(-20deg);
+  animation: cjp-glitch-swipe 3s infinite;
+}
+.cjp-glitch-btn:hover {
+  background: var(--lime); color: var(--ink) !important; box-shadow: 8px 8px 0 var(--red); border-color: var(--ink);
+  transform: translate(-2px, -2px);
+}
+@keyframes cjp-glitch-swipe {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
 .cjp-btn-ghost { background: var(--paper); color: var(--ink); box-shadow: 6px 6px 0 rgba(0,0,0,0.1); }
 .cjp-btn-ghost:hover { background: var(--ink); color: var(--paper); box-shadow: 8px 8px 0 var(--lime); }
 .cjp-btn-num { background: var(--red); color: var(--paper); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.85rem; transform: rotate(-5deg); display: inline-block;}
-.cjp-btn-dark { background: var(--ink); color: var(--paper); box-shadow: 6px 6px 0 var(--lime); }
-.cjp-btn-dark:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--lime); background: var(--red); }
-.cjp-btn-ghost-dark { background: transparent; color: var(--paper); border-color: var(--paper); box-shadow: 6px 6px 0 rgba(255,255,255,0.2); }
-.cjp-btn-ghost-dark:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); box-shadow: 8px 8px 0 var(--lime); }
-.cjp-btn-lime-alt { background: var(--ink); color: var(--paper); box-shadow: 6px 6px 0 var(--paper); }
-.cjp-btn-lime-alt:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--paper); background: var(--red); color: var(--paper); }
+.cjp-btn-dark { background: var(--ink); color: var(--paper) !important; box-shadow: 6px 6px 0 var(--lime); }
+.cjp-btn-dark:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--lime); background: var(--red); color: var(--paper) !important; }
+.cjp-btn-ghost-dark { background: transparent; color: var(--paper) !important; border-color: var(--paper); box-shadow: 6px 6px 0 rgba(255,255,255,0.2); }
+.cjp-btn-ghost-dark:hover { background: var(--paper); color: var(--ink) !important; border-color: var(--paper); box-shadow: 8px 8px 0 var(--lime); }
+.cjp-btn-lime-alt { background: var(--ink); color: var(--paper) !important; box-shadow: 6px 6px 0 var(--paper); }
+.cjp-btn-lime-alt:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--paper); background: var(--red); color: var(--paper) !important; }
 .cjp-btn-lime-ghost { background: transparent; color: var(--ink); border-color: var(--ink); box-shadow: 6px 6px 0 rgba(0,0,0,0.1); }
 .cjp-btn-lime-ghost:hover { background: var(--paper); color: var(--ink); border-color: var(--ink); box-shadow: 8px 8px 0 var(--ink); }
 .cjp-btn-block { display: flex; justify-content: center; width: 100%; margin-top: 1rem; }
@@ -1045,12 +1269,111 @@ const cjpCss = `
 .cjp-bigmarquee-track em { font-style: normal; color: var(--red); }
 
 /* SECTIONS */
-.cjp-section { padding: 5rem 0; position: relative; z-index: 2; }
-@media (max-width: 600px) { .cjp-section { padding: 3rem 0; } }
+/* TV CARD */
+.cjp-tv-card {
+  background: var(--paper);
+  border: 4px solid var(--lime);
+  border-radius: 20px;
+  box-shadow: 16px 16px 0 var(--lime);
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: rotate(-1deg);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cjp-tv-card:hover { transform: rotate(0) scale(1.02); }
+.cjp-tvc-screen-wrap {
+  position: relative;
+  border-bottom: 4px solid var(--lime);
+  background: #000;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.cjp-tvc-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.cjp-tvc-screen iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cjp-tvc-overlay {
+  position: absolute;
+  top: 1.5rem; left: 1.5rem; right: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  z-index: 10;
+}
+.cjp-tvc-rec { display: flex; align-items: center; gap: 0.5rem; color: #ff3333; }
+.cjp-pulse-dot { width: 12px; height: 12px; background: #ff3333; border-radius: 50%; animation: cjp-pulse 1s infinite alternate; }
+.cjp-tvc-body {
+  padding: 2rem 2.5rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+.cjp-tvc-top { margin-bottom: 1rem; }
+.cjp-tvc-badge {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.cjp-tvc-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
+.cjp-tvc-divider {
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--lime) 0, var(--lime) 10px, transparent 10px, transparent 20px);
+  margin: 2rem 0;
+  opacity: 0.5;
+}
+.cjp-tvc-footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--lime);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+@media (max-width: 600px) {
+  .cjp-tv-card { border-width: 3px; border-radius: 12px; box-shadow: 8px 8px 0 var(--lime); transform: rotate(0); }
+  .cjp-tvc-screen-wrap { border-bottom-width: 3px; }
+  .cjp-tvc-body { padding: 1.5rem; }
+  .cjp-tvc-overlay { top: 1rem; left: 1rem; right: 1rem; font-size: 0.8rem; }
+  .cjp-pulse-dot { width: 8px; height: 8px; }
+  .cjp-tvc-footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .cjp-tvc-divider { margin: 1.5rem 0; }
+}
+.cjp-section { padding: 7rem 0; position: relative; z-index: 2; }
+@media (max-width: 600px) { .cjp-section { padding: 4rem 0; } }
 .cjp-section-dark { background: var(--ink); color: var(--paper); }
 .cjp-section-lime { background: var(--lime); color: var(--ink); }
-.cjp-h2-row { max-width: 900px; margin-bottom: 3rem; }
-@media (max-width: 600px) { .cjp-h2-row { margin-bottom: 2rem; } }
+.cjp-h2-row { max-width: 1000px; margin-bottom: 4rem; }
+@media (max-width: 600px) { .cjp-h2-row { margin-bottom: 2.5rem; } }
 .cjp-eyebrow {
   display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em;
   background: var(--ink); color: var(--paper); padding: 0.35rem 0.75rem; border-radius: 4px;
@@ -1058,24 +1381,24 @@ const cjpCss = `
 .cjp-eyebrow-light { background: var(--lime); color: var(--ink); }
 .cjp-eyebrow-dark { background: var(--ink); color: var(--lime); }
 .cjp-h2 {
-  font-family: 'Archivo Black', sans-serif; font-size: clamp(2.2rem, 8vw, 5.5rem);
-  line-height: 0.92; letter-spacing: -0.03em; margin: 1rem 0 1.25rem; text-transform: uppercase;
+  font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 8vw, 6.5rem);
+  line-height: 0.92; letter-spacing: -0.03em; margin: 1.25rem 0 1.5rem; text-transform: uppercase;
 }
 .cjp-h2 em { font-style: italic; background: var(--lime); padding: 0 0.2em; display: inline-block; transform: rotate(-2deg); }
 .cjp-h2-light em { background: var(--lime); color: var(--ink); }
 .cjp-h2-dark em { background: var(--ink); color: var(--lime); }
-.cjp-lede { font-size: clamp(1rem, 1.3vw, 1.2rem); max-width: 640px; color: var(--grey); line-height: 1.55; }
+.cjp-lede { font-size: clamp(1.1rem, 1.5vw, 1.3rem); max-width: 760px; color: var(--grey); line-height: 1.6; padding-left: 1rem; border-left: 3px solid var(--lime);}
 .cjp-lede-dark { color: var(--ink); opacity: 0.85; }
 .cjp-section-dark .cjp-lede { color: #b9b9b9; }
 
 /* BENTO */
-.cjp-bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+.cjp-bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5rem; }
 .cjp-tile {
-  border: 2px solid var(--ink); border-radius: 24px; padding: 1.75rem;
+  border: 4px solid var(--ink); border-radius: 32px; padding: 2.5rem;
   background: var(--paper); position: relative; transition: transform .3s, box-shadow .3s;
-  min-height: 220px; display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 280px; display: flex; flex-direction: column; justify-content: space-between;
 }
-.cjp-tile:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink); }
+.cjp-tile:hover { transform: translate(-5px,-5px); box-shadow: 12px 12px 0 var(--ink); }
 .cjp-tile-1 { grid-column: span 4; transform: rotate(-0.4deg); }
 .cjp-tile-2 { grid-column: span 2; transform: rotate(0.6deg); }
 .cjp-tile-3 { grid-column: span 2; transform: rotate(-0.3deg); }
@@ -1083,8 +1406,8 @@ const cjpCss = `
 .cjp-tile-lime { background: var(--lime); }
 .cjp-tile-red { background: var(--red); color: var(--paper); }
 .cjp-tile-num { font-family: 'Space Mono', monospace; font-size: 0.85rem; opacity: 0.7; }
-.cjp-tile h3 { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1; margin: 0.75rem 0 0.6rem; text-transform: uppercase; }
-.cjp-tile p { font-size: 0.95rem; line-height: 1.5; }
+.cjp-tile h3 { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.1; margin: 1rem 0 0.8rem; text-transform: uppercase; }
+.cjp-tile p { font-size: 1.05rem; line-height: 1.6; }
 @media (max-width: 820px) {
   .cjp-bento { grid-template-columns: 1fr; }
   .cjp-tile-1, .cjp-tile-2, .cjp-tile-3, .cjp-tile-4 { grid-column: span 1; transform: none; }
@@ -1093,17 +1416,17 @@ const cjpCss = `
 /* DEMANDS */
 .cjp-demands { list-style: none; margin: 0; padding: 0; border-top: 1px solid #2a2a2a; }
 .cjp-demand {
-  display: grid; grid-template-columns: 120px 1fr 60px; gap: 1.5rem; align-items: center;
-  padding: 2rem 0.5rem; border-bottom: 1px solid #2a2a2a;
-  cursor: pointer; transition: padding .3s, background .3s;
+  display: grid; grid-template-columns: 140px 1fr 80px; gap: 2.5rem; align-items: center;
+  padding: 3rem 1rem; border-bottom: 2px solid #2a2a2a;
+  cursor: pointer; transition: padding .3s, background .3s, border-color .3s;
 }
-.cjp-demand:hover { padding-left: 1.5rem; padding-right: 1.5rem; background: #111; }
+.cjp-demand:hover { padding-left: 2.5rem; padding-right: 2.5rem; background: #111; border-color: var(--lime); }
 .cjp-demand:hover .cjp-demand-num { color: var(--lime); }
-.cjp-demand:hover .cjp-demand-arrow { transform: translate(6px,-6px) rotate(0); color: var(--lime); }
-.cjp-demand-num { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; color: #444; transition: color .3s; }
-.cjp-demand-body h3 { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.3rem, 2.4vw, 2rem); text-transform: uppercase; line-height: 1.05; margin: 0 0 0.5rem; }
-.cjp-demand-body p { color: #b9b9b9; line-height: 1.55; max-width: 700px; }
-.cjp-demand-arrow { font-size: 2rem; color: #555; transition: transform .3s, color .3s; transform: rotate(0); justify-self: end; }
+.cjp-demand:hover .cjp-demand-arrow { transform: translate(12px,-12px) scale(1.2) rotate(0); color: var(--lime); }
+.cjp-demand-num { font-family: 'Archivo Black', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1; color: #444; transition: color .3s; }
+.cjp-demand-body h3 { font-family: 'Archivo Black', sans-serif; font-size: clamp(1.5rem, 2.8vw, 2.4rem); text-transform: uppercase; line-height: 1.1; margin: 0 0 0.75rem; }
+.cjp-demand-body p { color: #b9b9b9; line-height: 1.6; max-width: 800px; font-size: 1.1rem; }
+.cjp-demand-arrow { font-size: 2.5rem; color: #555; transition: transform .3s, color .3s; transform: rotate(0); justify-self: end; }
 @media (max-width: 700px) {
   .cjp-demand { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.5rem 0.25rem; align-items: flex-start;}
   .cjp-demand:hover { padding-left: 0.5rem; padding-right: 0.5rem; }
@@ -1113,28 +1436,29 @@ const cjpCss = `
 }
 
 /* ELIG */
-.cjp-elig { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.cjp-elig { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 .cjp-elig-card {
-  border: 2px solid var(--ink); border-radius: 20px; padding: 1.5rem; background: var(--paper);
+  border: 3px solid var(--ink); border-radius: 28px; padding: 2rem; background: var(--paper);
   transition: transform .3s, box-shadow .3s, background .3s;
 }
-.cjp-elig-card:hover { transform: translateY(-6px); box-shadow: 6px 6px 0 var(--ink); background: var(--lime); }
-.cjp-elig-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-.cjp-elig-id { font-family: 'Space Mono', monospace; font-size: 0.7rem; opacity: 0.65; letter-spacing: 0.1em; }
-.cjp-check { width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--lime); display: grid; place-items: center; font-weight: 900; }
-.cjp-elig-card h3 { font-family: 'Archivo Black', sans-serif; font-size: 1.4rem; line-height: 1; margin: 0 0 0.5rem; text-transform: uppercase; }
-.cjp-elig-card p { font-size: 0.92rem; line-height: 1.5; color: var(--grey); }
+.cjp-elig-card:hover { transform: translateY(-8px); box-shadow: 10px 10px 0 var(--ink); background: var(--lime); }
+.cjp-elig-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+.cjp-elig-id { font-family: 'Space Mono', monospace; font-size: 0.8rem; opacity: 0.65; letter-spacing: 0.1em; }
+.cjp-check { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--lime); display: grid; place-items: center; font-weight: 900; font-size: 1.2rem; }
+.cjp-elig-card h3 { font-family: 'Archivo Black', sans-serif; font-size: 1.6rem; line-height: 1.1; margin: 0 0 0.75rem; text-transform: uppercase; }
+.cjp-elig-card p { font-size: 1.05rem; line-height: 1.6; color: var(--grey); }
 .cjp-fineprint { margin-top: 2rem; font-family: 'Space Mono', monospace; font-size: 0.82rem; color: var(--muted); text-align: center; border-top: 1px dashed var(--ink); padding-top: 1.5rem; }
 @media (max-width: 900px) { .cjp-elig { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .cjp-elig { grid-template-columns: 1fr; } }
 
 /* JOIN */
-.cjp-join { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
-@media (max-width: 900px) { .cjp-join { grid-template-columns: 1fr; } }
+.cjp-join { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; }
+@media (max-width: 900px) { .cjp-join { grid-template-columns: 1fr; gap: 2.5rem; } }
 .cjp-join-card {
-  background: var(--paper); border: 2px solid var(--ink); border-radius: 24px; padding: 2rem;
-  box-shadow: 10px 10px 0 var(--ink); transform: rotate(0.8deg);
+  background: var(--paper); border: 3px solid var(--ink); border-radius: 32px; padding: 3rem;
+  box-shadow: 16px 16px 0 var(--ink); transform: rotate(1deg); transition: transform 0.3s;
 }
+.cjp-join-card:hover { transform: rotate(0deg) scale(1.02); }
 .cjp-join-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px dashed var(--ink); padding-bottom: 0.75rem; margin-bottom: 1rem; }
 .cjp-join-head b { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; }
 .cjp-join-head small { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); }
@@ -1170,11 +1494,24 @@ const cjpCss = `
 
 /* FOOTER */
 .cjp-footer { background: var(--ink); color: var(--paper); padding-top: 3rem; position: relative; z-index: 2; overflow: hidden; }
+.cjp-footer-marquee {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+}
 .cjp-footer-mega {
-  font-family: 'Archivo Black', sans-serif; font-size: clamp(3rem, 14vw, 14rem); line-height: 0.85;
-  letter-spacing: -0.04em; white-space: nowrap; overflow: hidden;
+  font-family: 'Archivo Black', sans-serif; font-size: clamp(4rem, 16vw, 14rem); line-height: 0.85;
+  letter-spacing: -0.04em; white-space: nowrap;
   color: transparent; -webkit-text-stroke: 2px var(--lime); padding: 0 1rem;
   user-select: none;
+  animation: cjp-marquee 20s linear infinite;
+  display: inline-block;
+  will-change: transform;
+}
+@keyframes cjp-marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 @media (max-width: 600px) { .cjp-footer-mega { -webkit-text-stroke: 1px var(--lime); font-size: 16vw; } }
 .cjp-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 2rem; padding-top: 3rem; padding-bottom: 2rem; }
@@ -1185,8 +1522,8 @@ const cjpCss = `
 .cjp-disclaimer { font-family: 'Space Mono', monospace !important; font-size: 0.78rem !important; }
 .cjp-brand-foot { margin-bottom: 0.75rem; }
 .cjp-footer-bottom {
-  border-top: 1px solid #2a2a2a; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; gap: 1rem;
-  font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #888; flex-wrap: wrap; text-align: center;
+  border-top: 1px solid #2a2a2a; padding: 1.5rem 4rem; display: flex; justify-content: space-between; gap: 1rem;
+  font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #888; flex-wrap: wrap; text-align: center; max-width: 1440px; margin: 0 auto;
 }
 @media (max-width: 820px) { .cjp-footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .cjp-footer-grid { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 2rem; } .cjp-footer-bottom { justify-content: center; } }

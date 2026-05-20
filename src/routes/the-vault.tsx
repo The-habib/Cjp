@@ -6,22 +6,24 @@ export const Route = createFileRoute("/the-vault")({
   component: TheVault,
   head: () => ({
     meta: [
-      { title: "The Vault | Cockroach Janta Party" },
+      { title: "The Vault | Bound Together | Cockroach Janta Party" },
       {
         name: "description",
         content:
-          "Classified and decrypted files, leaks, and evidence that the system tried to erase. The truth is safe in the CJP Vault.",
+          "Classified and decrypted files, leaks, and evidence that the system tried to erase. The truth is safe in our bond. Dev: TG Habib, a comrade.",
       },
       { name: "robots", content: "index, follow" },
-      { property: "og:title", content: "The Vault | Cockroach Janta Party" },
+      { property: "og:title", content: "The Vault | Bound Together | Cockroach Janta Party" },
       {
         property: "og:description",
-        content: "Classified files, leaks, and evidence that the system tried to erase.",
+        content:
+          "Classified files, leaks, and evidence that the system tried to erase. We share a strong bond. Dev: TG Habib, a comrade.",
       },
-      { name: "twitter:title", content: "The Vault | Cockroach Janta Party" },
+      { name: "twitter:title", content: "The Vault | Bound Together | Cockroach Janta Party" },
       {
         name: "twitter:description",
-        content: "Classified files, leaks, and evidence that the system tried to erase.",
+        content:
+          "Classified files, leaks, and evidence that the system tried to erase. We share a strong bond. Dev: TG Habib, a comrade.",
       },
     ],
   }),
@@ -357,7 +359,7 @@ function TheVault() {
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-50 bg-background/40 backdrop-blur-2xl border-b border-border saturate-[1.8]"
       >
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-[1440px] px-8 mx-auto h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
             <motion.div
               whileHover={{ rotate: 180 }}
@@ -408,7 +410,7 @@ function TheVault() {
         </motion.div>
       </div>
 
-      <main className="relative z-10 pt-40 pb-32 px-6 max-w-7xl mx-auto text-foreground">
+      <main className="relative z-10 pt-40 pb-32 px-8 max-w-[1440px] mx-auto text-foreground">
         {/* HERO */}
         <section className="text-center mb-32 relative">
           <motion.div
@@ -445,7 +447,7 @@ function TheVault() {
               They scrubbed the servers. They paid the editors. But they cannot erase the cache.
               <br />
               <span className="text-primary font-normal">
-                You are viewing a decentralized mirror.
+                You are viewing a decentralized mirror forged by our bond.
               </span>
             </p>
           </SmoothReveal>
@@ -453,34 +455,31 @@ function TheVault() {
 
         {/* GLASS BENTO GRID */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-24 relative">
-          {/* NEW FILE 5 - LARGE VIDEO CARD 5 */}
           <SmoothReveal delay={0.35} className="md:col-span-12">
-            <VideoFileCard5 />
-          </SmoothReveal>
-
-          {/* NEW GEN Z PARTY BARE VIDEO CARD */}
-          <SmoothReveal delay={0.35} className="md:col-span-12">
-            <BareVideoCard />
-          </SmoothReveal>
-
-          {/* NEW FILE 4 - LARGE VIDEO CARD 4 */}
-          <SmoothReveal delay={0.4} className="md:col-span-12">
-            <VideoFileCard4 />
-          </SmoothReveal>
-
-          {/* NEW FILE 3 - LARGE VIDEO CARD 3 */}
-          <SmoothReveal delay={0.4} className="md:col-span-12">
-            <VideoFileCard3 />
-          </SmoothReveal>
-
-          {/* NEW FILE 2 - LARGE VIDEO CARD 2 */}
-          <SmoothReveal delay={0.4} className="md:col-span-12">
-            <VideoFileCard2 />
-          </SmoothReveal>
-
-          {/* FILE 1 - LARGE VIDEO CARD */}
-          <SmoothReveal delay={0.4} className="md:col-span-8">
-            <VideoFileCard />
+            <Link to="/cockroach" className="block">
+              <motion.div
+                whileHover={{ y: -8, scale: 1.01 }}
+                className="gl-card group h-full flex flex-col items-center justify-center p-12 text-center"
+              >
+                <div className="mb-6 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 text-primary">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                </div>
+                <h2 className="text-3xl font-archivo uppercase text-primary mb-4">
+                  Archive Relocated
+                </h2>
+                <p className="text-muted-foreground max-w-lg mb-8 font-light">
+                  All decrypted video transmissions have been moved to a secured, dedicated feed. 
+                  View the complete timeline and analysis of Swarm activities.
+                </p>
+                <span className="bg-primary/10 text-primary border border-primary font-archivo text-sm px-6 py-3 rounded-full hover:bg-primary hover:text-black transition-colors">
+                  ACCESS TRANSMISSIONS FEED →
+                </span>
+              </motion.div>
+            </Link>
           </SmoothReveal>
 
           {/* FILE 2 - TALL AUDIO CARD */}
