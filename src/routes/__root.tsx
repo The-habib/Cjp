@@ -6,127 +6,175 @@ import { motion, AnimatePresence } from "motion/react";
 import appCss from "../styles.css?url";
 
 function SplashAnimation({ onComplete }: { onComplete: () => void }) {
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
+    const start = performance.now();
+    let rAF: number;
+    const duration = 2500; // 2.5 seconds to reach 100%
+
+    const animate = (time: number) => {
+      let timeFraction = (time - start) / duration;
+      if (timeFraction > 1) timeFraction = 1;
+
+      // Easing function (easeOutExpo)
+      const easeOut = timeFraction === 1 ? 1 : 1 - Math.pow(2, -10 * timeFraction);
+      const progressValue = Math.floor(easeOut * 100);
+      setProgress(progressValue);
+
+      if (timeFraction < 1) {
+        rAF = requestAnimationFrame(animate);
+      }
+    };
+    rAF = requestAnimationFrame(animate);
+
     const timer = setTimeout(() => {
       onComplete();
-    }, 4500); // splash duration
-    return () => clearTimeout(timer);
+    }, 3200);
+
+    return () => {
+      clearTimeout(timer);
+      cancelAnimationFrame(rAF);
+    };
   }, [onComplete]);
+
+  const words = [
+    { text: "WE", color: "text-white" },
+    { text: "ARE", color: "text-white" },
+    { text: "BOUND", color: "text-lime-500" },
+  ];
 
   return (
     <motion.div
+      className="fixed inset-0 z-[10000] bg-zinc-950 text-white flex flex-col items-center justify-center overflow-hidden"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
-      className="fixed inset-0 z-[10000] bg-[#0d1a12] flex flex-col items-center justify-center pointer-events-none overflow-hidden"
+      exit={{
+        y: "-100vh",
+        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
+      }}
     >
-      <div className="absolute inset-0 opacity-20 cr-dive-grain mix-blend-overlay"></div>
-
-      {/* Scanning line */}
-      <motion.div
-        className="absolute inset-0 w-full h-1 bg-lime-500/50 shadow-[0_0_15px_rgba(132,204,22,0.8)]"
-        initial={{ top: "-10%" }}
-        animate={{ top: "110%" }}
-        transition={{ duration: 3, ease: "linear", repeat: Infinity }}
+      {/* Background Noise & Grid */}
+      <div className="absolute inset-0 opacity-20 cr-dive-grain mix-blend-overlay pointer-events-none" />
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
       />
 
+      {/* Kinetic Background Text */}
       <motion.div
-        initial={{ scale: 0.8, opacity: 0, filter: "blur(10px)" }}
-        animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex flex-col items-center relative z-10"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center items-center opacity-5 select-none pointer-events-none"
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
+        <span className="text-[25vw] font-black whitespace-nowrap text-lime-500 tracking-tighter mix-blend-screen leading-none">
+          CJP SYSTEM
+        </span>
+      </motion.div>
+
+      {/* Main Content */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center w-full max-w-4xl px-4"
+        exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)", transition: { duration: 0.4 } }}
+      >
+        {/* Emblem Reveal */}
         <motion.div
-          animate={{
-            rotate: [0, -5, 5, -2, 2, 0],
-            scale: [1, 1.05, 0.95, 1.02, 0.98, 1],
-            x: [0, 2, -2, 1, -1, 0],
-          }}
-          transition={{
-            duration: 0.4,
-            delay: 1.5,
-            ease: "easeInOut",
-          }}
+          initial={{ scale: 0, rotate: -180, opacity: 0 }}
+          animate={{ scale: 1, rotate: 0, opacity: 1 }}
+          transition={{ duration: 1.2, type: "spring", bounce: 0.4 }}
+          className="mb-8 relative"
         >
+          <div className="absolute inset-0 bg-lime-500 blur-[40px] opacity-20 rounded-full animate-pulse" />
           <img
             src="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218062/android-chrome-192x192_gxtgg6.png"
             alt="CJP Logo"
-            className="w-28 h-28 mb-8 !drop-shadow-[0_0_15px_rgba(132,204,22,0.3)] filter sepia-[0.2] hue-rotate-90 saturate-[2]"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-lime-500/20 shadow-[0_0_30px_rgba(132,204,22,0.3)] object-cover relative z-10 bg-zinc-900 filter saturate-150"
           />
         </motion.div>
 
-        <div className="relative">
-          <motion.h1
-            className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase text-center"
-            initial={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
-            animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
-            transition={{ delay: 0.5, duration: 1, ease: "circOut" }}
-          >
-            We Are <span className="text-lime-500">Bound</span>
-          </motion.h1>
-
-          {/* Glitch layers */}
-          <motion.h1
-            className="absolute top-0 left-0 w-full text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-red-500 uppercase text-center opacity-70 mix-blend-screen"
-            animate={{
-              x: [0, -3, 3, -1, 0],
-              y: [0, 1, -1, 0, 0],
-              clipPath: [
-                "inset(10% 0 80% 0)",
-                "inset(40% 0 10% 0)",
-                "inset(80% 0 5% 0)",
-                "inset(20% 0 60% 0)",
-                "inset(0% 0 0% 0)",
-              ],
-              opacity: [0, 0.7, 0, 0.7, 0],
-            }}
-            transition={{ duration: 0.5, delay: 2, repeat: 2, repeatType: "mirror" }}
-          >
-            We Are <span className="text-red-500">Bound</span>
-          </motion.h1>
-          <motion.h1
-            className="absolute top-0 left-0 w-full text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-blue-500 uppercase text-center opacity-70 mix-blend-screen"
-            animate={{
-              x: [0, 3, -3, 1, 0],
-              y: [0, -1, 1, 0, 0],
-              clipPath: [
-                "inset(80% 0 5% 0)",
-                "inset(20% 0 60% 0)",
-                "inset(10% 0 80% 0)",
-                "inset(40% 0 10% 0)",
-                "inset(0% 0 0% 0)",
-              ],
-              opacity: [0, 0.7, 0, 0.7, 0],
-            }}
-            transition={{ duration: 0.5, delay: 2.1, repeat: 2, repeatType: "mirror" }}
-          >
-            We Are <span className="text-blue-500">Bound</span>
-          </motion.h1>
+        {/* Staggered Title Animation */}
+        <div className="flex flex-wrap justify-center gap-3 md:gap-5 overflow-hidden pb-4">
+          {words.map((word, wordIdx) => (
+            <div key={wordIdx} className="flex">
+              {word.text.split("").map((char, charIdx) => (
+                <motion.span
+                  key={`${wordIdx}-${charIdx}`}
+                  initial={{ y: 120, opacity: 0, rotate: 15 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0 }}
+                  transition={{
+                    duration: 0.8,
+                    ease: [0.33, 1, 0.68, 1],
+                    delay: wordIdx * 0.1 + charIdx * 0.05,
+                  }}
+                  className={`text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter ${word.color}`}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </div>
+          ))}
         </div>
 
+        {/* Cyberpunk Progress Bar */}
         <motion.div
-          className="mt-8 flex flex-col items-center gap-3 w-64"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="mt-12 flex flex-col items-center w-full max-w-sm px-4"
         >
-          <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden relative">
-            <motion.div
-              className="absolute top-0 left-0 h-full bg-lime-500"
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ delay: 1.5, duration: 2.5, ease: "circOut" }}
-            />
-          </div>
-          <div className="flex justify-between w-full text-xs font-mono text-lime-500/70 tracking-widest uppercase">
-            <span>System</span>
+          <div className="flex justify-between items-end w-full mb-3 font-mono text-xs text-zinc-400 uppercase tracking-widest">
+            <div className="flex items-center gap-2">
+              <motion.span
+                animate={{ opacity: [1, 0.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+                className="w-2 h-2 rounded-full bg-lime-500 shadow-[0_0_8px_rgba(132,204,22,0.8)]"
+              />
+              <span>INITIATING ROOT CAUSE</span>
+            </div>
             <motion.span
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ duration: 0.8, repeat: Infinity }}
+              className="text-lime-500 text-sm font-bold"
+              key={progress} // Forces re-render text for glitch effect occasionally if wanted, but fine without
             >
-              Initializing...
+              {progress}%
             </motion.span>
           </div>
+
+          <div className="h-[2px] w-full bg-zinc-800 relative overflow-hidden flex rounded-full">
+            <motion.div
+              className="absolute top-0 left-0 bottom-0 bg-gradient-to-r from-lime-600 to-lime-400 shadow-[0_0_10px_rgba(132,204,22,0.5)]"
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.1, ease: "linear" }}
+            />
+          </div>
         </motion.div>
+      </motion.div>
+
+      {/* Decorative Frame Elements */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute top-6 left-6 right-6 bottom-6 border border-white/5 pointer-events-none rounded-2xl hidden md:block"
+      >
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-lime-500/50 -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-lime-500/50 translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-lime-500/50 -translate-x-1/2 translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-lime-500/50 translate-x-1/2 translate-y-1/2" />
+      </motion.div>
+
+      {/* Cyberpunk Footer Data */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-8 left-8 right-8 flex justify-between text-[10px] md:text-xs font-mono text-zinc-500 uppercase tracking-widest hidden sm:flex"
+      >
+        <span>OS_VER_1.4.2</span>
+        <span className="text-center opacity-50">COCKROACH JANTA PARTY ENCRYPTED</span>
+        <span>SECURE_BOND // SYS_READY</span>
       </motion.div>
     </motion.div>
   );

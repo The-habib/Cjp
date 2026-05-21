@@ -16,6 +16,8 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  getDoc,
+  setDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { motion } from "motion/react";
@@ -33,7 +35,13 @@ function AdminPanel() {
   const [videos, setVideos] = useState<any[]>([]);
   const [error, setError] = useState("");
   const [dataLoading, setDataLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<"registrations" | "videos">("registrations");
+  const [activeTab, setActiveTab] = useState<"registrations" | "videos" | "config">(
+    "registrations",
+  );
+
+  // Config
+  const [baseMemberCount, setBaseMemberCount] = useState<number>(0);
+  const [isConfigSaving, setIsConfigSaving] = useState(false);
 
   // Swarm Form/Data logic
   const [searchTerm, setSearchTerm] = useState("");
@@ -90,11 +98,38 @@ function AdminPanel() {
         if (u) {
           fetchRegistrations();
           fetchVideos();
+          fetchConfig();
         }
       }
     });
     return unsub;
   }, []);
+
+  const fetchConfig = async () => {
+    try {
+      const docRef = doc(db, "settings", "stats");
+      const snap = await getDoc(docRef);
+      if (snap.exists() && snap.data().baseMemberCount !== undefined) {
+        setBaseMemberCount(snap.data().baseMemberCount);
+      }
+    } catch (e: any) {
+      console.error(e);
+    }
+  };
+
+  const saveConfig = async () => {
+    setIsConfigSaving(true);
+    try {
+      const docRef = doc(db, "settings", "stats");
+      await setDoc(docRef, { baseMemberCount }, { merge: true });
+      alert("Config saved successfully!");
+    } catch (e: any) {
+      console.error(e);
+      alert("Failed to save config: " + e.message);
+    } finally {
+      setIsConfigSaving(false);
+    }
+  };
 
   const fetchRegistrations = async () => {
     setDataLoading(true);
@@ -328,6 +363,16 @@ function AdminPanel() {
               }`}
             >
               Cockroach Media
+            </button>
+            <button
+              onClick={() => setActiveTab("config")}
+              className={`flex-1 sm:flex-none px-3 md:px-4 py-2 font-['Space_Mono'] text-[10px] md:text-xs uppercase rounded-md transition-colors ${
+                activeTab === "config"
+                  ? "bg-[#c8ff00] text-black font-bold"
+                  : "text-[#888] hover:text-white"
+              }`}
+            >
+              Site Config
             </button>
           </div>
           <button
@@ -721,6 +766,51 @@ function AdminPanel() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {activeTab === "config" && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="max-w-xl mx-auto"
+          >
+            <header className="mb-8">
+              <h2 className="text-2xl font-black uppercase tracking-wider mb-2 font-['Archivo_Black']">
+                Site Configuration
+              </h2>
+              <p className="text-[#888] font-mono text-sm">
+                Update core metrics and behaviors. Do not forget to trigger a rebuild manually to
+                make it live if not real-time.
+              </p>
+            </header>
+
+            <div className="bg-[#111] border border-[#333] p-6 rounded-2xl flex flex-col gap-6 font-['Space_Mono']">
+              <div>
+                <label className="block text-xs uppercase text-[#888] mb-2 font-bold tracking-wider">
+                  Live Counter Start Value
+                </label>
+                <div className="flex gap-4">
+                  <input
+                    type="number"
+                    value={baseMemberCount}
+                    onChange={(e) => setBaseMemberCount(parseInt(e.target.value) || 0)}
+                    className="w-full bg-[#1a1a1a] border border-[#333] px-4 py-3 rounded-xl text-white focus:border-[#c8ff00] outline-none transition-colors"
+                  />
+                  <button
+                    onClick={saveConfig}
+                    disabled={isConfigSaving}
+                    className="px-6 py-3 bg-[#c8ff00] text-black font-bold uppercase rounded-xl hover:bg-lime-400 disabled:opacity-50 transition-colors whitespace-nowrap"
+                  >
+                    {isConfigSaving ? "Saving..." : "Save Count"}
+                  </button>
+                </div>
+                <p className="text-[#555] text-xs mt-2">
+                  This base member count is queried live for real-time start metrics. For example,
+                  15300000.
+                </p>
               </div>
             </div>
           </motion.div>

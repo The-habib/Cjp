@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -330,15 +332,33 @@ function Reveal({
 
 /* ============ LIVE ELECTION BOARD ============ */
 function LiveCounter() {
-  const [count, setCount] = useState(8820493);
+  const [count, setCount] = useState(15300000);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const docRef = doc(db, "settings", "stats");
+        const snap = await getDoc(docRef);
+        if (snap.exists() && snap.data().baseMemberCount !== undefined) {
+          setCount(snap.data().baseMemberCount);
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+      setIsReady(true);
+    };
+    fetchCount();
+  }, []);
+
+  useEffect(() => {
+    if (!isReady) return;
     const interval = setInterval(() => {
       const newJoins = Math.floor(Math.random() * 45) + 12;
       setCount((c) => c + newJoins);
     }, 2500);
     return () => clearInterval(interval);
-  }, []);
+  }, [isReady]);
 
   const formatted = count.toLocaleString();
 
