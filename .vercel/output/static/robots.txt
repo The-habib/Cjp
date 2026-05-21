@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://cockroach-janta-party.lovable.app/sitemap.xml
