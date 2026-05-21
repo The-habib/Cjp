@@ -20,9 +20,9 @@ function SplashAnimation({ onComplete }: { onComplete: () => void }) {
       className="fixed inset-0 z-[10000] bg-[#0d1a12] flex flex-col items-center justify-center pointer-events-none overflow-hidden"
     >
       <div className="absolute inset-0 opacity-20 cr-dive-grain mix-blend-overlay"></div>
-      
+
       {/* Scanning line */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 w-full h-1 bg-lime-500/50 shadow-[0_0_15px_rgba(132,204,22,0.8)]"
         initial={{ top: "-10%" }}
         animate={{ top: "110%" }}
@@ -36,26 +36,26 @@ function SplashAnimation({ onComplete }: { onComplete: () => void }) {
         className="flex flex-col items-center relative z-10"
       >
         <motion.div
-          animate={{ 
+          animate={{
             rotate: [0, -5, 5, -2, 2, 0],
             scale: [1, 1.05, 0.95, 1.02, 0.98, 1],
-            x: [0, 2, -2, 1, -1, 0]
+            x: [0, 2, -2, 1, -1, 0],
           }}
-          transition={{ 
-            duration: 0.4, 
+          transition={{
+            duration: 0.4,
             delay: 1.5,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
-          <img 
-            src="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218062/android-chrome-192x192_gxtgg6.png" 
+          <img
+            src="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218062/android-chrome-192x192_gxtgg6.png"
             alt="CJP Logo"
-            className="w-28 h-28 mb-8 !drop-shadow-[0_0_15px_rgba(132,204,22,0.3)] filter sepia-[0.2] hue-rotate-90 saturate-[2]" 
+            className="w-28 h-28 mb-8 !drop-shadow-[0_0_15px_rgba(132,204,22,0.3)] filter sepia-[0.2] hue-rotate-90 saturate-[2]"
           />
         </motion.div>
 
         <div className="relative">
-          <motion.h1 
+          <motion.h1
             className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase text-center"
             initial={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
             animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
@@ -63,27 +63,39 @@ function SplashAnimation({ onComplete }: { onComplete: () => void }) {
           >
             We Are <span className="text-lime-500">Bound</span>
           </motion.h1>
-          
+
           {/* Glitch layers */}
-          <motion.h1 
+          <motion.h1
             className="absolute top-0 left-0 w-full text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-red-500 uppercase text-center opacity-70 mix-blend-screen"
-            animate={{ 
+            animate={{
               x: [0, -3, 3, -1, 0],
               y: [0, 1, -1, 0, 0],
-              clipPath: ["inset(10% 0 80% 0)", "inset(40% 0 10% 0)", "inset(80% 0 5% 0)", "inset(20% 0 60% 0)", "inset(0% 0 0% 0)"],
-              opacity: [0, 0.7, 0, 0.7, 0]
+              clipPath: [
+                "inset(10% 0 80% 0)",
+                "inset(40% 0 10% 0)",
+                "inset(80% 0 5% 0)",
+                "inset(20% 0 60% 0)",
+                "inset(0% 0 0% 0)",
+              ],
+              opacity: [0, 0.7, 0, 0.7, 0],
             }}
             transition={{ duration: 0.5, delay: 2, repeat: 2, repeatType: "mirror" }}
           >
             We Are <span className="text-red-500">Bound</span>
           </motion.h1>
-          <motion.h1 
+          <motion.h1
             className="absolute top-0 left-0 w-full text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-blue-500 uppercase text-center opacity-70 mix-blend-screen"
-            animate={{ 
+            animate={{
               x: [0, 3, -3, 1, 0],
               y: [0, -1, 1, 0, 0],
-              clipPath: ["inset(80% 0 5% 0)", "inset(20% 0 60% 0)", "inset(10% 0 80% 0)", "inset(40% 0 10% 0)", "inset(0% 0 0% 0)"],
-              opacity: [0, 0.7, 0, 0.7, 0]
+              clipPath: [
+                "inset(80% 0 5% 0)",
+                "inset(20% 0 60% 0)",
+                "inset(10% 0 80% 0)",
+                "inset(40% 0 10% 0)",
+                "inset(0% 0 0% 0)",
+              ],
+              opacity: [0, 0.7, 0, 0.7, 0],
             }}
             transition={{ duration: 0.5, delay: 2.1, repeat: 2, repeatType: "mirror" }}
           >
@@ -98,7 +110,7 @@ function SplashAnimation({ onComplete }: { onComplete: () => void }) {
           transition={{ delay: 1.2, duration: 0.5 }}
         >
           <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden relative">
-            <motion.div 
+            <motion.div
               className="absolute top-0 left-0 h-full bg-lime-500"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}

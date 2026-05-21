@@ -1,23 +1,37 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { cjpVideos } from "../../data/videos";
+import { cjpVideos, VideoData } from "../../data/videos";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowLeft, Share2, Info } from "lucide-react";
 import React from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 export const Route = createFileRoute("/cockroach/$videoId")({
-  loader: ({ params }) => {
-    return cjpVideos.find((v) => v.id === params.videoId) || null;
+  loader: async ({ params }) => {
+    let video = cjpVideos.find((v) => v.id === params.videoId) || null;
+    if (!video) {
+      try {
+        const snap = await getDoc(doc(db, "videos", params.videoId));
+        if (snap.exists()) {
+          video = { id: snap.id, ...snap.data() } as VideoData;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return video;
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
         meta: [
           { title: "Not Found | CJP" },
-          { name: "description", content: "Transmission not found." }
-        ]
+          { name: "description", content: "Transmission not found." },
+        ],
       };
     }
-    const video = loaderData;
+    const video = loaderData as VideoData;
+    const thumbnail = video.thumbnailUrl || `https://cockroachjantaparty.bond/og-${video.id}.jpg`;
     return {
       meta: [
         { title: `${video.title} | Cockroach Media` },
@@ -27,11 +41,11 @@ export const Route = createFileRoute("/cockroach/$videoId")({
         { property: "og:type", content: "video.other" },
         { property: "og:site_name", content: "Cockroach Janta Party" },
         { property: "og:url", content: `https://cockroachjantaparty.bond/cockroach/${video.id}` },
-        { property: "og:image", content: `https://cockroachjantaparty.bond/og-${video.id}.jpg` },
+        { property: "og:image", content: thumbnail },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: `${video.title} | Cockroach Media` },
         { name: "twitter:description", content: video.description.substring(0, 150) },
-        { name: "twitter:image", content: `https://cockroachjantaparty.bond/og-${video.id}.jpg` },
+        { name: "twitter:image", content: thumbnail },
       ],
       scripts: [
         {
@@ -39,15 +53,15 @@ export const Route = createFileRoute("/cockroach/$videoId")({
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "VideoObject",
-            "name": video.title,
-            "description": video.description.replace(/\n/g, " "),
-            "thumbnailUrl": `https://cockroachjantaparty.bond/og-${video.id}.jpg`,
-            "uploadDate": `${video.date}T00:00:00Z`,
-            "embedUrl": video.embedUrl,
-            "url": `https://cockroachjantaparty.bond/cockroach/${video.id}`
+            name: video.title,
+            description: video.description.replace(/\n/g, " "),
+            thumbnailUrl: thumbnail,
+            uploadDate: `${video.date}T00:00:00Z`,
+            embedUrl: video.embedUrl,
+            url: `https://cockroachjantaparty.bond/cockroach/${video.id}`,
           }),
         },
-      ]
+      ],
     };
   },
   component: CockroachDeepDive,
@@ -55,7 +69,7 @@ export const Route = createFileRoute("/cockroach/$videoId")({
 
 function CockroachDeepDive() {
   const { videoId } = Route.useParams();
-  const video = cjpVideos.find((v) => v.id === videoId);
+  const video = Route.useLoaderData();
 
   const { scrollYProgress } = useScroll();
   const yOff = useTransform(scrollYProgress, [0, 1], [0, 200]);
@@ -154,16 +168,35 @@ function CockroachDeepDive() {
                     </React.Fragment>
                   ))}
                 </p>
-                <p>
-                  We are sharing this uncut video to show the gap between the rich leaders and the struggling people. 
-                  Every clip here proves the power of the people they step on.
-                </p>
-                <blockquote>
-                  "When you live in the dirt, you see exactly how dirty the system is."
-                </blockquote>
-                <p>
-                  Share this video. The paid media tries to hide this truth. We rely on the swarm to spread the word.
-                </p>
+                {video.quote ? (
+                  <blockquote>"{video.quote}"</blockquote>
+                ) : (
+                  <>
+                    <p>
+                      We are sharing this uncut video to show the gap between the rich leaders and
+                      the struggling people. Every clip here proves the power of the people they
+                      step on.
+                    </p>
+                    <blockquote>
+                      "When you live in the dirt, you see exactly how dirty the system is."
+                    </blockquote>
+                  </>
+                )}
+                {video.callToAction ? (
+                  <p>
+                    {video.callToAction.split("\\n").map((line, i) => (
+                      <React.Fragment key={i}>
+                        {line}
+                        <br />
+                      </React.Fragment>
+                    ))}
+                  </p>
+                ) : (
+                  <p>
+                    Share this video. The paid media tries to hide this truth. We rely on the swarm
+                    to spread the word.
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -172,16 +205,16 @@ function CockroachDeepDive() {
               <h3 className="cr-dive-h3">Video Details</h3>
               <ul className="cr-dive-meta-list">
                 <li>
-                  <strong>Topic:</strong> Accountability
+                  <strong>Topic:</strong> {video.topic || "Accountability"}
                 </li>
                 <li>
-                  <strong>Location:</strong> Classified
+                  <strong>Location:</strong> {video.location || "Classified"}
                 </li>
                 <li>
-                  <strong>Status:</strong> Exposed
+                  <strong>Status:</strong> {video.status || "Exposed"}
                 </li>
                 <li>
-                  <strong>Censorship:</strong> Broken
+                  <strong>Censorship:</strong> {video.censorship || "Broken"}
                 </li>
               </ul>
 

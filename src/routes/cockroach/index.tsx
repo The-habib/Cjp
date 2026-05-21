@@ -1,24 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { cjpVideos } from "../../data/videos";
+import { cjpVideos, VideoData } from "../../data/videos";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowLeft, PlayCircle } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "../../firebase";
 
 export const Route = createFileRoute("/cockroach/")({
   component: CockroachFeed,
   head: () => ({
     meta: [
       { title: "Cockroach Media | Uncensored Truth - CJP" },
-      { name: "description", content: "Raw, uncut truth the media won't show you. Watch the videos they tried to hide." },
+      {
+        name: "description",
+        content: "Raw, uncut truth the media won't show you. Watch the videos they tried to hide.",
+      },
       { property: "og:title", content: "Cockroach Media | Uncensored Truth - CJP" },
-      { property: "og:description", content: "Raw, uncut truth the media won't show you. Watch the videos they tried to hide." },
+      {
+        property: "og:description",
+        content: "Raw, uncut truth the media won't show you. Watch the videos they tried to hide.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Cockroach Janta Party" },
       { property: "og:url", content: "https://cockroachjantaparty.bond/cockroach" },
       { property: "og:image", content: "https://cockroachjantaparty.bond/og-media.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Cockroach Media | Uncensored Truth" },
-      { name: "twitter:description", content: "Raw, uncut truth the media won't show you. Watch the videos they tried to hide." },
+      {
+        name: "twitter:description",
+        content: "Raw, uncut truth the media won't show you. Watch the videos they tried to hide.",
+      },
       { name: "twitter:image", content: "https://cockroachjantaparty.bond/og-media.jpg" },
     ],
     scripts: [
@@ -27,18 +38,41 @@ export const Route = createFileRoute("/cockroach/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "Cockroach Media | Uncensored Truth",
-          "description": "Raw, uncut truth the media won't show you. Watch the videos they tried to hide.",
-          "url": "https://cockroachjantaparty.bond/cockroach"
+          name: "Cockroach Media | Uncensored Truth",
+          description:
+            "Raw, uncut truth the media won't show you. Watch the videos they tried to hide.",
+          url: "https://cockroachjantaparty.bond/cockroach",
         }),
       },
-    ]
+    ],
   }),
 });
 
 function CockroachFeed() {
   const { scrollYProgress } = useScroll();
   const yOff = useTransform(scrollYProgress, [0, 1], [0, 200]);
+
+  const [dynamicVideos, setDynamicVideos] = useState<VideoData[]>([]);
+
+  useEffect(() => {
+    const fetchDynamicVideos = async () => {
+      try {
+        const colRef = collection(db, "videos");
+        const q = query(colRef, orderBy("date", "desc"));
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as VideoData[];
+        setDynamicVideos(data);
+      } catch (e) {
+        console.error("Failed to load dynamic media", e);
+      }
+    };
+    fetchDynamicVideos();
+  }, []);
+
+  const allVideos = [...dynamicVideos, ...cjpVideos];
 
   return (
     <div className="cr-feed-page min-h-screen relative overflow-hidden">
@@ -71,12 +105,13 @@ function CockroachFeed() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="cr-feed-subtitle"
           >
-            Raw, uncut truth the paid media refuses to show. Pick a video to see what really happened.
+            Raw, uncut truth the paid media refuses to show. Pick a video to see what really
+            happened.
           </motion.p>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {cjpVideos.map((video, idx) => (
+          {allVideos.map((video, idx) => (
             <motion.div
               key={video.id}
               initial={{ opacity: 0, y: 40 }}

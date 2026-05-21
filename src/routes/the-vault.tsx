@@ -462,7 +462,14 @@ function TheVault() {
                 className="gl-card group h-full flex flex-col items-center justify-center p-12 text-center"
               >
                 <div className="mb-6 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 text-primary">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                     <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                     <line x1="12" y1="22.08" x2="12" y2="12"></line>
@@ -472,7 +479,7 @@ function TheVault() {
                   Archive Relocated
                 </h2>
                 <p className="text-muted-foreground max-w-lg mb-8 font-light">
-                  All decrypted video transmissions have been moved to a secured, dedicated feed. 
+                  All decrypted video transmissions have been moved to a secured, dedicated feed.
                   View the complete timeline and analysis of Swarm activities.
                 </p>
                 <span className="bg-primary/10 text-primary border border-primary font-archivo text-sm px-6 py-3 rounded-full hover:bg-primary hover:text-black transition-colors">

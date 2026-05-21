@@ -351,15 +351,15 @@ function LiveCounter() {
         </div>
         <div className="cr-eb-title">YOUTH STORMING IN</div>
       </div>
-      
+
       <div className="cr-eb-grid">
         <div className="cr-eb-main-count">
           <span className="cr-eb-label">TOTAL JOINED SO FAR</span>
           <div className="cr-live-number">
-            {formatted.split('').map((char, i) => {
+            {formatted.split("").map((char, i) => {
               const isNum = !isNaN(parseInt(char));
               return (
-                <div key={i} className={`cr-digit-wrap ${isNum ? 'num' : 'comma'}`}>
+                <div key={i} className={`cr-digit-wrap ${isNum ? "num" : "comma"}`}>
                   <AnimatePresence mode="popLayout" initial={false}>
                     <motion.span
                       key={`${i}-${char}`}
@@ -378,7 +378,7 @@ function LiveCounter() {
           </div>
         </div>
       </div>
-      
+
       <div className="cr-eb-footer">
         Real-time count of young people who are tired of the old system and want real change.
       </div>
@@ -497,14 +497,11 @@ function Index() {
               <a href="#join" className="cjp-btn cjp-btn-primary">
                 The Bond <em>→</em>
               </a>
-              <Link
-                to="/cockroach"
-                className="cjp-btn cjp-glitch-btn"
-              >
+              <Link to="/cockroach" className="cjp-btn cjp-glitch-btn">
                 <span>Cockroach Media</span>
               </Link>
             </div>
-            
+
             <Reveal delay={0.4}>
               <LiveCounter />
             </Reveal>
@@ -813,7 +810,8 @@ function Index() {
         <Reveal y={100} delay={0.2}>
           <div className="cjp-footer-marquee">
             <div className="cjp-footer-mega">
-              COCKROACH · JANTA · PARTY · COCKROACH · JANTA · PARTY · COCKROACH · JANTA · PARTY · COCKROACH · JANTA · PARTY · 
+              COCKROACH · JANTA · PARTY · COCKROACH · JANTA · PARTY · COCKROACH · JANTA · PARTY ·
+              COCKROACH · JANTA · PARTY ·
             </div>
           </div>
         </Reveal>

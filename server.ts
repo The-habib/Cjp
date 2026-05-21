@@ -2,14 +2,24 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import { cjpVideos } from "./src/data/videos";
+import helmet from "helmet";
+import compression from "compression";
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
 
   const isProd = process.env.NODE_ENV === "production";
-  
-  let vite: any;
+
+  app.use(compression());
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+      crossOriginEmbedderPolicy: false,
+    }),
+  );
+
+  let vite: import("vite").ViteDevServer | undefined;
   if (!isProd) {
     const { createServer: createViteServer } = await import("vite");
     vite = await createViteServer({
@@ -18,9 +28,7 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    app.use(express.static(path.join(process.cwd(), "dist"), {
-      index: false
-    }));
+    app.use(express.static(path.join(process.cwd(), "dist")));
   }
 
   app.get("/robots.txt", (req, res) => {
@@ -32,7 +40,7 @@ Sitemap: https://cockroachjantaparty.bond/sitemap.xml`);
 
   app.get("/sitemap.xml", (req, res) => {
     const siteUrl = "https://cockroachjantaparty.bond";
-    
+
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
@@ -68,7 +76,7 @@ Sitemap: https://cockroachjantaparty.bond/sitemap.xml`);
     });
 
     xml += `\n</urlset>`;
-    
+
     res.type("application/xml");
     res.send(xml);
   });
@@ -77,18 +85,18 @@ Sitemap: https://cockroachjantaparty.bond/sitemap.xml`);
     if (req.method !== "GET") return next();
     try {
       const url = req.originalUrl;
-      const siteUrl = "https://cockroachjantaparty.bond";
-
-      let template = "";
-      if (!isProd) {
-        template = fs.readFileSync(path.resolve(process.cwd(), "index.html"), "utf-8");
-        template = await vite.transformIndexHtml(url, template);
-      } else {
-        template = fs.readFileSync(path.resolve(process.cwd(), "dist", "index.html"), "utf-8");
+      if (isProd) {
+        return res.sendFile(path.resolve(process.cwd(), "dist", "index.html"));
       }
 
+      let template = fs.readFileSync(path.resolve(process.cwd(), "index.html"), "utf-8");
+      template = await vite.transformIndexHtml(url, template);
+
+      const siteUrl = "https://cockroachjantaparty.bond";
+
       let title = "Cockroach Janta Party | We Are Bound";
-      let desc = "Voice of the Lazy & Unemployed. We share a strong bond. Five demands. Zero sponsors.";
+      let desc =
+        "Voice of the Lazy & Unemployed. We share a strong bond. Five demands. Zero sponsors.";
       let imageUrl = `${siteUrl}/og-image.jpg`;
       let ogUrl = `${siteUrl}/`;
 
@@ -107,7 +115,7 @@ Sitemap: https://cockroachjantaparty.bond/sitemap.xml`);
           desc = video.description.replace(/\n/g, " ").substring(0, 150);
           imageUrl = `${siteUrl}/og-${video.id}.jpg`;
           ogUrl = `${siteUrl}/cockroach/${video.id}`;
-          
+
           jsonLd = `
             <script type="application/ld+json">
             {
@@ -160,16 +168,16 @@ Sitemap: https://cockroachjantaparty.bond/sitemap.xml`);
         .replace(/<meta property="og:[^>]*>/g, "")
         .replace(/<meta name="twitter:[^>]*>/g, "")
         .replace(/<meta name="description"[^>]*>/g, "");
-      
+
       html = html.replace("</head>", `${metaInjection}</head>`);
 
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
-    } catch (e: any) {
-      if (!isProd && vite) {
+    } catch (e: unknown) {
+      if (!isProd && vite && e instanceof Error) {
         vite.ssrFixStacktrace(e);
       }
-      console.error(e.stack);
-      res.status(500).end(e.stack);
+      console.error(e instanceof Error ? e.stack : e);
+      res.status(500).end(e instanceof Error ? e.stack : "Internal Server Error");
     }
   });
 
