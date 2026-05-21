@@ -4,9 +4,9 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "tsx server.ts",
-    "build": "vite build && tsx prerender.ts",
-    "start": "node server.ts",
+    "dev": "tsx local-dev-server.ts",
+    "build": "rm -rf .vercel && vite build && tsx prerender.ts",
+    "start": "node local-dev-server.ts",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
