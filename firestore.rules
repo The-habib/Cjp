@@ -22,7 +22,7 @@ service cloud.firestore {
       return data.keys().hasAll(['name', 'email', 'chronicallyOnline', 'lazy', 'identifyAsCockroach', 'createdAt']) &&
              data.keys().size() >= 6 && data.keys().size() <= 8 &&
              data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
-             data.email is string && data.email.size() > 0 && data.email.size() <= 100 &&
+             data.email is string && data.email.size() <= 100 &&
              data.chronicallyOnline in ['Yes', 'No', 'Maybe'] &&
              data.lazy in ['Yes', 'No', 'Strategically'] &&
              data.identifyAsCockroach in ['Yes', 'No'] &&
@@ -34,14 +34,18 @@ service cloud.firestore {
     // 4. Registration rules
     match /registrations/{registrationId} {
       allow read: if (isSignedIn() && request.auth.uid == registrationId) || isAdmin();
-      allow create: if isSignedIn() &&
+      allow create, update: if isSignedIn() &&
                        request.auth.uid == registrationId &&
                        isValidId(registrationId) &&
                        isValidRegistration(incoming());
-      allow update, delete: if isAdmin();
+      allow delete: if isAdmin();
     }
 
     match /videos/{videoId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /settings/{settingId} {
       allow read: if true;
       allow write: if isAdmin();
     }

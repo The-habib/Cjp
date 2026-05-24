@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, MotionStyle } from "motion/react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -307,13 +307,19 @@ function Reveal({
   y = 40,
   style,
   as = "div",
+  href,
+  target,
+  rel,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   y?: number;
-  style?: React.CSSProperties;
-  as?: keyof typeof motion;
+  style?: React.CSSProperties | MotionStyle;
+  as?: keyof typeof motion | "a" | "div";
+  href?: string;
+  target?: string;
+  rel?: string;
 }) {
   const Component: any = motion[as as keyof typeof motion] || motion.div;
   return (
@@ -324,6 +330,9 @@ function Reveal({
       transition={{ duration: 0.8, delay, ease: [0.2, 0.8, 0.2, 1] }}
       className={className}
       style={style}
+      href={href}
+      target={target}
+      rel={rel}
     >
       {children}
     </Component>
@@ -447,7 +456,10 @@ function Index() {
         <div className="cjp-nav-bg" aria-hidden>
           <img
             src="https://static.toiimg.com/thumb/msid-131177259,width-1280,height-720,imgsize-48962,resizemode-6,overlay-toi_sw,pt-32,y_pad-600,x_pad-1200/photo.jpg"
-            alt=""
+            alt="Cockroach Janta Party Media Background"
+            width={1280}
+            height={720}
+            loading="lazy"
           />
         </div>
         <a href="#top" className="cjp-brand">
@@ -787,7 +799,7 @@ function Index() {
           </Reveal>
           <div className="cjp-contact-grid">
             <Reveal
-              as="a"
+              as={"a" as any}
               delay={0.1}
               href="mailto:contact@cockroachjantaparty.org"
               className="cjp-contact"
@@ -797,7 +809,7 @@ function Index() {
               <em>↗</em>
             </Reveal>
             <Reveal
-              as="a"
+              as={"a" as any}
               delay={0.2}
               href="mailto:contact@cockroachjantaparty.org"
               className="cjp-contact"

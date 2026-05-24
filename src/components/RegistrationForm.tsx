@@ -9,6 +9,7 @@ import {
   User,
 } from "firebase/auth";
 import { handleFirestoreError, OperationType } from "../firebase-utils";
+import { toast } from "sonner";
 
 export function RegistrationForm() {
   const [user, setUser] = useState<User | null>(null);
@@ -23,7 +24,6 @@ export function RegistrationForm() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
@@ -35,7 +35,7 @@ export function RegistrationForm() {
           if (snap.exists()) {
             setSuccess(true);
           }
-        } catch (err: any) {
+        } catch (err: unknown) {
           if (err instanceof Error && err.message.includes("the client is offline")) {
             console.error("Please check your Firebase configuration.");
           }
@@ -51,9 +51,10 @@ export function RegistrationForm() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-    } catch (e: any) {
+      toast.success("Authenticated successfully");
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message);
+      toast.error(e instanceof Error ? e.message : String(e));
     }
   };
 
@@ -66,32 +67,27 @@ export function RegistrationForm() {
     e.preventDefault();
     if (!user) return;
     setSubmitting(true);
-    setError(null);
 
     const payload = {
       name: formData.name,
       email: user.email || "",
-      phone: formData.phone || undefined,
+      ...(formData.phone ? { phone: formData.phone } : {}),
       chronicallyOnline: formData.chronicallyOnline,
       lazy: formData.lazy,
       identifyAsCockroach: formData.identifyAsCockroach,
-      twitterHandle: formData.twitterHandle || undefined,
+      ...(formData.twitterHandle ? { twitterHandle: formData.twitterHandle } : {}),
       createdAt: serverTimestamp(),
     };
-
-    // Remove undefined
-    Object.keys(payload).forEach(
-      (key) => (payload as any)[key] === undefined && delete (payload as any)[key],
-    );
 
     try {
       await setDoc(doc(db, "registrations", user.uid), payload);
       setSuccess(true);
+      toast.success("Registration successful!");
     } catch (err) {
       try {
         handleFirestoreError(err, OperationType.WRITE, `registrations/${user.uid}`);
-      } catch (handlerErr: any) {
-        setError("Failed to register. Are you sure you are a cockroach?");
+      } catch (handlerErr: unknown) {
+        toast.error("Failed to register. Are you sure you are a cockroach?");
         console.error(handlerErr);
       }
     } finally {
@@ -273,10 +269,6 @@ export function RegistrationForm() {
           placeholder="@"
         />
       </div>
-
-      {error && (
-        <div style={{ color: "var(--red)", fontSize: "0.85rem", marginTop: "0.5rem" }}>{error}</div>
-      )}
 
       <button
         type="submit"

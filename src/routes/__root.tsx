@@ -90,7 +90,9 @@ function SplashAnimation({ onComplete }: { onComplete: () => void }) {
           <div className="absolute inset-0 bg-lime-500 blur-[40px] opacity-20 rounded-full animate-pulse" />
           <img
             src="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218062/android-chrome-192x192_gxtgg6.png"
-            alt="CJP Logo"
+            alt="Cockroach Janta Party Logo"
+            width={160}
+            height={160}
             className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-lime-500/20 shadow-[0_0_30px_rgba(132,204,22,0.3)] object-cover relative z-10 bg-zinc-900 filter saturate-150"
           />
         </motion.div>
@@ -186,6 +188,24 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* SEO Mastery: Google Search Console Verification Placeholder */}
+        <meta name="google-site-verification" content="G-YOUR_SEARCH_CONSOLE_VERIFICATION_CODE" />
+        {import.meta.env.VITE_GA_ID && (
+          <>
+            {/* SEO Mastery: GA4 Analytics */}
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_ID}`}></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${import.meta.env.VITE_GA_ID}');
+                `,
+              }}
+            />
+          </>
+        )}
         <link
           rel="icon"
           type="image/x-icon"
@@ -220,7 +240,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
           sizes="512x512"
           href="https://res.cloudinary.com/dwlquotvw/image/upload/v1779218062/android-chrome-512x512_bactvf.png"
         />
-        <link rel="canonical" href="https://cockroachjantaparty.bond/" />
         <link rel="stylesheet" href={appCss} />
         <HeadContent />
       </head>
@@ -300,6 +319,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+import { Toaster } from "sonner";
+
+import { HelmetProvider } from "react-helmet-async";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const [showSplash, setShowSplash] = useState(true);
@@ -319,6 +342,7 @@ function RootComponent() {
       <AnimatePresence>
         {showSplash && <SplashAnimation onComplete={() => setShowSplash(false)} />}
       </AnimatePresence>
+      <Toaster position="top-center" theme="dark" />
       <Outlet />
     </QueryClientProvider>
   );

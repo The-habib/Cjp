@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { CloudinaryUploader } from "../components/CloudinaryUploader";
+import { toast } from "sonner";
 import {
   onAuthStateChanged,
   signInWithPopup,
@@ -31,9 +33,8 @@ const ALLOWED_EMAILS = ["tgff28970@gmail.com", "theogaidev@gmail.com"];
 function AdminPanel() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [registrations, setRegistrations] = useState<any[]>([]);
-  const [videos, setVideos] = useState<any[]>([]);
-  const [error, setError] = useState("");
+  const [registrations, setRegistrations] = useState<Record<string, unknown>[]>([]);
+  const [videos, setVideos] = useState<Record<string, unknown>[]>([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"registrations" | "videos" | "config">(
     "registrations",
@@ -77,9 +78,10 @@ function AdminPanel() {
     setIsRebuilding(true);
     try {
       await fetch(webhookUrl, { method: "POST" });
+      toast.success("Vercel rebuild triggered successfully!");
     } catch (e) {
       console.error(e);
-      alert("Failed to trigger Vercel rebuild");
+      toast.error("Failed to trigger Vercel rebuild");
     } finally {
       setIsRebuilding(false);
     }
@@ -91,10 +93,9 @@ function AdminPanel() {
       setLoading(false);
       // Auto-logout if not allowed
       if (u && u.email && !ALLOWED_EMAILS.includes(u.email)) {
-        setError("Unauthorized access.");
+        toast.error("Unauthorized access.");
         signOut(auth);
       } else {
-        setError("");
         if (u) {
           fetchRegistrations();
           fetchVideos();
@@ -122,10 +123,10 @@ function AdminPanel() {
     try {
       const docRef = doc(db, "settings", "stats");
       await setDoc(docRef, { baseMemberCount }, { merge: true });
-      alert("Config saved successfully!");
-    } catch (e: any) {
+      toast.success("Config saved successfully!");
+    } catch (e: unknown) {
       console.error(e);
-      alert("Failed to save config: " + e.message);
+      toast.error("Failed to save config: " + (e instanceof Error ? e.message : String(e)));
     } finally {
       setIsConfigSaving(false);
     }
@@ -142,9 +143,9 @@ function AdminPanel() {
         ...doc.data(),
       }));
       setRegistrations(data);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || "Failed to fetch registrations.");
+      toast.error((e instanceof Error ? e.message : String(e)) || "Failed to fetch registrations.");
     } finally {
       setDataLoading(false);
     }
@@ -160,24 +161,25 @@ function AdminPanel() {
         ...doc.data(),
       }));
       setVideos(data);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || "Failed to fetch videos.");
+      toast.error((e instanceof Error ? e.message : String(e)) || "Failed to fetch videos.");
     }
   };
 
   const handleLogin = async () => {
     try {
-      setError("");
       const provider = new GoogleAuthProvider();
       const res = await signInWithPopup(auth, provider);
       if (res.user.email && !ALLOWED_EMAILS.includes(res.user.email)) {
-        setError("Unauthorized access.");
+        toast.error("Unauthorized access.");
         await signOut(auth);
+      } else {
+        toast.success("Authenticated successfully");
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message);
+      toast.error((e instanceof Error ? e.message : String(e)));
     }
   };
 
@@ -189,9 +191,9 @@ function AdminPanel() {
 
   const filteredRegistrations = registrations.filter(
     (r) =>
-      r.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      r.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      r.twitterHandle?.toLowerCase().includes(searchTerm.toLowerCase()),
+      (r.name as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (r.email as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (r.twitterHandle as string)?.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const handleExportCSV = () => {
@@ -204,7 +206,7 @@ function AdminPanel() {
       `"${r.lazy || ""}"`,
       `"${r.chronicallyOnline || ""}"`,
       `"${r.identifyAsCockroach || ""}"`,
-      `"${r.createdAt?.toDate ? r.createdAt.toDate().toLocaleDateString() : ""}"`,
+      `"${(r as any).createdAt?.toDate ? (r as any).createdAt.toDate().toLocaleDateString() : ""}"`,
     ]);
     const csvContext = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
     const blob = new Blob([csvContext], { type: "text/csv" });
@@ -221,27 +223,28 @@ function AdminPanel() {
       return;
     try {
       await deleteDoc(doc(db, "registrations", id));
+      toast.success("Cockroach systematically removed from swarm.");
       await fetchRegistrations();
-    } catch (e: any) {
-      setError(e.message || "Failed to delete from swarm.");
+    } catch (e: unknown) {
+      toast.error((e instanceof Error ? e.message : String(e)) || "Failed to delete from swarm.");
     }
   };
 
-  const startEditVideo = (video: any) => {
-    setEditVideoId(video.id);
+  const startEditVideo = (video: Record<string, unknown>) => {
+    setEditVideoId(video.id as string);
     setNewVideo({
-      title: video.title || "",
-      description: video.description || "",
-      embedUrl: video.embedUrl || "",
-      thumbnailUrl: video.thumbnailUrl || "",
-      source: video.source || "Vault Archive",
-      topic: video.topic || "Accountability",
-      location: video.location || "Classified",
-      status: video.status || "Exposed",
-      censorship: video.censorship || "Broken",
-      quote: video.quote || "",
-      callToAction: video.callToAction || "",
-      date: video.date || new Date().toISOString().split("T")[0],
+      title: (video.title as string) || "",
+      description: (video.description as string) || "",
+      embedUrl: (video.embedUrl as string) || "",
+      thumbnailUrl: (video.thumbnailUrl as string) || "",
+      source: (video.source as string) || "Vault Archive",
+      topic: (video.topic as string) || "Accountability",
+      location: (video.location as string) || "Classified",
+      status: (video.status as string) || "Exposed",
+      censorship: (video.censorship as string) || "Broken",
+      quote: (video.quote as string) || "",
+      callToAction: (video.callToAction as string) || "",
+      date: (video.date as string) || new Date().toISOString().split("T")[0],
     });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -254,7 +257,6 @@ function AdminPanel() {
   const handleCreateVideo = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsDeployingVideo(true);
-    setError("");
     try {
       if (editVideoId) {
         await updateDoc(doc(db, "videos", editVideoId), {
@@ -269,11 +271,12 @@ function AdminPanel() {
         });
       }
       setNewVideo(resetVideoState());
+      toast.success(editVideoId ? "Video updated successfully." : "Video deployed successfully.");
       await fetchVideos();
       await triggerVercelRebuild();
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || "Failed to deploy video.");
+      toast.error((e instanceof Error ? e.message : String(e)) || "Failed to deploy video.");
     } finally {
       setIsDeployingVideo(false);
     }
@@ -283,11 +286,12 @@ function AdminPanel() {
     if (!confirm("Are you sure you want to delete this video?")) return;
     try {
       await deleteDoc(doc(db, "videos", id));
+      toast.success("Video deleted.");
       await fetchVideos();
       await triggerVercelRebuild();
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || "Failed to delete video.");
+      toast.error((e instanceof Error ? e.message : String(e)) || "Failed to delete video.");
     }
   };
 
@@ -314,8 +318,6 @@ function AdminPanel() {
             </h1>
             <p className="text-[#888] text-sm">Classified access only.</p>
           </div>
-
-          {error && <div className="text-red-500 text-sm mb-4 text-center">{error}</div>}
 
           <button
             onClick={handleLogin}
@@ -385,12 +387,6 @@ function AdminPanel() {
       </nav>
 
       <main className="p-8 max-w-7xl mx-auto">
-        {error && (
-          <div className="text-red-500 mb-6 bg-red-500/10 p-4 rounded-xl font-mono text-sm">
-            {error}
-          </div>
-        )}
-
         {activeTab === "registrations" && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
@@ -450,21 +446,21 @@ function AdminPanel() {
                     </tr>
                   )}
                   {filteredRegistrations.map((r) => (
-                    <tr key={r.id} className="hover:bg-[#111] transition-colors">
-                      <td className="p-4 font-['Inter'] font-semibold">{r.name}</td>
-                      <td className="p-4 text-[#888]">{r.email}</td>
+                    <tr key={r.id as string} className="hover:bg-[#111] transition-colors">
+                      <td className="p-4 font-['Inter'] font-semibold">{r.name as React.ReactNode}</td>
+                      <td className="p-4 text-[#888]">{r.email as React.ReactNode}</td>
                       <td className="p-4">
                         {r.twitterHandle ? (
                           <span className="bg-blue-500/10 text-blue-400 px-2 py-1 rounded">
-                            {r.twitterHandle}
+                            {r.twitterHandle as React.ReactNode}
                           </span>
                         ) : (
                           "-"
                         )}
                       </td>
-                      <td className="p-4 text-[#888]">{r.phone || "-"}</td>
-                      <td className="p-4 text-center">{r.lazy}</td>
-                      <td className="p-4 text-center">{r.chronicallyOnline}</td>
+                      <td className="p-4 text-[#888]">{r.phone ? (r.phone as React.ReactNode) : "-"}</td>
+                      <td className="p-4 text-center">{r.lazy as React.ReactNode}</td>
+                      <td className="p-4 text-center">{r.chronicallyOnline as React.ReactNode}</td>
                       <td className="p-4 text-center">
                         {r.identifyAsCockroach === "Yes" ? (
                           <span className="text-[#c8ff00]">Yes</span>
@@ -474,7 +470,7 @@ function AdminPanel() {
                       </td>
                       <td className="p-4 text-right">
                         <button
-                          onClick={() => handleDeleteRegistration(r.id)}
+                          onClick={() => handleDeleteRegistration(r.id as string)}
                           className="text-xs text-red-500 hover:text-red-400 bg-red-900/20 hover:bg-red-900/40 px-2 py-1 rounded transition-colors uppercase"
                         >
                           Delete
@@ -549,29 +545,42 @@ function AdminPanel() {
                       placeholder="Shocking Truth Revealed..."
                     />
                   </div>
-                  <div>
-                    <label className="block text-xs font-['Space_Mono'] uppercase mb-1 text-[#888]">
-                      Embed URL
-                    </label>
+                  <div className="md:col-span-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="block text-xs font-['Space_Mono'] uppercase text-[#888]">
+                        Video URL (Embed or Direct) *
+                      </label>
+                      <CloudinaryUploader 
+                        onUploadSuccess={(url) => setNewVideo({ ...newVideo, embedUrl: url })}
+                        resourceType="video"
+                      />
+                    </div>
                     <input
                       required
                       type="url"
                       className="w-full bg-[#050505] border border-[#333] rounded px-3 py-2 text-white focus:border-[#c8ff00] focus:ring-1 focus:ring-[#c8ff00] outline-none transition-all text-sm font-mono"
                       value={newVideo.embedUrl}
                       onChange={(e) => setNewVideo({ ...newVideo, embedUrl: e.target.value })}
-                      placeholder="https://www.youtube.com/embed/..."
+                      placeholder="https://www.youtube.com/embed/... or raw mp4"
                     />
                   </div>
-                  <div>
-                    <label className="block text-xs font-['Space_Mono'] uppercase mb-1 text-[#888]">
-                      Thumbnail URL (Optional)
-                    </label>
+                  <div className="md:col-span-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="block text-xs font-['Space_Mono'] uppercase text-[#888]">
+                        Thumbnail URL (Optional)
+                      </label>
+                      <CloudinaryUploader 
+                        onUploadSuccess={(url) => setNewVideo({ ...newVideo, thumbnailUrl: url })}
+                        resourceType="image"
+                        buttonText="Upload Image"
+                      />
+                    </div>
                     <input
                       type="url"
                       className="w-full bg-[#050505] border border-[#333] rounded px-3 py-2 text-white focus:border-[#c8ff00] focus:ring-1 focus:ring-[#c8ff00] outline-none transition-all text-sm font-mono"
                       value={newVideo.thumbnailUrl || ""}
                       onChange={(e) => setNewVideo({ ...newVideo, thumbnailUrl: e.target.value })}
-                      placeholder="https://i.ytimg.com/vi/.../maxresdefault.jpg"
+                      placeholder="https://i.ytimg.com/vi/.../maxresdefault.jpg or image URL"
                     />
                   </div>
                   <div>
@@ -725,26 +734,26 @@ function AdminPanel() {
                 )}
                 {videos.map((vid) => (
                   <div
-                    key={vid.id}
+                    key={vid.id as string}
                     className="bg-[#111] border border-[#1a1a1a] rounded-xl p-4 flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex justify-between items-start mb-2">
                         <h3 className="font-bold text-[#c8ff00] flex-1 mr-2 leading-tight">
-                          {vid.title}
+                          {vid.title as React.ReactNode}
                         </h3>
                         <span className="text-xs font-mono bg-[#333] px-2 py-0.5 rounded text-[#aaa]">
-                          {vid.date}
+                          {vid.date as React.ReactNode}
                         </span>
                       </div>
-                      <p className="text-xs text-[#888] line-clamp-3 mb-3">{vid.description}</p>
+                      <p className="text-xs text-[#888] line-clamp-3 mb-3">{vid.description as React.ReactNode}</p>
                       <div className="text-xs font-mono text-blue-400 break-all bg-blue-500/10 p-2 rounded mb-4">
-                        {vid.embedUrl}
+                        {vid.embedUrl as React.ReactNode}
                       </div>
                     </div>
                     <div>
                       <a
-                        href={`/cockroach/${vid.id}`}
+                        href={`/cockroach/${vid.id as string}`}
                         target="_blank"
                         rel="noreferrer"
                         className="text-xs uppercase bg-[#222] px-3 py-1 rounded inline-block mr-2 hover:bg-[#333] transition-colors"
@@ -758,7 +767,7 @@ function AdminPanel() {
                         Edit
                       </button>
                       <button
-                        onClick={() => handleDeleteVideo(vid.id)}
+                        onClick={() => handleDeleteVideo(vid.id as string)}
                         className="text-xs uppercase bg-red-900/30 text-red-400 px-3 py-1 rounded hover:bg-red-900/50 transition-colors"
                       >
                         Delete

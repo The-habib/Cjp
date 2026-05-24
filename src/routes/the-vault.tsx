@@ -26,6 +26,7 @@ export const Route = createFileRoute("/the-vault")({
           "Classified files, leaks, and evidence that the system tried to erase. We share a strong bond. Dev: TG Habib, a comrade.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://cockroachjantaparty.bond/the-vault" }],
   }),
 });
 
