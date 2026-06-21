@@ -5,6 +5,8 @@ import React from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { toast } from "sonner";
+import { motion } from "motion/react";
+import { animationDurations, easingCurves } from "../../lib/animations";
 
 export const Route = createFileRoute("/cockroach/$videoId")({
   loader: async ({ params }) => {
@@ -92,6 +94,7 @@ export const Route = createFileRoute("/cockroach/$videoId")({
 });
 
 function CockroachDeepDive() {
+  const navigate = useNavigate();
   const { videoId } = Route.useParams();
   const video = Route.useLoaderData();
 
@@ -168,15 +171,31 @@ function CockroachDeepDive() {
       {/* Main Column */}
       <main className="w-full sm:w-[600px] sm:border-r border-white/10 min-h-screen pb-20 sm:pb-0 z-10">
         {/* Sticky Header */}
-        <div className="sticky top-0 z-50 bg-[#050505]/70 backdrop-blur-md border-b border-white/10 px-4 py-3 flex gap-6 items-center">
-          <button onClick={() => navigate({ to: '/cockroach' })} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors">
+        <motion.div className="sticky top-0 z-50 bg-[#050505]/70 backdrop-blur-md border-b border-white/10 px-4 py-3 flex gap-6 items-center">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate({ to: '/cockroach' })}
+            className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors"
+          >
             <ArrowLeft className="w-5 h-5"/>
-          </button>
-          <h1 className="text-xl font-bold leading-tight font-['Archivo_Black'] uppercase tracking-tight">Post</h1>
-        </div>
+          </motion.button>
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-xl font-bold leading-tight font-['Archivo_Black'] uppercase tracking-tight"
+          >
+            Post
+          </motion.h1>
+        </motion.div>
 
         {/* The Post View */}
-        <div className="p-4 border-b border-white/10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: animationDurations.medium, ease: easingCurves.easeOutCubic }}
+          className="p-4 border-b border-white/10"
+        >
           {/* Author */}
           <div className="flex gap-3 mb-3 items-center">
              <div className="shrink-0">
@@ -240,28 +259,53 @@ function CockroachDeepDive() {
           </div>
 
           <div className="border-t border-white/10 pt-1 flex justify-between text-[#888] mt-1 -mx-2 px-2">
-            <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+            <motion.button
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors"><MessageCircle className="w-[22px] h-[22px]" /></div>
-            </button>
-            <button className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors">
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#00ba7c]/10 transition-colors"><Repeat2 className="w-[22px] h-[22px]" /></div>
-            </button>
-            <button className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors">
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#f91880]/10 transition-colors"><Heart className="w-[22px] h-[22px]" /></div>
-            </button>
-            <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
+              className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors"><BarChart2 className="w-[22px] h-[22px]" /></div>
-            </button>
+            </motion.button>
             <div className="flex gap-1">
-              <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+              >
                 <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors"><Bookmark className="w-[22px] h-[22px]" /></div>
-              </button>
-              <button className="flex items-center gap-2 hover:text-[#00f0ff] group/btn transition-colors" onClick={handleShare}>
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center gap-2 hover:text-[#00f0ff] group/btn transition-colors"
+                onClick={handleShare}
+              >
                 <div className="p-2 rounded-full group-hover/btn:bg-[#00f0ff]/10 transition-colors"><Share className="w-[22px] h-[22px]" /></div>
-              </button>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Reply input (Fake) */}
         <div className="p-4 border-b border-white/10 flex gap-3 pb-8">
