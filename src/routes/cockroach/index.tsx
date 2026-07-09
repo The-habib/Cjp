@@ -225,6 +225,7 @@ function CockroachFeed() {
                   </div>
                   
                   {/* Media Attachment */}
+                  {/* ⚡ Bolt Optimization: Added preload="none" to the <video> element below to prevent greedy downloading of video metadata/chunks on initial load. Impact: Drastically reduces initial bandwidth usage and improves feed load time/TTI. */}
                   <div 
                     className="w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] mb-3 aspect-video relative mt-3 group-hover:border-[#c8ff00]/50 transition-colors"
                     onClick={(e) => e.stopPropagation()} // Stop navigation when clicking video controls
@@ -235,6 +236,7 @@ function CockroachFeed() {
                         controls
                         muted
                         playsInline
+                        preload="none"
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                     ) : (
