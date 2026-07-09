@@ -1,9 +1,22 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { cjpVideos, VideoData } from "../../data/videos";
-import { 
-  ArrowLeft, MessageCircle, Repeat2, Heart, Share, Bug, 
-  BadgeCheck, Home, Search, Bell, Mail, User, Bookmark, 
-  Calendar, Link as LinkIcon, BarChart2 
+import {
+  ArrowLeft,
+  MessageCircle,
+  Repeat2,
+  Heart,
+  Share,
+  Bug,
+  BadgeCheck,
+  Home,
+  Search,
+  Bell,
+  Mail,
+  User,
+  Bookmark,
+  Calendar,
+  Link as LinkIcon,
+  BarChart2,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
@@ -12,9 +25,7 @@ import { db } from "../../firebase";
 export const Route = createFileRoute("/cockroach/profile")({
   component: CockroachProfile,
   head: () => ({
-    meta: [
-      { title: "Cockroach Janta Party (@TheCJP)" },
-    ],
+    meta: [{ title: "Cockroach Janta Party (@TheCJP)" }],
   }),
 });
 
@@ -42,7 +53,7 @@ function CockroachProfile() {
   }, []);
 
   const allVideos = [...dynamicVideos, ...cjpVideos];
-  
+
   const formatStat = (num: number) => {
     if (num > 1000) return (num / 1000).toFixed(1) + "K";
     return num.toString();
@@ -51,57 +62,75 @@ function CockroachProfile() {
   return (
     <div className="bg-[#050505] min-h-screen text-white font-sans flex justify-center relative isolate">
       {/* Grain */}
-      <div className="pointer-events-none fixed inset-0 z-[-1] opacity-[0.08]" style={{ backgroundImage: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\'><filter id=\'n\'><feTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'2\'/></filter><rect width=\'100%\' height=\'100%\' filter=\'url(%23n)\' opacity=\'0.35\'/></svg>")' }}></div>
+      <div
+        className="pointer-events-none fixed inset-0 z-[-1] opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>\")",
+        }}
+      ></div>
 
       {/* Left Sidebar (Desktop) */}
       <header className="hidden sm:flex flex-col w-[80px] xl:w-[275px] pt-2 xl:pt-4 px-2 xl:px-4 h-screen sticky top-0 border-r border-white/10 z-10">
-        <Link to="/cockroach" className="w-12 h-12 rounded-full hover:bg-[#181818] flex items-center justify-center mb-2 transition-colors">
+        <Link
+          to="/cockroach"
+          className="w-12 h-12 rounded-full hover:bg-[#181818] flex items-center justify-center mb-2 transition-colors"
+        >
           <Bug className="w-7 h-7 text-white" />
         </Link>
         <nav className="flex flex-col gap-2 w-full">
-           <Link to="/cockroach" className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
-             <Home className="w-7 h-7" />
-             <span className="text-xl hidden xl:inline">Home</span>
-           </Link>
-           <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
-             <Search className="w-7 h-7" />
-             <span className="text-xl hidden xl:inline">Explore</span>
-           </div>
-           <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
-             <Bell className="w-7 h-7" />
-             <span className="text-xl hidden xl:inline">Notifications</span>
-           </div>
-           <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
-             <Mail className="w-7 h-7" />
-             <span className="text-xl hidden xl:inline">Messages</span>
-           </div>
-           <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
-             <Bookmark className="w-7 h-7" />
-             <span className="text-xl hidden xl:inline">Bookmarks</span>
-           </div>
-           <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer font-bold">
-             <User className="w-7 h-7 text-white" />
-             <span className="text-xl hidden xl:inline">Profile</span>
-           </div>
+          <Link
+            to="/cockroach"
+            className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50"
+          >
+            <Home className="w-7 h-7" />
+            <span className="text-xl hidden xl:inline">Home</span>
+          </Link>
+          <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
+            <Search className="w-7 h-7" />
+            <span className="text-xl hidden xl:inline">Explore</span>
+          </div>
+          <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
+            <Bell className="w-7 h-7" />
+            <span className="text-xl hidden xl:inline">Notifications</span>
+          </div>
+          <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
+            <Mail className="w-7 h-7" />
+            <span className="text-xl hidden xl:inline">Messages</span>
+          </div>
+          <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer text-white/50">
+            <Bookmark className="w-7 h-7" />
+            <span className="text-xl hidden xl:inline">Bookmarks</span>
+          </div>
+          <div className="flex items-center gap-4 p-3 rounded-full hover:bg-[#181818] transition-colors w-max cursor-pointer font-bold">
+            <User className="w-7 h-7 text-white" />
+            <span className="text-xl hidden xl:inline">Profile</span>
+          </div>
         </nav>
-        
+
         <button className="mt-4 bg-[#c8ff00] hover:bg-[#b0df00] text-black font-bold rounded-full w-12 h-12 xl:w-full xl:h-[52px] flex items-center justify-center transition-colors font-['Archivo_Black'] uppercase tracking-widest">
           <span className="hidden xl:inline text-[17px]">Post</span>
           <Bug className="w-6 h-6 xl:hidden text-black" />
         </button>
       </header>
-      
+
       {/* Main Feed Column */}
       <main className="w-full sm:w-[600px] sm:border-r border-white/10 min-h-screen pb-20 sm:pb-0 z-10">
-        
         {/* Sticky Header */}
         <div className="sticky top-0 z-50 bg-[#050505]/70 backdrop-blur-md border-b border-white/10 px-4 py-3 flex gap-6 items-center cursor-pointer">
-          <button onClick={() => navigate({ to: '/cockroach' })} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors">
-            <ArrowLeft className="w-5 h-5"/>
+          <button
+            onClick={() => navigate({ to: "/cockroach" })}
+            className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="flex flex-col">
-            <h1 className="text-xl font-bold leading-tight font-['Archivo_Black'] uppercase tracking-tight">Cockroach Janta Party</h1>
-            <span className="text-[13px] text-[#888] font-['Space_Mono']">{allVideos.length} POSTS</span>
+            <h1 className="text-xl font-bold leading-tight font-['Archivo_Black'] uppercase tracking-tight">
+              Cockroach Janta Party
+            </h1>
+            <span className="text-[13px] text-[#888] font-['Space_Mono']">
+              {allVideos.length} POSTS
+            </span>
           </div>
         </div>
 
@@ -109,14 +138,16 @@ function CockroachProfile() {
         <div className="border-b border-white/10">
           {/* Banner */}
           <div className="w-full h-[200px] bg-[#1a1a1a] overflow-hidden relative">
-             <div className="absolute inset-0 bg-[linear-gradient(45deg,#000_25%,transparent_25%,transparent_75%,#000_75%,#000),linear-gradient(45deg,#000_25%,transparent_25%,transparent_75%,#000_75%,#000)] bg-[length:20px_20px] opacity-20 [background-position:0_0,10px_10px]"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(45deg,#000_25%,transparent_25%,transparent_75%,#000_75%,#000),linear-gradient(45deg,#000_25%,transparent_25%,transparent_75%,#000_75%,#000)] bg-[length:20px_20px] opacity-20 [background-position:0_0,10px_10px]"></div>
           </div>
-          
+
           <div className="px-4 pb-4">
             {/* Avatar & Action Button */}
             <div className="flex justify-between items-start mb-4">
               <div className="w-[134px] h-[134px] rounded-full border-4 border-[#050505] bg-[#0a0a0a] -mt-[67px] relative flex items-center justify-center overflow-hidden">
-                <span className="font-['Space_Mono'] text-[#c8ff00] text-3xl font-bold tracking-tighter">CJP</span>
+                <span className="font-['Space_Mono'] text-[#c8ff00] text-3xl font-bold tracking-tighter">
+                  CJP
+                </span>
               </div>
               <button className="bg-transparent border border-white/30 text-white font-bold rounded-full px-4 py-1.5 mt-3 hover:bg-white/10 transition-colors">
                 Follow
@@ -125,57 +156,73 @@ function CockroachProfile() {
 
             {/* Profile Info */}
             <div className="mb-4">
-               <h2 className="text-xl font-bold leading-tight font-['Archivo_Black'] uppercase tracking-tight flex items-center gap-1">
-                 Cockroach Janta Party
-                 <BadgeCheck className="w-5 h-5 text-[#e4b524]" fill="currentColor" stroke="black" />
-               </h2>
-               <span className="text-[15px] text-[#888] font-['Space_Mono'] block mb-3">@TheCJP</span>
-               <div className="text-[15px] leading-snug mb-3">
-                 Voice of the Lazy & Unemployed. We share a strong bond.<br/>
-                 Five demands. Zero sponsors.<br/>
-                 Raw & Uncut truths the media won't show you.
-               </div>
-               
-               <div className="flex flex-wrap gap-4 text-[#888] text-[15px] font-['Space_Mono'] mb-3">
-                 <div className="flex items-center gap-1">
-                   <LinkIcon className="w-4 h-4" />
-                   <a href="#" className="text-[#00f0ff] hover:underline">thecjp.bond</a>
-                 </div>
-                 <div className="flex items-center gap-1">
-                   <Calendar className="w-4 h-4" />
-                   <span>Joined May 2011</span>
-                 </div>
-               </div>
+              <h2 className="text-xl font-bold leading-tight font-['Archivo_Black'] uppercase tracking-tight flex items-center gap-1">
+                Cockroach Janta Party
+                <BadgeCheck className="w-5 h-5 text-[#e4b524]" fill="currentColor" stroke="black" />
+              </h2>
+              <span className="text-[15px] text-[#888] font-['Space_Mono'] block mb-3">
+                @TheCJP
+              </span>
+              <div className="text-[15px] leading-snug mb-3">
+                Voice of the Lazy & Unemployed. We share a strong bond.
+                <br />
+                Five demands. Zero sponsors.
+                <br />
+                Raw & Uncut truths the media won't show you.
+              </div>
 
-               <div className="flex gap-4 font-['Space_Mono'] text-[14px]">
-                 <div className="hover:underline cursor-pointer"><span className="text-white font-bold">1</span> <span className="text-[#888]">Following</span></div>
-                 <div className="hover:underline cursor-pointer"><span className="text-white font-bold">2.4M</span> <span className="text-[#888]">Followers</span></div>
-               </div>
+              <div className="flex flex-wrap gap-4 text-[#888] text-[15px] font-['Space_Mono'] mb-3">
+                <div className="flex items-center gap-1">
+                  <LinkIcon className="w-4 h-4" />
+                  <a href="#" className="text-[#00f0ff] hover:underline">
+                    thecjp.bond
+                  </a>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" />
+                  <span>Joined May 2011</span>
+                </div>
+              </div>
+
+              <div className="flex gap-4 font-['Space_Mono'] text-[14px]">
+                <div className="hover:underline cursor-pointer">
+                  <span className="text-white font-bold">1</span>{" "}
+                  <span className="text-[#888]">Following</span>
+                </div>
+                <div className="hover:underline cursor-pointer">
+                  <span className="text-white font-bold">2.4M</span>{" "}
+                  <span className="text-[#888]">Followers</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Tab Bar */}
         <div className="border-b border-white/10 flex">
-          <div 
-            onClick={() => setActiveTab("posts")} 
+          <div
+            onClick={() => setActiveTab("posts")}
             className="flex-1 text-center hover:bg-white/5 transition-colors cursor-pointer pt-4 pb-0 font-bold flex justify-center"
           >
-            <div className={`pb-3 font-['Space_Mono'] uppercase ${activeTab === "posts" ? "border-b-4 border-[#c8ff00] text-white" : "border-b-4 border-transparent text-[#888]"}`}>Posts</div>
+            <div
+              className={`pb-3 font-['Space_Mono'] uppercase ${activeTab === "posts" ? "border-b-4 border-[#c8ff00] text-white" : "border-b-4 border-transparent text-[#888]"}`}
+            >
+              Posts
+            </div>
           </div>
-          <div 
+          <div
             onClick={() => setActiveTab("replies")}
             className={`flex-1 text-center hover:bg-white/5 transition-colors cursor-pointer py-4 font-['Space_Mono'] uppercase ${activeTab === "replies" ? "text-white font-bold" : "text-[#888]"}`}
           >
             Replies
           </div>
-          <div 
+          <div
             onClick={() => setActiveTab("highlights")}
             className={`flex-1 text-center hover:bg-white/5 transition-colors cursor-pointer py-4 font-['Space_Mono'] uppercase ${activeTab === "highlights" ? "text-white font-bold" : "text-[#888]"}`}
           >
             Highlights
           </div>
-          <div 
+          <div
             onClick={() => setActiveTab("media")}
             className={`flex-1 text-center hover:bg-white/5 transition-colors cursor-pointer py-4 font-['Space_Mono'] uppercase ${activeTab === "media" ? "text-white font-bold" : "text-[#888]"}`}
           >
@@ -185,21 +232,24 @@ function CockroachProfile() {
 
         {/* Feed List */}
         <div>
-           {activeTab === "posts" ? allVideos.map((video, idx) => (
-             <div 
-               key={video.id} 
-               onClick={() => navigate({ to: `/cockroach/${video.id}` })}
-               className="border-b border-white/10 p-4 hover:bg-white/[0.02] transition-colors cursor-pointer flex gap-3 group"
-             >
+          {activeTab === "posts" ? (
+            allVideos.map((video, idx) => (
+              <div
+                key={video.id}
+                onClick={() => navigate({ to: `/cockroach/${video.id}` })}
+                className="border-b border-white/10 p-4 hover:bg-white/[0.02] transition-colors cursor-pointer flex gap-3 group"
+              >
                 {/* Avatar */}
                 <div className="shrink-0 flex flex-col items-center">
-                   <Link 
-                     to="/cockroach/profile" 
-                     onClick={(e) => e.stopPropagation()} 
-                     className="w-10 h-10 rounded-full bg-[#0a0a0a] border border-[#333] flex items-center justify-center overflow-hidden hover:border-[#c8ff00] transition-colors relative"
-                   >
-                     <span className="font-['Space_Mono'] text-[#c8ff00] text-sm font-bold tracking-tighter">CJP</span>
-                   </Link>
+                  <Link
+                    to="/cockroach/profile"
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-10 h-10 rounded-full bg-[#0a0a0a] border border-[#333] flex items-center justify-center overflow-hidden hover:border-[#c8ff00] transition-colors relative"
+                  >
+                    <span className="font-['Space_Mono'] text-[#c8ff00] text-sm font-bold tracking-tighter">
+                      CJP
+                    </span>
+                  </Link>
                 </div>
 
                 {/* Content */}
@@ -207,29 +257,49 @@ function CockroachProfile() {
                   {/* Author Line */}
                   <div className="flex justify-between items-start mb-1">
                     <div className="flex items-center gap-1 text-[15px] max-w-full">
-                      <Link to="/cockroach/profile" onClick={(e) => e.stopPropagation()} className="font-bold hover:underline truncate font-['Space_Mono'] text-[14px]">Cockroach Janta Party</Link>
-                      <BadgeCheck className="w-4 h-4 text-[#e4b524]" fill="currentColor" stroke="black" />
-                      <span className="text-[#888] shrink-0 font-['Space_Mono'] text-[13px]">@TheCJP</span>
-                      <span className="text-[#888] shrink-0 font-['Space_Mono'] text-[13px]">·</span>
-                      <span className="text-[#888] hover:underline shrink-0 text-xs whitespace-nowrap font-['Space_Mono']">{video.date}</span>
+                      <Link
+                        to="/cockroach/profile"
+                        onClick={(e) => e.stopPropagation()}
+                        className="font-bold hover:underline truncate font-['Space_Mono'] text-[14px]"
+                      >
+                        Cockroach Janta Party
+                      </Link>
+                      <BadgeCheck
+                        className="w-4 h-4 text-[#e4b524]"
+                        fill="currentColor"
+                        stroke="black"
+                      />
+                      <span className="text-[#888] shrink-0 font-['Space_Mono'] text-[13px]">
+                        @TheCJP
+                      </span>
+                      <span className="text-[#888] shrink-0 font-['Space_Mono'] text-[13px]">
+                        ·
+                      </span>
+                      <span className="text-[#888] hover:underline shrink-0 text-xs whitespace-nowrap font-['Space_Mono']">
+                        {video.date}
+                      </span>
                     </div>
                   </div>
 
                   {/* Post Text */}
                   <div className="text-[15px] leading-normal whitespace-pre-wrap mb-3 break-words text-gray-200">
                     <span className="font-['Archivo_Black'] text-lg block mb-1 uppercase tracking-tight text-white gap-2 flex items-center">
-                       {video?.title}
-                       <span className="bg-white/10 text-white text-[10px] px-2 py-0.5 rounded font-['Space_Mono'] tracking-widest">{video?.source}</span>
+                      {video?.title}
+                      <span className="bg-white/10 text-white text-[10px] px-2 py-0.5 rounded font-['Space_Mono'] tracking-widest">
+                        {video?.source}
+                      </span>
                     </span>
                     {video?.description}
                   </div>
-                  
+
                   {/* Media Attachment */}
-                  <div 
+                  <div
                     className="w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] mb-3 aspect-video relative mt-3 group-hover:border-[#c8ff00]/50 transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
-                     {video?.embedUrl?.match(/\.(mp4|webm|ogg)$/i) || (video?.embedUrl?.includes("cloudinary.com") && !video?.embedUrl?.includes("youtube.com")) ? (
+                    {video?.embedUrl?.match(/\.(mp4|webm|ogg)$/i) ||
+                    (video?.embedUrl?.includes("cloudinary.com") &&
+                      !video?.embedUrl?.includes("youtube.com")) ? (
                       <video
                         src={video.embedUrl}
                         controls
@@ -251,35 +321,71 @@ function CockroachProfile() {
 
                   {/* Actions */}
                   <div className="flex justify-between text-[#888] max-w-md mt-1 -ml-2 font-['Space_Mono']">
-                    <button onClick={(e) => { e.stopPropagation(); }} className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
-                      <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors"><MessageCircle className="w-[18px] h-[18px]" /></div>
-                      <span className="text-[13px]">{formatStat(100 + (video.id.length * 12))}</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                    >
+                      <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
+                        <MessageCircle className="w-[18px] h-[18px]" />
+                      </div>
+                      <span className="text-[13px]">{formatStat(100 + video.id.length * 12)}</span>
                     </button>
-                    <button onClick={(e) => { e.stopPropagation(); }} className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors">
-                      <div className="p-2 rounded-full group-hover/btn:bg-[#00ba7c]/10 transition-colors"><Repeat2 className="w-[18px] h-[18px]" /></div>
-                      <span className="text-[13px]">{formatStat(450 + (idx * 33))}</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors"
+                    >
+                      <div className="p-2 rounded-full group-hover/btn:bg-[#00ba7c]/10 transition-colors">
+                        <Repeat2 className="w-[18px] h-[18px]" />
+                      </div>
+                      <span className="text-[13px]">{formatStat(450 + idx * 33)}</span>
                     </button>
-                    <button onClick={(e) => { e.stopPropagation(); }} className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors">
-                      <div className="p-2 rounded-full group-hover/btn:bg-[#f91880]/10 transition-colors"><Heart className="w-[18px] h-[18px]" /></div>
-                      <span className="text-[13px]">{formatStat(1200 + (idx * 156))}</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors"
+                    >
+                      <div className="p-2 rounded-full group-hover/btn:bg-[#f91880]/10 transition-colors">
+                        <Heart className="w-[18px] h-[18px]" />
+                      </div>
+                      <span className="text-[13px]">{formatStat(1200 + idx * 156)}</span>
                     </button>
-                    <button onClick={(e) => { e.stopPropagation(); }} className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
-                      <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors"><BarChart2 className="w-[18px] h-[18px]" /></div>
-                      <span className="text-[13px]">{formatStat(5000 + (idx * 850))}</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                    >
+                      <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
+                        <BarChart2 className="w-[18px] h-[18px]" />
+                      </div>
+                      <span className="text-[13px]">{formatStat(5000 + idx * 850)}</span>
                     </button>
                     <div className="flex gap-1">
-                      <button onClick={(e) => { e.stopPropagation(); }} className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
-                        <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors"><Share className="w-[18px] h-[18px]" /></div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                        className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                      >
+                        <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
+                          <Share className="w-[18px] h-[18px]" />
+                        </div>
                       </button>
                     </div>
                   </div>
                 </div>
-             </div>
-           )) : (
-             <div className="p-8 text-center text-[#888] font-['Space_Mono']">
-               No {activeTab} yet.
-             </div>
-           )}
+              </div>
+            ))
+          ) : (
+            <div className="p-8 text-center text-[#888] font-['Space_Mono']">
+              No {activeTab} yet.
+            </div>
+          )}
         </div>
       </main>
 
@@ -289,69 +395,87 @@ function CockroachProfile() {
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <Search className="h-4 w-4 text-[#888] group-focus-within:text-[#c8ff00]" />
           </div>
-          <input 
-            type="text" 
-            placeholder="Search the swarm" 
+          <input
+            type="text"
+            placeholder="Search the swarm"
             className="w-full bg-[#0a0a0a] outline-none text-white rounded-full py-3 pl-12 pr-4 focus:bg-black focus:border focus:border-[#c8ff00] transition-colors border border-white/10 font-['Space_Mono'] text-sm"
           />
         </div>
 
         <div className="bg-[#0a0a0a] rounded-2xl py-4 mb-4 border border-white/10">
-           {/* Media Grid Placeholder (Like Twitter profile sidebar) */}
-           <h2 className="text-xl font-bold mb-4 px-4 font-['Archivo_Black'] uppercase tracking-tight">You might like</h2>
-           <div className="hover:bg-white/[0.03] px-4 py-3 cursor-pointer transition-colors flex justify-between items-center bg-[#050505] mb-2">
-             <div className="flex gap-3 items-center w-full min-w-0 pr-2">
-               <div className="w-10 h-10 rounded-full bg-white shrink-0"></div>
-               <div className="flex flex-col min-w-0">
-                 <div className="flex items-center gap-1">
-                   <span className="font-bold text-[15px] hover:underline truncate mix-blend-difference">Anonymous</span>
-                   <BadgeCheck className="w-[14px] h-[14px] text-gray-400 shrink-0" fill="currentColor" stroke="black" />
-                 </div>
-                 <span className="text-[#888] text-[13px] font-['Space_Mono'] truncate">@unknown_actor</span>
-               </div>
-             </div>
-             <button className="bg-transparent border border-white/30 text-white font-bold text-xs font-['Space_Mono'] px-4 py-1.5 rounded-full hover:bg-white/10 transition-colors uppercase tracking-widest">
-               Follow
-             </button>
-           </div>
+          {/* Media Grid Placeholder (Like Twitter profile sidebar) */}
+          <h2 className="text-xl font-bold mb-4 px-4 font-['Archivo_Black'] uppercase tracking-tight">
+            You might like
+          </h2>
+          <div className="hover:bg-white/[0.03] px-4 py-3 cursor-pointer transition-colors flex justify-between items-center bg-[#050505] mb-2">
+            <div className="flex gap-3 items-center w-full min-w-0 pr-2">
+              <div className="w-10 h-10 rounded-full bg-white shrink-0"></div>
+              <div className="flex flex-col min-w-0">
+                <div className="flex items-center gap-1">
+                  <span className="font-bold text-[15px] hover:underline truncate mix-blend-difference">
+                    Anonymous
+                  </span>
+                  <BadgeCheck
+                    className="w-[14px] h-[14px] text-gray-400 shrink-0"
+                    fill="currentColor"
+                    stroke="black"
+                  />
+                </div>
+                <span className="text-[#888] text-[13px] font-['Space_Mono'] truncate">
+                  @unknown_actor
+                </span>
+              </div>
+            </div>
+            <button className="bg-transparent border border-white/30 text-white font-bold text-xs font-['Space_Mono'] px-4 py-1.5 rounded-full hover:bg-white/10 transition-colors uppercase tracking-widest">
+              Follow
+            </button>
+          </div>
         </div>
 
         <div className="bg-[#0a0a0a] rounded-2xl py-4 border border-white/10">
-           <h2 className="text-xl font-bold mb-4 px-4 font-['Archivo_Black'] uppercase tracking-tight">Trends for you</h2>
-           <div className="hover:bg-white/[0.03] px-4 py-2 cursor-pointer transition-colors mb-2">
-             <div className="text-[#888] text-[12px] font-['Space_Mono'] uppercase">Politics · Trending</div>
-             <div className="font-bold text-[15px] mt-0.5">#CockroachJantaParty</div>
-             <div className="text-[#888] text-[12px] font-['Space_Mono'] mt-0.5">125K posts</div>
-           </div>
-           <div className="hover:bg-white/[0.03] px-4 py-2 cursor-pointer transition-colors mb-2">
-             <div className="text-[#888] text-[12px] font-['Space_Mono'] uppercase">Trending in India</div>
-             <div className="font-bold text-[15px] mt-0.5">Media Exposed</div>
-             <div className="text-[#888] text-[12px] font-['Space_Mono'] mt-0.5">84.2K posts</div>
-           </div>
+          <h2 className="text-xl font-bold mb-4 px-4 font-['Archivo_Black'] uppercase tracking-tight">
+            Trends for you
+          </h2>
+          <div className="hover:bg-white/[0.03] px-4 py-2 cursor-pointer transition-colors mb-2">
+            <div className="text-[#888] text-[12px] font-['Space_Mono'] uppercase">
+              Politics · Trending
+            </div>
+            <div className="font-bold text-[15px] mt-0.5">#CockroachJantaParty</div>
+            <div className="text-[#888] text-[12px] font-['Space_Mono'] mt-0.5">125K posts</div>
+          </div>
+          <div className="hover:bg-white/[0.03] px-4 py-2 cursor-pointer transition-colors mb-2">
+            <div className="text-[#888] text-[12px] font-['Space_Mono'] uppercase">
+              Trending in India
+            </div>
+            <div className="font-bold text-[15px] mt-0.5">Media Exposed</div>
+            <div className="text-[#888] text-[12px] font-['Space_Mono'] mt-0.5">84.2K posts</div>
+          </div>
         </div>
       </aside>
 
       {/* Mobile Floating Action Button */}
-      <button className="fixed sm:hidden bottom-20 right-4 w-14 h-14 bg-[#c8ff00] rounded-full flex items-center justify-center shadow-lg z-40 hover:bg-[#b0df00] transition-colors">
+      <button
+        aria-label="Compose new bug"
+        className="fixed sm:hidden bottom-20 right-4 w-14 h-14 bg-[#c8ff00] rounded-full flex items-center justify-center shadow-lg z-40 hover:bg-[#b0df00] transition-colors"
+      >
         <Bug className="w-6 h-6 text-black" />
       </button>
 
       {/* Mobile Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 sm:hidden bg-[#050505] border-t border-white/10 flex justify-around items-center py-3 z-50 px-2 pb-[safe-area-inset-bottom]">
-        <Link to="/cockroach" className="p-2 transition-colors">
+        <Link to="/cockroach" aria-label="Home" className="p-2 transition-colors">
           <Home className="w-6 h-6 text-white" />
         </Link>
-        <button className="p-2 transition-colors text-[#888]">
+        <button aria-label="Search" className="p-2 transition-colors text-[#888]">
           <Search className="w-6 h-6" />
         </button>
-        <button className="p-2 transition-colors text-[#888]">
+        <button aria-label="Notifications" className="p-2 transition-colors text-[#888]">
           <Bell className="w-6 h-6" />
         </button>
-        <button className="p-2 transition-colors text-[#888]">
+        <button aria-label="Messages" className="p-2 transition-colors text-[#888]">
           <Mail className="w-6 h-6" />
         </button>
       </div>
-
     </div>
   );
 }
