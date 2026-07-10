@@ -9,12 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TheVaultRouteImport } from './routes/the-vault'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CockroachIndexRouteImport } from './routes/cockroach/index'
+import { Route as CockroachProfileRouteImport } from './routes/cockroach/profile'
+import { Route as CockroachVideoIdRouteImport } from './routes/cockroach/$videoId'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const TheVaultRoute = TheVaultRouteImport.update({
+  id: '/the-vault',
+  path: '/the-vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,40 +31,97 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CockroachIndexRoute = CockroachIndexRouteImport.update({
+  id: '/cockroach/',
+  path: '/cockroach/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CockroachProfileRoute = CockroachProfileRouteImport.update({
+  id: '/cockroach/profile',
+  path: '/cockroach/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CockroachVideoIdRoute = CockroachVideoIdRouteImport.update({
+  id: '/cockroach/$videoId',
+  path: '/cockroach/$videoId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AdminRoute
+  '/the-vault': typeof TheVaultRoute
+  '/cockroach/$videoId': typeof CockroachVideoIdRoute
+  '/cockroach/profile': typeof CockroachProfileRoute
+  '/cockroach/': typeof CockroachIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AdminRoute
+  '/the-vault': typeof TheVaultRoute
+  '/cockroach/$videoId': typeof CockroachVideoIdRoute
+  '/cockroach/profile': typeof CockroachProfileRoute
+  '/cockroach': typeof CockroachIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AdminRoute
+  '/the-vault': typeof TheVaultRoute
+  '/cockroach/$videoId': typeof CockroachVideoIdRoute
+  '/cockroach/profile': typeof CockroachProfileRoute
+  '/cockroach/': typeof CockroachIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/the-vault'
+    | '/cockroach/$videoId'
+    | '/cockroach/profile'
+    | '/cockroach/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml'
-  id: '__root__' | '/' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/admin'
+    | '/the-vault'
+    | '/cockroach/$videoId'
+    | '/cockroach/profile'
+    | '/cockroach'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/the-vault'
+    | '/cockroach/$videoId'
+    | '/cockroach/profile'
+    | '/cockroach/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminRoute: typeof AdminRoute
+  TheVaultRoute: typeof TheVaultRoute
+  CockroachVideoIdRoute: typeof CockroachVideoIdRoute
+  CockroachProfileRoute: typeof CockroachProfileRoute
+  CockroachIndexRoute: typeof CockroachIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
+    '/the-vault': {
+      id: '/the-vault'
+      path: '/the-vault'
+      fullPath: '/the-vault'
+      preLoaderRoute: typeof TheVaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -65,12 +131,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cockroach/': {
+      id: '/cockroach/'
+      path: '/cockroach'
+      fullPath: '/cockroach/'
+      preLoaderRoute: typeof CockroachIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cockroach/profile': {
+      id: '/cockroach/profile'
+      path: '/cockroach/profile'
+      fullPath: '/cockroach/profile'
+      preLoaderRoute: typeof CockroachProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cockroach/$videoId': {
+      id: '/cockroach/$videoId'
+      path: '/cockroach/$videoId'
+      fullPath: '/cockroach/$videoId'
+      preLoaderRoute: typeof CockroachVideoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminRoute: AdminRoute,
+  TheVaultRoute: TheVaultRoute,
+  CockroachVideoIdRoute: CockroachVideoIdRoute,
+  CockroachProfileRoute: CockroachProfileRoute,
+  CockroachIndexRoute: CockroachIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -161,8 +161,11 @@ export function RegistrationForm() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-        <label style={{ fontSize: "0.85rem", fontWeight: "bold" }}>Name *</label>
+        <label htmlFor="name" style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
+          Name *
+        </label>
         <input
+          id="name"
           required
           type="text"
           value={formData.name}
@@ -178,8 +181,11 @@ export function RegistrationForm() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-        <label style={{ fontSize: "0.85rem", fontWeight: "bold" }}>Phone (optional)</label>
+        <label htmlFor="phone" style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
+          Phone (optional)
+        </label>
         <input
+          id="phone"
           type="text"
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -194,10 +200,11 @@ export function RegistrationForm() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-        <label style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
+        <label htmlFor="chronicallyOnline" style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
           Are you chronically online?
         </label>
         <select
+          id="chronicallyOnline"
           value={formData.chronicallyOnline}
           onChange={(e) => setFormData({ ...formData, chronicallyOnline: e.target.value })}
           style={{
@@ -215,8 +222,11 @@ export function RegistrationForm() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-        <label style={{ fontSize: "0.85rem", fontWeight: "bold" }}>Are you lazy?</label>
+        <label htmlFor="lazy" style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
+          Are you lazy?
+        </label>
         <select
+          id="lazy"
           value={formData.lazy}
           onChange={(e) => setFormData({ ...formData, lazy: e.target.value })}
           style={{
@@ -234,10 +244,11 @@ export function RegistrationForm() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-        <label style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
+        <label htmlFor="identifyAsCockroach" style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
           Do you identify as a "cockroach" as defined by the CJI?
         </label>
         <select
+          id="identifyAsCockroach"
           value={formData.identifyAsCockroach}
           onChange={(e) => setFormData({ ...formData, identifyAsCockroach: e.target.value })}
           style={{
@@ -254,8 +265,11 @@ export function RegistrationForm() {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-        <label style={{ fontSize: "0.85rem", fontWeight: "bold" }}>Twitter Handle (optional)</label>
+        <label htmlFor="twitterHandle" style={{ fontSize: "0.85rem", fontWeight: "bold" }}>
+          Twitter Handle (optional)
+        </label>
         <input
+          id="twitterHandle"
           type="text"
           value={formData.twitterHandle}
           onChange={(e) => setFormData({ ...formData, twitterHandle: e.target.value })}
