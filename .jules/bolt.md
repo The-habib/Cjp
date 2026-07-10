@@ -1,0 +1,3 @@
+## 2024-07-10 - Unnecessary Array Filtering on Re-renders
+**Learning:** Arrays derived from state, such as `filteredRegistrations` in `src/routes/admin.tsx`, are recomputed on every render. This becomes a performance bottleneck if the list grows large or if re-renders happen frequently due to unrelated state changes (e.g., active tab selection).
+**Action:** Always wrap computationally expensive filtering or mapping of state in a `useMemo` hook, especially when dealing with lists that could grow arbitrarily large, and extract redundant string conversions (like `toLowerCase()`) outside of the filter loop.

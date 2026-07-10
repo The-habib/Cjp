@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { CloudinaryUploader } from "../components/CloudinaryUploader";
 import { toast } from "sonner";
 import {
@@ -189,12 +189,17 @@ function AdminPanel() {
     setVideos([]);
   };
 
-  const filteredRegistrations = registrations.filter(
-    (r) =>
-      (r.name as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (r.email as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (r.twitterHandle as string)?.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  // ⚡ Bolt: Memoize filtered registrations to prevent unnecessary recalculations
+  // during unrelated re-renders (e.g. changing tabs). Also lifted toLowerCase() out of the loop.
+  const filteredRegistrations = useMemo(() => {
+    const lowerTerm = searchTerm.toLowerCase();
+    return registrations.filter(
+      (r) =>
+        (r.name as string)?.toLowerCase().includes(lowerTerm) ||
+        (r.email as string)?.toLowerCase().includes(lowerTerm) ||
+        (r.twitterHandle as string)?.toLowerCase().includes(lowerTerm),
+    );
+  }, [registrations, searchTerm]);
 
   const handleExportCSV = () => {
     const headers = ["Name", "Email", "Twitter", "Phone", "Lazy", "Online", "Cockroach", "Date"];
