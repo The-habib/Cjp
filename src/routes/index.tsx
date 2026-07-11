@@ -277,21 +277,28 @@ function useCursor() {
       x = -100,
       y = -100,
       tx = -100,
-      ty = -100;
-    const move = (e: MouseEvent) => {
-      tx = e.clientX;
-      ty = e.clientY;
-    };
+      ty = -100,
+      isLooping = false;
     const loop = () => {
       if (Math.abs(tx - x) > 0.1 || Math.abs(ty - y) > 0.1) {
         x += (tx - x) * 0.18;
         y += (ty - y) * 0.18;
         el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        raf = requestAnimationFrame(loop);
+      } else {
+        isLooping = false;
       }
-      raf = requestAnimationFrame(loop);
     };
-    window.addEventListener("mousemove", move);
-    raf = requestAnimationFrame(loop);
+    const move = (e: MouseEvent) => {
+      tx = e.clientX;
+      ty = e.clientY;
+      if (!isLooping) {
+        isLooping = true;
+        raf = requestAnimationFrame(loop);
+      }
+    };
+    // ⚡ Bolt: Added passive: true to prevent blocking main thread scrolling
+    window.addEventListener("mousemove", move, { passive: true });
     return () => {
       window.removeEventListener("mousemove", move);
       cancelAnimationFrame(raf);
