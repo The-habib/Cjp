@@ -170,16 +170,20 @@ async function generateStatic() {
           <h1>Cockroach Media | Uncensored Truth</h1>
           <p>Raw, uncut truth the media won't show you. Watch the videos they tried to hide.</p>
           <div class="video-feed">
-            ${allVideos.map(v => `
+            ${allVideos
+              .map(
+                (v) => `
               <article>
                 <h2>${v.title}</h2>
                 <a href="/cockroach/${v.id}">
                   <img src="${v.thumbnailUrl || `${siteUrl}/og-${v.id}.jpg`}" alt="${v.title}" width="1280" height="720" loading="lazy" />
                 </a>
                 <p>${v.description}</p>
-                <time datetime="${v.date || new Date().toISOString().split('T')[0]}">${v.date}</time>
+                <time datetime="${v.date || new Date().toISOString().split("T")[0]}">${v.date}</time>
               </article>
-            `).join("")}
+            `,
+              )
+              .join("")}
           </div>
         </main>
       `;
@@ -192,7 +196,7 @@ async function generateStatic() {
             <article>
               <header>
                 <h1>${video.title}</h1>
-                <time datetime="${video.date || new Date().toISOString().split('T')[0]}">${video.date}</time>
+                <time datetime="${video.date || new Date().toISOString().split("T")[0]}">${video.date}</time>
               </header>
               <figure>
                 <img src="${video.thumbnailUrl || `${siteUrl}/og-${video.id}.jpg`}" alt="Video thumbnail for ${video.title}" width="1280" height="720" />
@@ -205,7 +209,7 @@ async function generateStatic() {
         `;
       }
     } else if (route === "/") {
-       staticContent = `
+      staticContent = `
          <main>
            <h1>Cockroach Janta Party</h1>
            <p>Voice of the Lazy & Unemployed. We share a strong bond. Five demands. Zero sponsors.</p>
@@ -217,7 +221,10 @@ async function generateStatic() {
     }
 
     if (staticContent) {
-      html = html.replace('<div id="root"></div>', `<div id="root">\n<!-- SEO STATIC PREVIEW -->\n<div class="seo-preview">${staticContent}</div>\n</div>`);
+      html = html.replace(
+        '<div id="root"></div>',
+        `<div id="root">\n<!-- SEO STATIC PREVIEW -->\n<div class="seo-preview">${staticContent}</div>\n</div>`,
+      );
     }
 
     // Create directory for route if it's not root
@@ -329,7 +336,10 @@ async function generateStatic() {
   // Generate a dedicated 404.html page for Vercel/Netlify fallbacks
   fs.writeFileSync(
     path.join(distPath, "404.html"),
-    template.replace('<div id="root"></div>', `<div id="root">\n<!-- SEO 404 -->\n<div class="seo-preview"><main><h1>404 - Not Found</h1><p>The requested transmission does not exist.</p></main></div>\n</div>`)
+    template.replace(
+      '<div id="root"></div>',
+      `<div id="root">\n<!-- SEO 404 -->\n<div class="seo-preview"><main><h1>404 - Not Found</h1><p>The requested transmission does not exist.</p></main></div>\n</div>`,
+    ),
   );
   console.log("✓ Generated 404.html");
 
