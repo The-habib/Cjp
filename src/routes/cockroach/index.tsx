@@ -205,25 +205,49 @@ function CockroachFeed() {
               <input
                 type="text"
                 placeholder="What is happening?!"
+                aria-label="What is happening?!"
                 className="w-full bg-transparent outline-none text-xl text-white placeholder-[#555] font-['Space_Mono']"
               />
             </div>
             <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/10">
               <div className="flex gap-1 text-[#c8ff00]">
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  type="button"
+                  aria-label="Add image"
+                  title="Add image"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                >
                   <ImageIcon className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  type="button"
+                  aria-label="Add video"
+                  title="Add video"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                >
                   <Video className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  type="button"
+                  aria-label="Add poll"
+                  title="Add poll"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                >
                   <BarChart2 className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block">
+                <button
+                  type="button"
+                  aria-label="Schedule post"
+                  title="Schedule post"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block"
+                >
                   <Calendar className="w-5 h-5" />
                 </button>
               </div>
-              <button className="bg-[#c8ff00] hover:bg-[#b0df00] text-black font-bold rounded-full px-5 py-2 transition-colors font-['Archivo_Black'] uppercase tracking-widest text-sm opacity-50 cursor-not-allowed">
+              <button
+                disabled
+                className="bg-[#c8ff00] hover:bg-[#b0df00] text-black font-bold rounded-full px-5 py-2 transition-colors font-['Archivo_Black'] uppercase tracking-widest text-sm opacity-50 cursor-not-allowed"
+              >
                 Post
               </button>
             </div>
@@ -398,6 +422,7 @@ function CockroachFeed() {
           <input
             type="text"
             placeholder="Search the swarm"
+            aria-label="Search the swarm"
             className="w-full bg-[#0a0a0a] outline-none text-white rounded-full py-3 pl-12 pr-4 focus:bg-black focus:border focus:border-[#c8ff00] transition-colors border border-white/10 font-['Space_Mono'] text-sm"
           />
         </div>
