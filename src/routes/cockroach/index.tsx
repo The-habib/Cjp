@@ -210,16 +210,28 @@ function CockroachFeed() {
             </div>
             <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/10">
               <div className="flex gap-1 text-[#c8ff00]">
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  aria-label="Add image"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                >
                   <ImageIcon className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  aria-label="Add video"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                >
                   <Video className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  aria-label="Add poll"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                >
                   <BarChart2 className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block">
+                <button
+                  aria-label="Schedule post"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block"
+                >
                   <Calendar className="w-5 h-5" />
                 </button>
               </div>
@@ -322,6 +334,7 @@ function CockroachFeed() {
                   {/* Actions */}
                   <div className="flex justify-between text-[#888] max-w-md mt-1 -ml-2 font-['Space_Mono']">
                     <button
+                      aria-label="Reply"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -333,6 +346,7 @@ function CockroachFeed() {
                       <span className="text-[13px]">{formatStat(100 + video.id.length * 12)}</span>
                     </button>
                     <button
+                      aria-label="Repost"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -344,6 +358,7 @@ function CockroachFeed() {
                       <span className="text-[13px]">{formatStat(450 + idx * 33)}</span>
                     </button>
                     <button
+                      aria-label="Like"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -355,6 +370,7 @@ function CockroachFeed() {
                       <span className="text-[13px]">{formatStat(1200 + idx * 156)}</span>
                     </button>
                     <button
+                      aria-label="View analytics"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -367,6 +383,7 @@ function CockroachFeed() {
                     </button>
                     <div className="flex gap-1">
                       <button
+                        aria-label="Share"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
