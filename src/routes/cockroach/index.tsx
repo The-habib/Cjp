@@ -210,16 +210,32 @@ function CockroachFeed() {
             </div>
             <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/10">
               <div className="flex gap-1 text-[#c8ff00]">
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                  aria-label="Add image"
+                  title="Add image"
+                >
                   <ImageIcon className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                  aria-label="Add video"
+                  title="Add video"
+                >
                   <Video className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                  aria-label="Create poll"
+                  title="Create poll"
+                >
                   <BarChart2 className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                  aria-label="Schedule post"
+                  title="Schedule post"
+                >
                   <Calendar className="w-5 h-5" />
                 </button>
               </div>
