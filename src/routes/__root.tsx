@@ -193,7 +193,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
         {import.meta.env.VITE_GA_ID && (
           <>
             {/* SEO Mastery: GA4 Analytics */}
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_ID}`}></script>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_ID}`}
+            ></script>
             <script
               dangerouslySetInnerHTML={{
                 __html: `
