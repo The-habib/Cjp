@@ -1,3 +1,1 @@
-## 2026-07-09 - Added missing ARIA labels to mobile navigation
-**Learning:** Found an accessibility issue pattern specific to this app's components: icon-only mobile navigation buttons (bottom nav and floating action button) lacked `aria-label`s, making them unreadable by screen readers.
-**Action:** Always ensure icon-only buttons have descriptive `aria-label` attributes, especially in recurring layout components like navigation bars.
+## 2024-05-18 - Missing ARIA Labels on Icon-Only Social Buttons\n**Learning:** The Cockroach app relies heavily on icon-only buttons for interactions (reply, repost, like, share). These were missing accessible names, making them difficult for screen reader users to identify.\n**Action:** Add both `aria-label` and `title` attributes to all icon-only action buttons. The `title` provides a native tooltip for sighted users, while `aria-label` ensures screen reader support. This is a crucial pattern for any social interaction component.

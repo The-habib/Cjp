@@ -309,28 +309,48 @@ function CockroachDeepDive() {
           </div>
 
           <div className="border-t border-white/10 pt-1 flex justify-between text-[#888] mt-1 -mx-2 px-2">
-            <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+            <button
+              className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+              aria-label="Reply"
+              title="Reply"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                 <MessageCircle className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors">
+            <button
+              className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors"
+              aria-label="Repost"
+              title="Repost"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#00ba7c]/10 transition-colors">
                 <Repeat2 className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors">
+            <button
+              className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors"
+              aria-label="Like"
+              title="Like"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#f91880]/10 transition-colors">
                 <Heart className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+            <button
+              className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+              aria-label="View views"
+              title="View views"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                 <BarChart2 className="w-[22px] h-[22px]" />
               </div>
             </button>
             <div className="flex gap-1">
-              <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+              <button
+                className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                aria-label="Bookmark"
+                title="Bookmark"
+              >
                 <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                   <Bookmark className="w-[22px] h-[22px]" />
                 </div>
@@ -338,6 +358,8 @@ function CockroachDeepDive() {
               <button
                 className="flex items-center gap-2 hover:text-[#00f0ff] group/btn transition-colors"
                 onClick={handleShare}
+                aria-label="Share"
+                title="Share"
               >
                 <div className="p-2 rounded-full group-hover/btn:bg-[#00f0ff]/10 transition-colors">
                   <Share className="w-[22px] h-[22px]" />
@@ -413,23 +435,47 @@ function CockroachDeepDive() {
                 {reply.text}
               </div>
               <div className="flex justify-between text-[#888] max-w-md -ml-2 font-['Space_Mono']">
-                <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                <button
+                  className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors"
+                  aria-label="Reply"
+                  title="Reply"
+                >
                   <MessageCircle className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#00ba7c]/10 hover:text-[#00ba7c] rounded-full transition-colors">
+                <button
+                  className="p-2 hover:bg-[#00ba7c]/10 hover:text-[#00ba7c] rounded-full transition-colors"
+                  aria-label="Repost"
+                  title="Repost"
+                >
                   <Repeat2 className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#f91880]/10 hover:text-[#f91880] rounded-full transition-colors">
+                <button
+                  className="p-2 hover:bg-[#f91880]/10 hover:text-[#f91880] rounded-full transition-colors"
+                  aria-label="Like"
+                  title="Like"
+                >
                   <Heart className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                <button
+                  className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors"
+                  aria-label="View views"
+                  title="View views"
+                >
                   <BarChart2 className="w-[18px] h-[18px]" />
                 </button>
                 <div className="flex gap-1">
-                  <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                  <button
+                    className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors"
+                    aria-label="Bookmark"
+                    title="Bookmark"
+                  >
                     <Bookmark className="w-[18px] h-[18px]" />
                   </button>
-                  <button className="p-2 hover:bg-[#00f0ff]/10 hover:text-[#00f0ff] rounded-full transition-colors">
+                  <button
+                    className="p-2 hover:bg-[#00f0ff]/10 hover:text-[#00f0ff] rounded-full transition-colors"
+                    aria-label="Share"
+                    title="Share"
+                  >
                     <Share className="w-[18px] h-[18px]" />
                   </button>
                 </div>
