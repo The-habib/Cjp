@@ -193,7 +193,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
         {import.meta.env.VITE_GA_ID && (
           <>
             {/* SEO Mastery: GA4 Analytics */}
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_ID}`}></script>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_GA_ID}`}
+            ></script>
             <script
               dangerouslySetInnerHTML={{
                 __html: `
@@ -288,8 +291,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         </p>
         <div className="mt-4 p-4 bg-red-900/20 border border-red-500/50 rounded text-left text-xs text-red-200 overflow-auto whitespace-pre-wrap max-h-60">
           <p className="font-bold">Error Details:</p>
-          <p>{error.message}</p>
-          {error.stack && <p className="mt-2 opacity-70">{error.stack}</p>}
+          <p>{import.meta.env.DEV ? error.message : "An unexpected error occurred."}</p>
+          {import.meta.env.DEV && error.stack && <p className="mt-2 opacity-70">{error.stack}</p>}
         </div>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button

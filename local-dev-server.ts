@@ -177,7 +177,7 @@ Sitemap: https://cockroachjantaparty.bond/sitemap.xml`);
         vite.ssrFixStacktrace(e);
       }
       console.error(e instanceof Error ? e.stack : e);
-      res.status(500).end(e instanceof Error ? e.stack : "Internal Server Error");
+      res.status(500).end(!isProd && e instanceof Error ? e.stack : "Internal Server Error");
     }
   });
 
