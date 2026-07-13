@@ -210,16 +210,28 @@ function CockroachFeed() {
             </div>
             <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/10">
               <div className="flex gap-1 text-[#c8ff00]">
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                  aria-label="Add image"
+                >
                   <ImageIcon className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                  aria-label="Add video"
+                >
                   <Video className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                  aria-label="Add poll"
+                >
                   <BarChart2 className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block"
+                  aria-label="Schedule post"
+                >
                   <Calendar className="w-5 h-5" />
                 </button>
               </div>
