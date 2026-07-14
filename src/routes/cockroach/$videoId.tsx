@@ -360,7 +360,10 @@ function CockroachDeepDive() {
             />
             <div className="flex justify-between items-center border-t border-white/10 mt-4 pt-3">
               <div className="text-[#c8ff00] flex gap-4"></div>
-              <button className="bg-[#c8ff00]/50 text-black/50 font-bold rounded-full px-4 py-1.5 cursor-not-allowed font-['Archivo_Black'] uppercase tracking-wide">
+              <button
+                className="bg-[#c8ff00]/50 text-black/50 font-bold rounded-full px-4 py-1.5 cursor-not-allowed font-['Archivo_Black'] uppercase tracking-wide"
+                disabled
+              >
                 Reply
               </button>
             </div>
