@@ -223,7 +223,10 @@ function CockroachFeed() {
                   <Calendar className="w-5 h-5" />
                 </button>
               </div>
-              <button className="bg-[#c8ff00] hover:bg-[#b0df00] text-black font-bold rounded-full px-5 py-2 transition-colors font-['Archivo_Black'] uppercase tracking-widest text-sm opacity-50 cursor-not-allowed">
+              <button
+                disabled
+                className="bg-[#c8ff00] hover:bg-[#b0df00] text-black font-bold rounded-full px-5 py-2 transition-colors font-['Archivo_Black'] uppercase tracking-widest text-sm opacity-50 cursor-not-allowed"
+              >
                 Post
               </button>
             </div>
