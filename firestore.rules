@@ -13,8 +13,9 @@ service cloud.firestore {
     function incoming() { return request.resource.data; }
     function existing() { return resource.data; }
     function isSignedIn() { return request.auth != null; }
+    function isVerified() { return isSignedIn() && request.auth.token.email_verified == true; }
     function isAdmin() { 
-      return isSignedIn() && (request.auth.token.email == 'tgff28970@gmail.com' || request.auth.token.email == 'theogaidev@gmail.com');
+      return isVerified() && (request.auth.token.email == 'tgff28970@gmail.com' || request.auth.token.email == 'theogaidev@gmail.com');
     }
 
     // 3. Validation Blueprint for Registration
@@ -34,7 +35,7 @@ service cloud.firestore {
     // 4. Registration rules
     match /registrations/{registrationId} {
       allow read: if (isSignedIn() && request.auth.uid == registrationId) || isAdmin();
-      allow create, update: if isSignedIn() &&
+      allow create, update: if isVerified() &&
                        request.auth.uid == registrationId &&
                        isValidId(registrationId) &&
                        isValidRegistration(incoming());
