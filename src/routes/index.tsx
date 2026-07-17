@@ -321,7 +321,7 @@ function Reveal({
   target?: string;
   rel?: string;
 }) {
-  const Component: any = motion[as as keyof typeof motion] || motion.div;
+  const Component = (motion[as as keyof typeof motion] || motion.div) as React.ElementType;
   return (
     <Component
       initial={{ opacity: 0, y }}
@@ -799,7 +799,7 @@ function Index() {
           </Reveal>
           <div className="cjp-contact-grid">
             <Reveal
-              as={"a" as any}
+              as="a"
               delay={0.1}
               href="mailto:contact@cockroachjantaparty.org"
               className="cjp-contact"
@@ -809,7 +809,7 @@ function Index() {
               <em>↗</em>
             </Reveal>
             <Reveal
-              as={"a" as any}
+              as="a"
               delay={0.2}
               href="mailto:contact@cockroachjantaparty.org"
               className="cjp-contact"

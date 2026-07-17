@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { CloudinaryUploader } from "../components/CloudinaryUploader";
 import { toast } from "sonner";
 import {
@@ -113,7 +113,7 @@ function AdminPanel() {
       if (snap.exists() && snap.data().baseMemberCount !== undefined) {
         setBaseMemberCount(snap.data().baseMemberCount);
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
     }
   };
@@ -179,7 +179,7 @@ function AdminPanel() {
       }
     } catch (e: unknown) {
       console.error(e);
-      toast.error((e instanceof Error ? e.message : String(e)));
+      toast.error(e instanceof Error ? e.message : String(e));
     }
   };
 
@@ -189,12 +189,16 @@ function AdminPanel() {
     setVideos([]);
   };
 
-  const filteredRegistrations = registrations.filter(
-    (r) =>
-      (r.name as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (r.email as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (r.twitterHandle as string)?.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  // ⚡ Bolt: Memoize filteredRegistrations and hoist toLowerCase to avoid O(N * 3) string ops
+  const filteredRegistrations = useMemo(() => {
+    const searchLower = searchTerm.toLowerCase();
+    return registrations.filter(
+      (r) =>
+        (r.name as string)?.toLowerCase().includes(searchLower) ||
+        (r.email as string)?.toLowerCase().includes(searchLower) ||
+        (r.twitterHandle as string)?.toLowerCase().includes(searchLower),
+    );
+  }, [registrations, searchTerm]);
 
   const handleExportCSV = () => {
     const headers = ["Name", "Email", "Twitter", "Phone", "Lazy", "Online", "Cockroach", "Date"];
@@ -206,7 +210,7 @@ function AdminPanel() {
       `"${r.lazy || ""}"`,
       `"${r.chronicallyOnline || ""}"`,
       `"${r.identifyAsCockroach || ""}"`,
-      `"${(r as any).createdAt?.toDate ? (r as any).createdAt.toDate().toLocaleDateString() : ""}"`,
+      `"${(r as { createdAt?: { toDate?: () => Date } }).createdAt?.toDate ? (r as { createdAt?: { toDate?: () => Date } }).createdAt?.toDate?.().toLocaleDateString() : ""}"`,
     ]);
     const csvContext = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
     const blob = new Blob([csvContext], { type: "text/csv" });
@@ -447,7 +451,9 @@ function AdminPanel() {
                   )}
                   {filteredRegistrations.map((r) => (
                     <tr key={r.id as string} className="hover:bg-[#111] transition-colors">
-                      <td className="p-4 font-['Inter'] font-semibold">{r.name as React.ReactNode}</td>
+                      <td className="p-4 font-['Inter'] font-semibold">
+                        {r.name as React.ReactNode}
+                      </td>
                       <td className="p-4 text-[#888]">{r.email as React.ReactNode}</td>
                       <td className="p-4">
                         {r.twitterHandle ? (
@@ -458,7 +464,9 @@ function AdminPanel() {
                           "-"
                         )}
                       </td>
-                      <td className="p-4 text-[#888]">{r.phone ? (r.phone as React.ReactNode) : "-"}</td>
+                      <td className="p-4 text-[#888]">
+                        {r.phone ? (r.phone as React.ReactNode) : "-"}
+                      </td>
                       <td className="p-4 text-center">{r.lazy as React.ReactNode}</td>
                       <td className="p-4 text-center">{r.chronicallyOnline as React.ReactNode}</td>
                       <td className="p-4 text-center">
@@ -550,7 +558,7 @@ function AdminPanel() {
                       <label className="block text-xs font-['Space_Mono'] uppercase text-[#888]">
                         Video URL (Embed or Direct) *
                       </label>
-                      <CloudinaryUploader 
+                      <CloudinaryUploader
                         onUploadSuccess={(url) => setNewVideo({ ...newVideo, embedUrl: url })}
                         resourceType="video"
                       />
@@ -569,7 +577,7 @@ function AdminPanel() {
                       <label className="block text-xs font-['Space_Mono'] uppercase text-[#888]">
                         Thumbnail URL (Optional)
                       </label>
-                      <CloudinaryUploader 
+                      <CloudinaryUploader
                         onUploadSuccess={(url) => setNewVideo({ ...newVideo, thumbnailUrl: url })}
                         resourceType="image"
                         buttonText="Upload Image"
@@ -746,7 +754,9 @@ function AdminPanel() {
                           {vid.date as React.ReactNode}
                         </span>
                       </div>
-                      <p className="text-xs text-[#888] line-clamp-3 mb-3">{vid.description as React.ReactNode}</p>
+                      <p className="text-xs text-[#888] line-clamp-3 mb-3">
+                        {vid.description as React.ReactNode}
+                      </p>
                       <div className="text-xs font-mono text-blue-400 break-all bg-blue-500/10 p-2 rounded mb-4">
                         {vid.embedUrl as React.ReactNode}
                       </div>
