@@ -326,6 +326,7 @@ function CockroachProfile() {
                         e.stopPropagation();
                       }}
                       className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                      aria-label="Reply"
                     >
                       <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                         <MessageCircle className="w-[18px] h-[18px]" />
@@ -337,6 +338,7 @@ function CockroachProfile() {
                         e.stopPropagation();
                       }}
                       className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors"
+                      aria-label="Repost"
                     >
                       <div className="p-2 rounded-full group-hover/btn:bg-[#00ba7c]/10 transition-colors">
                         <Repeat2 className="w-[18px] h-[18px]" />
@@ -348,6 +350,7 @@ function CockroachProfile() {
                         e.stopPropagation();
                       }}
                       className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors"
+                      aria-label="Like"
                     >
                       <div className="p-2 rounded-full group-hover/btn:bg-[#f91880]/10 transition-colors">
                         <Heart className="w-[18px] h-[18px]" />
@@ -359,6 +362,7 @@ function CockroachProfile() {
                         e.stopPropagation();
                       }}
                       className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                      aria-label="View analytics"
                     >
                       <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                         <BarChart2 className="w-[18px] h-[18px]" />
@@ -371,6 +375,7 @@ function CockroachProfile() {
                           e.stopPropagation();
                         }}
                         className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                        aria-label="Share"
                       >
                         <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                           <Share className="w-[18px] h-[18px]" />
