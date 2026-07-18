@@ -89,7 +89,7 @@ function CockroachFeed() {
     fetchDynamicVideos();
   }, []);
 
-  const allVideos = [...dynamicVideos, ...cjpVideos];
+  const allVideos = React.useMemo(() => [...dynamicVideos, ...cjpVideos], [dynamicVideos]);
 
   // Format dates relative if needed or just use literal
   const formatStat = (num: number) => {

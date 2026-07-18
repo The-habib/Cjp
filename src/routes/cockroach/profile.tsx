@@ -52,7 +52,7 @@ function CockroachProfile() {
     fetchDynamicVideos();
   }, []);
 
-  const allVideos = [...dynamicVideos, ...cjpVideos];
+  const allVideos = React.useMemo(() => [...dynamicVideos, ...cjpVideos], [dynamicVideos]);
 
   const formatStat = (num: number) => {
     if (num > 1000) return (num / 1000).toFixed(1) + "K";
