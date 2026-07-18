@@ -203,7 +203,9 @@ function CockroachDeepDive() {
         <div className="sticky top-0 z-50 bg-[#050505]/70 backdrop-blur-md border-b border-white/10 px-4 py-3 flex gap-6 items-center">
           <button
             onClick={() => navigate({ to: "/cockroach" })}
-            className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors"
+            className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+            aria-label="Back to feed"
+            title="Back to feed"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -309,35 +311,57 @@ function CockroachDeepDive() {
           </div>
 
           <div className="border-t border-white/10 pt-1 flex justify-between text-[#888] mt-1 -mx-2 px-2">
-            <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+            <button
+              className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00] rounded-full"
+              aria-label="Reply"
+              title="Reply"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                 <MessageCircle className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors">
+            <button
+              className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ba7c] rounded-full"
+              aria-label="Repost"
+              title="Repost"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#00ba7c]/10 transition-colors">
                 <Repeat2 className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors">
+            <button
+              className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f91880] rounded-full"
+              aria-label="Like"
+              title="Like"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#f91880]/10 transition-colors">
                 <Heart className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+            <button
+              className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00] rounded-full"
+              aria-label="View Analytics"
+              title="View Analytics"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                 <BarChart2 className="w-[22px] h-[22px]" />
               </div>
             </button>
             <div className="flex gap-1">
-              <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+              <button
+                className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00] rounded-full"
+                aria-label="Bookmark"
+                title="Bookmark"
+              >
                 <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                   <Bookmark className="w-[22px] h-[22px]" />
                 </div>
               </button>
               <button
-                className="flex items-center gap-2 hover:text-[#00f0ff] group/btn transition-colors"
+                className="flex items-center gap-2 hover:text-[#00f0ff] group/btn transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f0ff] rounded-full"
                 onClick={handleShare}
+                aria-label="Share"
+                title="Share"
               >
                 <div className="p-2 rounded-full group-hover/btn:bg-[#00f0ff]/10 transition-colors">
                   <Share className="w-[22px] h-[22px]" />
@@ -413,23 +437,47 @@ function CockroachDeepDive() {
                 {reply.text}
               </div>
               <div className="flex justify-between text-[#888] max-w-md -ml-2 font-['Space_Mono']">
-                <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                <button
+                  className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                  aria-label="Reply"
+                  title="Reply"
+                >
                   <MessageCircle className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#00ba7c]/10 hover:text-[#00ba7c] rounded-full transition-colors">
+                <button
+                  className="p-2 hover:bg-[#00ba7c]/10 hover:text-[#00ba7c] rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00ba7c]"
+                  aria-label="Repost"
+                  title="Repost"
+                >
                   <Repeat2 className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#f91880]/10 hover:text-[#f91880] rounded-full transition-colors">
+                <button
+                  className="p-2 hover:bg-[#f91880]/10 hover:text-[#f91880] rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f91880]"
+                  aria-label="Like"
+                  title="Like"
+                >
                   <Heart className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                <button
+                  className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                  aria-label="View Analytics"
+                  title="View Analytics"
+                >
                   <BarChart2 className="w-[18px] h-[18px]" />
                 </button>
                 <div className="flex gap-1">
-                  <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                  <button
+                    className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                    aria-label="Bookmark"
+                    title="Bookmark"
+                  >
                     <Bookmark className="w-[18px] h-[18px]" />
                   </button>
-                  <button className="p-2 hover:bg-[#00f0ff]/10 hover:text-[#00f0ff] rounded-full transition-colors">
+                  <button
+                    className="p-2 hover:bg-[#00f0ff]/10 hover:text-[#00f0ff] rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00f0ff]"
+                    aria-label="Share"
+                    title="Share"
+                  >
                     <Share className="w-[18px] h-[18px]" />
                   </button>
                 </div>
