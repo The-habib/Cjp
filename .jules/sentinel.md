@@ -1,0 +1,4 @@
+## 2024-05-18 - [Fix Authorization Bypass in Admin Panel]
+**Vulnerability:** The admin endpoint in `src/routes/admin.tsx` and the Firestore database rules (`firestore.rules`) were checking if a user's email was present in an allowed list (`ALLOWED_EMAILS`), but they did NOT verify if the user's email was actually verified (`emailVerified == true`).
+**Learning:** This allowed for a privilege escalation attack. An attacker could create a new Firebase account using a targeted allowlisted email address (e.g., `tgff28970@gmail.com`) without actually owning or verifying that email. Because Firebase authentication only checked if the email string matched, the attacker would gain unauthorized admin access to the application and database.
+**Prevention:** Always verify that an email address is owned by the user (`emailVerified`) before using it for authorization or granting elevated privileges, both in client-side code and backend security rules.
