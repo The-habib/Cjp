@@ -1,0 +1,3 @@
+## 2025-07-19 - UseMemo for derived lists in admin panels
+**Learning:** Admin panels that render large datasets client-side can suffer performance bottlenecks on re-renders (like when switching tabs or typing in completely unrelated form inputs) if derived state operations like `.filter()` aren't memoized.
+**Action:** When working on complex client-side Admin/Dashboard UI, ensure list filtering/mapping calculations are wrapped in `useMemo`, and lift any inner-loop static assignments (like `.toLowerCase()` on search terms) outside the iteration.
