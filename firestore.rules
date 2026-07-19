@@ -14,7 +14,7 @@ service cloud.firestore {
     function existing() { return resource.data; }
     function isSignedIn() { return request.auth != null; }
     function isAdmin() { 
-      return isSignedIn() && (request.auth.token.email == 'tgff28970@gmail.com' || request.auth.token.email == 'theogaidev@gmail.com');
+      return isSignedIn() && request.auth.token.email_verified == true && (request.auth.token.email == 'tgff28970@gmail.com' || request.auth.token.email == 'theogaidev@gmail.com');
     }
 
     // 3. Validation Blueprint for Registration

@@ -1,0 +1,5 @@
+## 2025-03-08 - [Privilege Escalation via Unverified Email Auth in Firebase]
+
+**Vulnerability:** Firebase admin authorization checks (in `firestore.rules` and `src/routes/admin.tsx`) verified the user's email address by checking `request.auth.token.email` against an allowlist, but completely omitted verifying if the user actually proved ownership of that email (`request.auth.token.email_verified == true`). This meant a malicious user could potentially create an account (e.g., via email/password) using an admin's email without verifying it, and instantly gain administrative privileges in the database.
+**Learning:** Checking a user's email address for authorization isn't safe unless you also confirm the provider verified their ownership of that email. This is particularly problematic in Firebase because multiple auth providers can be enabled, and some (like basic email/password) allow creating accounts with unverified emails.
+**Prevention:** Always mandate `request.auth.token.email_verified == true` in Firebase security rules alongside any `request.auth.token.email` allowlist checks to prevent unauthorized access via unverified accounts.
