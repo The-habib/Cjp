@@ -91,9 +91,9 @@ function AdminPanel() {
     const unsub = onAuthStateChanged(auth, (u) => {
       setUser(u);
       setLoading(false);
-      // Auto-logout if not allowed
-      if (u && u.email && !ALLOWED_EMAILS.includes(u.email)) {
-        toast.error("Unauthorized access.");
+      // Auto-logout if not allowed or email not verified
+      if (u && u.email && (!ALLOWED_EMAILS.includes(u.email) || !u.emailVerified)) {
+        toast.error("Unauthorized access or unverified email.");
         signOut(auth);
       } else {
         if (u) {

@@ -1,0 +1,4 @@
+## 2024-06-25 - Missing email_verified check on admin functions
+**Vulnerability:** Admin endpoint and Firebase rules were not checking for email verification (`emailVerified == true`), meaning anyone could create an unverified Google account using one of the allowed admin emails and gain admin access.
+**Learning:** The system correctly limited access to a strict list of allowed emails, but since Firebase Auth allows creating accounts with any email (pending verification), an attacker could spoof the admin email if they didn't require verification. This means Firebase auth email matching is insufficient without `email_verified == true`.
+**Prevention:** Always verify `request.auth.token.email_verified == true` in Firebase security rules and `user.emailVerified` in client-side code whenever authorizing based on a hardcoded email list or domain.
