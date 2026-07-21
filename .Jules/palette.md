@@ -1,3 +1,6 @@
 ## 2026-07-09 - Added missing ARIA labels to mobile navigation
 **Learning:** Found an accessibility issue pattern specific to this app's components: icon-only mobile navigation buttons (bottom nav and floating action button) lacked `aria-label`s, making them unreadable by screen readers.
 **Action:** Always ensure icon-only buttons have descriptive `aria-label` attributes, especially in recurring layout components like navigation bars.
+## 2026-07-21 - Interactive Element Accessibility
+**Learning:** The Cockroach page had media attachment buttons that were visually identifiable by icons but lacked text alternatives (ARIA labels) and tooltips, making them completely inaccessible to screen reader users and confusing for visual users without context. Additionally, a visually disabled 'Post' button was missing the semantic HTML `disabled` attribute, allowing it to still be focusable and appear active to assistive technologies.
+**Action:** Always ensure that icon-only interactive elements possess `aria-label`s and `title`s. When styling an element to appear disabled visually (e.g., `opacity-50`, `cursor-not-allowed`), strictly ensure that the semantic `disabled` attribute is applied to maintain a cohesive experience across all user modalities.
