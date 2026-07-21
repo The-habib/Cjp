@@ -309,33 +309,49 @@ function CockroachDeepDive() {
           </div>
 
           <div className="border-t border-white/10 pt-1 flex justify-between text-[#888] mt-1 -mx-2 px-2">
-            <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+            <button
+              aria-label="Reply"
+              className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                 <MessageCircle className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors">
+            <button
+              aria-label="Repost"
+              className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#00ba7c]/10 transition-colors">
                 <Repeat2 className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors">
+            <button
+              aria-label="Like"
+              className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#f91880]/10 transition-colors">
                 <Heart className="w-[22px] h-[22px]" />
               </div>
             </button>
-            <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+            <button
+              aria-label="View analytics"
+              className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+            >
               <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                 <BarChart2 className="w-[22px] h-[22px]" />
               </div>
             </button>
             <div className="flex gap-1">
-              <button className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors">
+              <button
+                aria-label="Bookmark"
+                className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+              >
                 <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                   <Bookmark className="w-[22px] h-[22px]" />
                 </div>
               </button>
               <button
+                aria-label="Share"
                 className="flex items-center gap-2 hover:text-[#00f0ff] group/btn transition-colors"
                 onClick={handleShare}
               >
@@ -360,7 +376,10 @@ function CockroachDeepDive() {
             />
             <div className="flex justify-between items-center border-t border-white/10 mt-4 pt-3">
               <div className="text-[#c8ff00] flex gap-4"></div>
-              <button className="bg-[#c8ff00]/50 text-black/50 font-bold rounded-full px-4 py-1.5 cursor-not-allowed font-['Archivo_Black'] uppercase tracking-wide">
+              <button
+                disabled
+                className="bg-[#c8ff00]/50 text-black/50 font-bold rounded-full px-4 py-1.5 cursor-not-allowed font-['Archivo_Black'] uppercase tracking-wide"
+              >
                 Reply
               </button>
             </div>
@@ -413,23 +432,41 @@ function CockroachDeepDive() {
                 {reply.text}
               </div>
               <div className="flex justify-between text-[#888] max-w-md -ml-2 font-['Space_Mono']">
-                <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                <button
+                  aria-label="Reply"
+                  className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors"
+                >
                   <MessageCircle className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#00ba7c]/10 hover:text-[#00ba7c] rounded-full transition-colors">
+                <button
+                  aria-label="Repost"
+                  className="p-2 hover:bg-[#00ba7c]/10 hover:text-[#00ba7c] rounded-full transition-colors"
+                >
                   <Repeat2 className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#f91880]/10 hover:text-[#f91880] rounded-full transition-colors">
+                <button
+                  aria-label="Like"
+                  className="p-2 hover:bg-[#f91880]/10 hover:text-[#f91880] rounded-full transition-colors"
+                >
                   <Heart className="w-[18px] h-[18px]" />
                 </button>
-                <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                <button
+                  aria-label="View analytics"
+                  className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors"
+                >
                   <BarChart2 className="w-[18px] h-[18px]" />
                 </button>
                 <div className="flex gap-1">
-                  <button className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors">
+                  <button
+                    aria-label="Bookmark"
+                    className="p-2 hover:bg-[#c8ff00]/10 hover:text-[#c8ff00] rounded-full transition-colors"
+                  >
                     <Bookmark className="w-[18px] h-[18px]" />
                   </button>
-                  <button className="p-2 hover:bg-[#00f0ff]/10 hover:text-[#00f0ff] rounded-full transition-colors">
+                  <button
+                    aria-label="Share"
+                    className="p-2 hover:bg-[#00f0ff]/10 hover:text-[#00f0ff] rounded-full transition-colors"
+                  >
                     <Share className="w-[18px] h-[18px]" />
                   </button>
                 </div>
