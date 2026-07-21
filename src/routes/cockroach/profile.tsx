@@ -322,6 +322,7 @@ function CockroachProfile() {
                   {/* Actions */}
                   <div className="flex justify-between text-[#888] max-w-md mt-1 -ml-2 font-['Space_Mono']">
                     <button
+                      aria-label="Reply"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -333,6 +334,7 @@ function CockroachProfile() {
                       <span className="text-[13px]">{formatStat(100 + video.id.length * 12)}</span>
                     </button>
                     <button
+                      aria-label="Repost"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -344,6 +346,7 @@ function CockroachProfile() {
                       <span className="text-[13px]">{formatStat(450 + idx * 33)}</span>
                     </button>
                     <button
+                      aria-label="Like"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -355,6 +358,7 @@ function CockroachProfile() {
                       <span className="text-[13px]">{formatStat(1200 + idx * 156)}</span>
                     </button>
                     <button
+                      aria-label="View analytics"
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
@@ -367,6 +371,7 @@ function CockroachProfile() {
                     </button>
                     <div className="flex gap-1">
                       <button
+                        aria-label="Share"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
