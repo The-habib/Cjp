@@ -26,7 +26,9 @@ export function CloudinaryUploader({
     const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
     if (!cloudName || !uploadPreset) {
-      toast.error("Cloudinary configuration is missing. Set VITE_CLOUDINARY_CLOUD_NAME and VITE_CLOUDINARY_UPLOAD_PRESET.");
+      toast.error(
+        "Cloudinary configuration is missing. Set VITE_CLOUDINARY_CLOUD_NAME and VITE_CLOUDINARY_UPLOAD_PRESET.",
+      );
       return;
     }
 
@@ -56,7 +58,7 @@ export function CloudinaryUploader({
         } else {
           try {
             const errResponse = JSON.parse(xhr.responseText);
-            let errMsg = errResponse.error?.message || "Upload failed";
+            const errMsg = errResponse.error?.message || "Upload failed";
             toast.error(`Cloudinary Error: ${errMsg} (Preset: ${uploadPreset})`);
           } catch {
             toast.error(`Upload failed with status: ${xhr.status} - ${xhr.responseText}`);

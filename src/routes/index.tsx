@@ -273,7 +273,7 @@ function useCursor() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    let raf = 0,
+    let raf: number | null = null,
       x = -100,
       y = -100,
       tx = -100,
@@ -281,20 +281,24 @@ function useCursor() {
     const move = (e: MouseEvent) => {
       tx = e.clientX;
       ty = e.clientY;
+      if (raf === null) {
+        raf = requestAnimationFrame(loop);
+      }
     };
     const loop = () => {
       if (Math.abs(tx - x) > 0.1 || Math.abs(ty - y) > 0.1) {
         x += (tx - x) * 0.18;
         y += (ty - y) * 0.18;
         el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        raf = requestAnimationFrame(loop);
+      } else {
+        raf = null;
       }
-      raf = requestAnimationFrame(loop);
     };
-    window.addEventListener("mousemove", move);
-    raf = requestAnimationFrame(loop);
+    window.addEventListener("mousemove", move, { passive: true });
     return () => {
       window.removeEventListener("mousemove", move);
-      cancelAnimationFrame(raf);
+      if (raf !== null) cancelAnimationFrame(raf);
     };
   }, []);
   return ref;
