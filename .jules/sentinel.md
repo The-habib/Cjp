@@ -1,0 +1,4 @@
+## 2025-02-14 - Prevent Privilege Escalation via Spoofed Email Admin Bypass
+**Vulnerability:** Admin endpoints and Firebase DB functions (`firestore.rules`, `src/routes/admin.tsx`) verified authorization using only the `email` string match without verifying `emailVerified`. This meant an attacker could create an account on a platform providing arbitrary unverified emails and match the hardcoded admin emails to gain unauthorized admin access.
+**Learning:** Checking only the email field value from `request.auth.token.email` or `user.email` without ensuring the email is verified (`request.auth.token.email_verified == true` or `user.emailVerified`) creates a critical spoofing vulnerability.
+**Prevention:** Always combine email checks with email verification checks in Firebase security rules and client-side authentication checks to prevent spoofed accounts from bypassing authorization restrictions.
