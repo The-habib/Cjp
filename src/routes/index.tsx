@@ -278,17 +278,21 @@ function useCursor() {
       y = -100,
       tx = -100,
       ty = -100;
-    const move = (e: MouseEvent) => {
-      tx = e.clientX;
-      ty = e.clientY;
-    };
     const loop = () => {
       if (Math.abs(tx - x) > 0.1 || Math.abs(ty - y) > 0.1) {
         x += (tx - x) * 0.18;
         y += (ty - y) * 0.18;
         el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        raf = requestAnimationFrame(loop);
+      } else {
+        // ⚡ Bolt: Stop the animation loop when cursor is idle to save CPU
+        raf = 0;
       }
-      raf = requestAnimationFrame(loop);
+    };
+    const move = (e: MouseEvent) => {
+      tx = e.clientX;
+      ty = e.clientY;
+      if (!raf) raf = requestAnimationFrame(loop);
     };
     window.addEventListener("mousemove", move);
     raf = requestAnimationFrame(loop);
