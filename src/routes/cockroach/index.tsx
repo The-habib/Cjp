@@ -204,26 +204,42 @@ function CockroachFeed() {
             <div className="py-2">
               <input
                 type="text"
+                aria-label="Post text"
                 placeholder="What is happening?!"
-                className="w-full bg-transparent outline-none text-xl text-white placeholder-[#555] font-['Space_Mono']"
+                className="w-full bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00] text-xl text-white placeholder-[#555] font-['Space_Mono'] rounded"
               />
             </div>
             <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/10">
               <div className="flex gap-1 text-[#c8ff00]">
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  aria-label="Add image"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                >
                   <ImageIcon className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  aria-label="Add video"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                >
                   <Video className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  aria-label="Add poll"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                >
                   <BarChart2 className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block">
+                <button
+                  aria-label="Schedule post"
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+                >
                   <Calendar className="w-5 h-5" />
                 </button>
               </div>
-              <button className="bg-[#c8ff00] hover:bg-[#b0df00] text-black font-bold rounded-full px-5 py-2 transition-colors font-['Archivo_Black'] uppercase tracking-widest text-sm opacity-50 cursor-not-allowed">
+              <button
+                disabled
+                className="bg-[#c8ff00] hover:bg-[#b0df00] text-black font-bold rounded-full px-5 py-2 transition-colors font-['Archivo_Black'] uppercase tracking-widest text-sm opacity-50 cursor-not-allowed outline-none focus-visible:ring-2 focus-visible:ring-[#c8ff00]"
+              >
                 Post
               </button>
             </div>
