@@ -210,16 +210,28 @@ function CockroachFeed() {
             </div>
             <div className="flex justify-between items-center mt-3 pt-3 border-t border-white/10">
               <div className="flex gap-1 text-[#c8ff00]">
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                  aria-label="Add image"
+                >
                   <ImageIcon className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                  aria-label="Add video"
+                >
                   <Video className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors"
+                  aria-label="Add poll"
+                >
                   <BarChart2 className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block">
+                <button
+                  className="p-2 rounded-full hover:bg-[#c8ff00]/10 transition-colors hidden sm:block"
+                  aria-label="Schedule post"
+                >
                   <Calendar className="w-5 h-5" />
                 </button>
               </div>
@@ -326,6 +338,7 @@ function CockroachFeed() {
                         e.stopPropagation();
                       }}
                       className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                      aria-label="Reply"
                     >
                       <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                         <MessageCircle className="w-[18px] h-[18px]" />
@@ -337,6 +350,7 @@ function CockroachFeed() {
                         e.stopPropagation();
                       }}
                       className="flex items-center gap-2 hover:text-[#00ba7c] group/btn transition-colors"
+                      aria-label="Repost"
                     >
                       <div className="p-2 rounded-full group-hover/btn:bg-[#00ba7c]/10 transition-colors">
                         <Repeat2 className="w-[18px] h-[18px]" />
@@ -348,6 +362,7 @@ function CockroachFeed() {
                         e.stopPropagation();
                       }}
                       className="flex items-center gap-2 hover:text-[#f91880] group/btn transition-colors"
+                      aria-label="Like"
                     >
                       <div className="p-2 rounded-full group-hover/btn:bg-[#f91880]/10 transition-colors">
                         <Heart className="w-[18px] h-[18px]" />
@@ -359,6 +374,7 @@ function CockroachFeed() {
                         e.stopPropagation();
                       }}
                       className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                      aria-label="View analytics"
                     >
                       <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                         <BarChart2 className="w-[18px] h-[18px]" />
@@ -371,6 +387,7 @@ function CockroachFeed() {
                           e.stopPropagation();
                         }}
                         className="flex items-center gap-2 hover:text-[#c8ff00] group/btn transition-colors"
+                        aria-label="Share"
                       >
                         <div className="p-2 rounded-full group-hover/btn:bg-[#c8ff00]/10 transition-colors">
                           <Share className="w-[18px] h-[18px]" />
