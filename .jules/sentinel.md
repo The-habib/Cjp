@@ -1,0 +1,4 @@
+## 2024-03-05 - Missing Email Verification for Admin Roles
+**Vulnerability:** Admin access could be gained by spoofing an allowed email address since `ALLOWED_EMAILS` only validated the email string in Firebase client rules and `firestore.rules`, without checking the `email_verified` claim.
+**Learning:** Checking for user email against a hardcoded array alone is insufficient; an unverified email account can be created maliciously to match `ALLOWED_EMAILS`.
+**Prevention:** Always verify `request.auth.token.email_verified == true` in backend rules (like `firestore.rules`) and `user.emailVerified` in client UI login logic to prevent email spoofing attacks.
